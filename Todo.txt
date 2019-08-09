@@ -1,0 +1,33 @@
+ok 1. SetTest 추가
+1. IDisposibleTest 후에 ParallelLinq 하면 데드락 상태 문제
+다음 키워드 예제 추가 할것
+
+virtual, abstract, override 메소드
+C#에서는 파생 클래서에서 기반 클래스의 단순 재정의는 상속다형성되지 않는다.
+override 재정의를 해야 상속 다형성이 된다.
+파생클래서에서 override 하기 위해서는 기반클래스의 함수가 virtual 또는 abstract이어야한다.
+기반 클래스 함수 정의가 있으면 virtual 없으면 abstract
+
+abstract 클래스, interface
+abstract함수가 하나라도 있는 클래스는 abstract클래스로 선언 해야 한다. abstract 클래스는 인스턴스를 생성할 수 없다.
+interface는 abstract클래스와 비슷하지만 필드가 없고 함수와 프로퍼티만 존재, 함수에 public abstract 안붙임(당연하니까)
+
+base
+기반 클래스의 참조
+기반 클래스의 메서드 호출 base.Print();
+기반 클래스의 생성자 호출 public Drive(int a) : Super(a)
+
+멤버 액세스 한정자
+public 모든 클래스에서 접근 가능
+private 포함 클래스만 접근 가능
+protected 포함 클래스와 파생 클래스에서 접근 가능
+internal 같은어셈블리에서 접근 가능
+protected internal 같은어셈블리 또는 파생 클래스에서 접근 가능
+
+sealed 클래스는 다른 클래스가 상속 하지 못함
+sealed 메서드는 파생 클래스에서 재정의 하지 못함
+ 항상 override와 함께 사용 해야 함
+ 항상 abstract와 함께 사용 못함
+구조체는 암시적으로 항상 sealed이므로 상속 목함 하지만 interface를 상속 받아 구조체를 정의 할 수 있음
+
+new 키워드는 일반 재정의시 기반 클래스의 함수가 숨겨진다는 컴파일 경고를 없애기 위해 사용
