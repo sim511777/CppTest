@@ -604,6 +604,15 @@ void MapTest() {
     PrintVector(outarr);
 }
 
+void ForTest() {
+    vector<wstring> msg{ L"Hello", L"C++", L"World", L"from", L"VS Code!" };
+
+    for (const auto& word : msg) {
+        wcout << word << " ";
+    }
+    cout << endl;
+}
+
 int main() {
     //printf("== VariableArgumentTest ==\n");
     //VariableArgumentTest();
@@ -692,8 +701,11 @@ int main() {
     //printf("== RangeBasedForTest ==\n");
     //RangeBasedForTest();
 
-    printf("== MapTest ==\n");
-    MapTest();
+    //printf("== MapTest ==\n");
+    //MapTest();
+
+    printf("== ForTest ==\n");
+    ForTest();
 
     getchar();
     return 0;
