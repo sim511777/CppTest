@@ -11,6 +11,7 @@
 #include <locale>
 #include <codecvt>
 #include <windows.h>
+#include <algorithm>
 
 using namespace std;
 using namespace concurrency;
@@ -581,6 +582,28 @@ void RangeBasedForTest() {
     cout << endl;
 }
 
+template<typename T>
+void PrintVector(vector<T> arr) {
+    for_each(arr.begin(), arr.end(), [](auto num) { cout << num << " "; });
+}
+
+void MapTest() {
+    vector<int> inarr = { 1,2,3,4,5 };
+    PrintVector(inarr);
+
+    cout << endl;
+    
+    vector<int> outarr;
+    outarr.resize(5);
+    transform(inarr.begin(), inarr.end(), outarr.begin(), [](auto num) { return num * 2; });
+    PrintVector(outarr);
+
+    cout << endl;
+
+    copy_if(inarr.begin(), inarr.end(), outarr.begin(), [](auto num) { return num % 2 == 1; });
+    PrintVector(outarr);
+}
+
 int main() {
     //printf("== VariableArgumentTest ==\n");
     //VariableArgumentTest();
@@ -666,8 +689,11 @@ int main() {
     //printf("== StringConvertTest2 ==\n");
     //StringConvertTest2();
 
-    printf("== RangeBasedForTest ==\n");
-    RangeBasedForTest();
+    //printf("== RangeBasedForTest ==\n");
+    //RangeBasedForTest();
+
+    printf("== MapTest ==\n");
+    MapTest();
 
     getchar();
     return 0;
