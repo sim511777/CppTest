@@ -613,6 +613,12 @@ void ForTest() {
     cout << endl;
 }
 
+void RemainderTest() {
+    for (int i = -10; i <= 10; i++) {
+        printf("%d / 2 = %d, %d %% 2 = %d\n", i, i / 2, i, i % 2);
+    }
+}
+
 int main() {
     //printf("== VariableArgumentTest ==\n");
     //VariableArgumentTest();
@@ -704,8 +710,11 @@ int main() {
     //printf("== MapTest ==\n");
     //MapTest();
 
-    printf("== ForTest ==\n");
-    ForTest();
+    //printf("== ForTest ==\n");
+    //ForTest();
+
+    printf("== RemainderTest ==\n");
+    RemainderTest();
 
     getchar();
     return 0;
