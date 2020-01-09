@@ -619,25 +619,46 @@ void RemainderTest() {
     }
 }
 
-void VectorSortTest() {
-    vector<string> stringList;
-    stringList.push_back("While");
-    stringList.push_back("small");
-    stringList.push_back("test");
-    stringList.push_back("programs");
-    stringList.push_back("have");
-    stringList.push_back("existed");
-    stringList.push_back("since");
-    stringList.push_back("the");
-    stringList.push_back("development");
-    stringList.push_back("of");
-    stringList.push_back("programmable");
-
-    sort(stringList.begin(), stringList.end);
-    for (auto str : stringList) {
-        cout << str << endl;
+class Student {
+public:
+    string name;
+    int age;
+    Student(string name, int age) {
+        this->name = name;
+        this->age = age;
     }
+    friend ostream& operator <<(ostream& c, const Student& T);
+};
+
+ostream& operator <<(ostream& c, const Student& T) {
+    return c << T.name << ":" << T.age;
 }
+
+void VectorSortTest() {
+    //cout << "vector<int> sort" << endl;
+    //vector<int> items { 2, 9, 1, 5, 4, 7, 6, 3, 0, 8,  };
+    //sort(items.begin(), items.end(), [](int a, int b) -> bool { return a < b; });
+    //for (auto item : items)
+    //    cout << item << " ";
+
+    //cout << "vector<string> sort" << endl;
+    //vector<string> items = { "s4", "s7", "s6", "s8", "s2", "s0", "s9", "s5", "s3", "s1", };
+    //sort(items.begin(), items.end(), [](string a, string b) -> bool { return a < b; });
+    //for (auto item : items)
+    //    cout << item << " ";
+
+    cout << "vector<Student> sort" << endl;
+    vector<Student> items = { { "s4", 2 }, { "s7", 9 }, { "s6", 1 }, { "s8", 5 }, { "s2", 4 }, { "s0", 7 }, { "s9", 6 }, { "s5", 3 }, { "s3", 0 }, { "s1", 8 }, };
+    sort(items.begin(), items.end(), [](Student a, Student b) -> bool { return a.age < b.age; });
+    for (auto item : items)
+        cout << item << " ";
+    cout << endl;
+    sort(items.begin(), items.end(), [](Student a, Student b) -> bool { return a.name < b.name; });
+    for (auto item : items)
+        cout << item << " ";
+}
+
+
 
 int main() {
     //printf("== VariableArgumentTest ==\n");
