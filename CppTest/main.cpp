@@ -49,7 +49,7 @@ double DoubleSum(int num, ...) {
 }
 
 void VariableArgumentTest() {
-    cout << "==== VariableArgumentTest ====" << endl;
+    cout << "==== VariableArgumentTest ====" << endl << endl;
     int iSum = IntSum(3, 1, 2, 3);
     printf("int sum = %d\n", iSum);
     double dSum = DoubleSum(3, 1.1, 2.2, 3.3);
@@ -57,7 +57,7 @@ void VariableArgumentTest() {
 }
 
 void PplTest() {
-    cout << "==== PplTest ====" << endl;
+    cout << "==== PplTest ====" << endl << endl;
     printf("normal\n");
     for (int i = 0; i < 10; i++) {
         printf("%d ", i);
@@ -70,7 +70,7 @@ void PplTest() {
 }
 
 void OpenMPTest() {
-    cout << "==== OpenMPTest ====" << endl;
+    cout << "==== OpenMPTest ====" << endl << endl;
     //#pragma omp parallel
     //{
     //    printf("Hello, OpenMP\n");
@@ -115,7 +115,7 @@ void inTheForest(T& t) {
 };
 
 void DuckTypingTest() {
-    cout << "==== DuckTypingTest ====" << endl;
+    cout << "==== DuckTypingTest ====" << endl << endl;
     Duck donald;
     Person jhon;
 
@@ -124,7 +124,7 @@ void DuckTypingTest() {
 }
 
 void RangeForTest() {
-    cout << "==== RangeForTest ====" << endl;
+    cout << "==== RangeForTest ====" << endl << endl;
     // 배열의 경우 로컬에서만 가능
     int arr[5] = { 0, 1, 2, 3, 4, };
     for (int i : arr)
@@ -132,7 +132,7 @@ void RangeForTest() {
 }
 
 void StringFormatTest() {
-    cout << "==== StringFormatTest ====" << endl;
+    cout << "==== StringFormatTest ====" << endl << endl;
     ostringstream oss;
     oss << " my age : " << 16;
     oss << " my height : " << 170;
@@ -142,7 +142,7 @@ void StringFormatTest() {
 }
 
 void PrintfTest() {
-    cout << "==== PrintfTest ====" << endl;
+    cout << "==== PrintfTest ====" << endl << endl;
     unsigned char a = 23;
     unsigned char b = 24;
     printf("%d %d\n", a, b);
@@ -150,7 +150,7 @@ void PrintfTest() {
 }
 
 void MemoryLeakTest() {
-    cout << "==== MemoryLeakTest ====" << endl;
+    cout << "==== MemoryLeakTest ====" << endl << endl;
     // 이것을 하면 프로그램 종료시 디버그 출력창에 메모리 릭 정보를 아래와 같이 표시해 준다.
     // Detected memory leaks!
     // Dumping objects ->
@@ -179,7 +179,7 @@ void UnrefFunctionList() {
 void Func(int a) { printf("정수를 인자로 받는 함수\n"); }
 void Func(int* a) { printf("포인터를 인자로 받는 함수\n"); }
 void NullPtrTest() {
-    cout << "==== NullPtrTest ====" << endl;
+    cout << "==== NullPtrTest ====" << endl << endl;
     Func(1);
     Func(NULL); // 이것을 정수 인자 함수가 호출된다. 포인터 인자 함수를 널포인터 인자로 호출 하고 싶을때 난감
     Func(nullptr);
@@ -201,7 +201,7 @@ public:
 };
 
 void SharedPtrTest() {
-    cout << "==== SharedPtrTest ====" << endl;
+    cout << "==== SharedPtrTest ====" << endl << endl;
     wcout.imbue(locale("korean"));
     auto car = Car(L"아반떼");
     auto car2 = Car();
@@ -240,7 +240,7 @@ void del(Graphic* g) {
 }
 
 void VectorTest() {
-    cout << "==== VectorTest ====" << endl;
+    cout << "==== VectorTest ====" << endl << endl;
     vector<int> intlist;
     intlist.push_back(1);
     intlist.push_back(2);
@@ -264,7 +264,7 @@ void VectorTest() {
 }
 
 void VectorTest2() {
-    cout << "==== VectorTest2 ====" << endl;
+    cout << "==== VectorTest2 ====" << endl << endl;
     vector<int> intlist;
     intlist.push_back(1);
     intlist.push_back(2);
@@ -288,7 +288,7 @@ void VectorTest2() {
 }
 
 void VectorTest3() {
-    cout << "==== VectorTest3 ====" << endl;
+    cout << "==== VectorTest3 ====" << endl << endl;
     vector<int> intlist;
     intlist.push_back(0);
     intlist.push_back(1);
@@ -300,7 +300,7 @@ void VectorTest3() {
 }
 
 void VectorTest4() {
-    cout << "==== VectorTest4 ====" << endl;
+    cout << "==== VectorTest4 ====" << endl << endl;
     vector<int> ints;
     int cap = ints.capacity();
     cout << "size : " << ints.size() << ", cap : " << cap << endl;
@@ -315,7 +315,7 @@ void VectorTest4() {
 }
 
 void VectorTestString() {
-    cout << "==== VectorTestString ====" << endl;
+    cout << "==== VectorTestString ====" << endl << endl;
     vector<string> strList;
     strList.push_back("aaa");
     strList.push_back("bbb");
@@ -331,7 +331,7 @@ void VectorTestString() {
 }
 
 void ChronoTestDuration() {
-    cout << "==== ChronoTestDuration ====" << endl;
+    cout << "==== ChronoTestDuration ====" << endl << endl;
     time_point<system_clock> t0 = system_clock::now();
     this_thread::sleep_for(seconds(3));
     system_clock::time_point t1 = system_clock::now();
@@ -340,7 +340,7 @@ void ChronoTestDuration() {
 }
 
 void ChronoTestNow() {
-    cout << "==== ChronoTestNow ====" << endl;
+    cout << "==== ChronoTestNow ====" << endl << endl;
     time_point<system_clock> now = system_clock::now();
     time_t t = system_clock::to_time_t(now);
     string ts = ctime(&t);
@@ -360,7 +360,7 @@ MyCar GetMyCar() {
 }
 
 void ObjectReturnTest() {
-    cout << "==== ObjectReturnTest ====" << endl;
+    cout << "==== ObjectReturnTest ====" << endl << endl;
     MyCar car = GetMyCar();
     printf("object from caller : %p\n", &car);
 }
@@ -374,7 +374,7 @@ int fun() {
 }
 
 void PromiseFutureTest() {
-    cout << "==== PromiseFutureTest ====" << endl;
+    cout << "==== PromiseFutureTest ====" << endl << endl;
     //future<int> fut = async(fun);
     future<int> fut = async(launch::async, fun);  // 비동기로 실행
     //future<int> fut = async(launch::deferred, fun);
@@ -390,7 +390,7 @@ void PromiseFutureTest() {
 }
 
 void ConstPointerTest() {
-    cout << "==== ConstPointerTest ====" << endl;
+    cout << "==== ConstPointerTest ====" << endl << endl;
     int a = 5;
     int b = 10;
     const int* ptr1 = &a;    // int 변경 불가
@@ -418,7 +418,7 @@ public:
 //GraphicSet globalObj("Global Object");
 
 void GraphicSetTest() {
-    cout << "==== GraphicSetTest ====" << endl;
+    cout << "==== GraphicSetTest ====" << endl << endl;
     GraphicSet localObj("Local Object");
     int a = 1;
 }
@@ -429,7 +429,7 @@ public:
 };
 int MyClass::num;
 void StaticMemberTest() {
-    cout << "==== StaticMemberTest ====" << endl;
+    cout << "==== StaticMemberTest ====" << endl << endl;
     MyClass::num = 100;
     cout << MyClass::num << endl;
 }
@@ -481,7 +481,7 @@ void Taxi::Run() {}
 void Truck::Run() {}
 
 void CarSetTest() {
-    cout << "==== CarSetTest ====" << endl;
+    cout << "==== CarSetTest ====" << endl << endl;
     carSet.bus.Run();
 }
 
@@ -506,7 +506,7 @@ string WstrToStr(wstring const& wstr)
 }
 
 void StringConvertTest() {
-    cout << "==== StringConvertTest ====" << endl;
+    cout << "==== StringConvertTest ====" << endl << endl;
     //locale::global(locale("ko-KR"));
     //setlocale(LC_ALL, "ko-KR");
 
@@ -558,7 +558,7 @@ string wcs_to_mbs(wstring const& str, locale const& loc = locale("")) {
 }
 
 void StringConvertTest2() {
-    cout << "==== StringConvertTest2 ====" << endl;
+    cout << "==== StringConvertTest2 ====" << endl << endl;
     //locale::global(locale("ko-KR"));
     //setlocale(LC_ALL, "ko-KR");
 
@@ -588,7 +588,7 @@ void StringConvertTest2() {
 }
 
 void RangeBasedForTest() {
-    cout << "==== RangeBasedForTest ====" << endl;
+    cout << "==== RangeBasedForTest ====" << endl << endl;
     int arr1[] = { 1,2,3,4,5 };
     // int *arr1 = new int[5];  // error
     for (auto a : arr1) {
@@ -612,7 +612,7 @@ void PrintVector(vector<T> arr) {
 }
 
 void MapTest() {
-    cout << "==== MapTest ====" << endl;
+    cout << "==== MapTest ====" << endl << endl;
     vector<int> inarr = { 1,2,3,4,5 };
     PrintVector(inarr);
 
@@ -630,7 +630,7 @@ void MapTest() {
 }
 
 void ForTest() {
-    cout << "==== ForTest ====" << endl;
+    cout << "==== ForTest ====" << endl << endl;
     vector<wstring> msg{ L"Hello", L"C++", L"World", L"from", L"VS Code!" };
 
     for (const auto& word : msg) {
@@ -640,7 +640,7 @@ void ForTest() {
 }
 
 void RemainderTest() {
-    cout << "==== RemainderTest ====" << endl;
+    cout << "==== RemainderTest ====" << endl << endl;
     for (int i = -10; i <= 10; i++) {
         printf("%d / 2 = %d, %d %% 2 = %d\n", i, i / 2, i, i % 2);
     }
@@ -662,28 +662,34 @@ ostream& operator <<(ostream& c, const Student& T) {
 }
 
 void VectorSortTest() {
-    cout << "==== VectorSortTest ====" << endl;
-    //cout << "vector<int> sort" << endl;
-    //vector<int> items { 2, 9, 1, 5, 4, 7, 6, 3, 0, 8,  };
-    //sort(items.begin(), items.end(), [](int a, int b) -> bool { return a < b; });
-    //for (auto item : items)
-    //    cout << item << " ";
-
-    //cout << "vector<string> sort" << endl;
-    //vector<string> items = { "s4", "s7", "s6", "s8", "s2", "s0", "s9", "s5", "s3", "s1", };
-    //sort(items.begin(), items.end(), [](string a, string b) -> bool { return a < b; });
-    //for (auto item : items)
-    //    cout << item << " ";
-
-    cout << "vector<Student> sort" << endl;
-    vector<Student> items = { { "s4", 2 }, { "s7", 9 }, { "s6", 1 }, { "s8", 5 }, { "s2", 4 }, { "s0", 7 }, { "s9", 6 }, { "s5", 3 }, { "s3", 0 }, { "s1", 8 }, };
-    sort(items.begin(), items.end(), [](Student a, Student b) -> bool { return a.age < b.age; });
-    for (auto item : items)
+    cout << "==== VectorSortTest ====" << endl << endl;
+    cout << "vector<int> sort" << endl;
+    vector<int> intList { 2, 9, 1, 5, 4, 7, 6, 3, 0, 8,  };
+    sort(intList.begin(), intList.end(), [](int a, int b) -> bool { return a < b; });
+    for (int item : intList)
         cout << item << " ";
-    cout << endl;
-    sort(items.begin(), items.end(), [](Student a, Student b) -> bool { return a.name < b.name; });
-    for (auto item : items)
+    cout << endl << endl;
+
+    cout << "vector<string> sort" << endl;
+    vector<string> stringList = { "s4", "s7", "s6", "s8", "s2", "s0", "s9", "s5", "s3", "s1", };
+    sort(stringList.begin(), stringList.end(), [](string a, string b) -> bool { return a < b; });
+    for (string item : stringList)
         cout << item << " ";
+    cout << endl << endl;
+
+    vector<Student> studentList = { { "s4", 2 }, { "s7", 9 }, { "s6", 1 }, { "s8", 5 }, { "s2", 4 }, { "s0", 7 }, { "s9", 6 }, { "s5", 3 }, { "s3", 0 }, { "s1", 8 }, };
+    
+    cout << "vector<Student> sort by age" << endl;
+    sort(studentList.begin(), studentList.end(), [](Student a, Student b) -> bool { return a.age < b.age; });
+    for (Student item : studentList)
+        cout << item << " ";
+    cout << endl << endl;
+
+    cout << "vector<Student> sort by name" << endl;
+    sort(studentList.begin(), studentList.end(), [](Student a, Student b) -> bool { return a.name < b.name; });
+    for (Student item : studentList)
+        cout << item << " ";
+    cout << endl << endl;
 }
 
 int main() {
