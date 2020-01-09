@@ -619,6 +619,26 @@ void RemainderTest() {
     }
 }
 
+void VectorSortTest() {
+    vector<string> stringList;
+    stringList.push_back("While");
+    stringList.push_back("small");
+    stringList.push_back("test");
+    stringList.push_back("programs");
+    stringList.push_back("have");
+    stringList.push_back("existed");
+    stringList.push_back("since");
+    stringList.push_back("the");
+    stringList.push_back("development");
+    stringList.push_back("of");
+    stringList.push_back("programmable");
+
+    sort(stringList.begin(), stringList.end);
+    for (auto str : stringList) {
+        cout << str << endl;
+    }
+}
+
 int main() {
     //printf("== VariableArgumentTest ==\n");
     //VariableArgumentTest();
@@ -713,8 +733,11 @@ int main() {
     //printf("== ForTest ==\n");
     //ForTest();
 
-    printf("== RemainderTest ==\n");
-    RemainderTest();
+    //printf("== RemainderTest ==\n");
+    //RemainderTest();
+
+    printf("== VectorSortTest ==\n");
+    VectorSortTest();
 
     getchar();
     return 0;
