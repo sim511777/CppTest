@@ -49,6 +49,7 @@ double DoubleSum(int num, ...) {
 }
 
 void VariableArgumentTest() {
+    cout << "==== VariableArgumentTest ====" << endl;
     int iSum = IntSum(3, 1, 2, 3);
     printf("int sum = %d\n", iSum);
     double dSum = DoubleSum(3, 1.1, 2.2, 3.3);
@@ -56,6 +57,7 @@ void VariableArgumentTest() {
 }
 
 void PplTest() {
+    cout << "==== PplTest ====" << endl;
     printf("normal\n");
     for (int i = 0; i < 10; i++) {
         printf("%d ", i);
@@ -68,14 +70,13 @@ void PplTest() {
 }
 
 void OpenMPTest() {
-    //printf("==== Test1 ====\n");
+    cout << "==== OpenMPTest ====" << endl;
     //#pragma omp parallel
     //{
     //    printf("Hello, OpenMP\n");
     //    printf("Bye, world\n");
     //}
 
-    //printf("==== Test2 ====\n");
     //int sum = 0;
     //#pragma omp parallel for
     //for (int i = 0; i < 10; i++) {
@@ -114,6 +115,7 @@ void inTheForest(T& t) {
 };
 
 void DuckTypingTest() {
+    cout << "==== DuckTypingTest ====" << endl;
     Duck donald;
     Person jhon;
 
@@ -122,6 +124,7 @@ void DuckTypingTest() {
 }
 
 void RangeForTest() {
+    cout << "==== RangeForTest ====" << endl;
     // 배열의 경우 로컬에서만 가능
     int arr[5] = { 0, 1, 2, 3, 4, };
     for (int i : arr)
@@ -129,6 +132,7 @@ void RangeForTest() {
 }
 
 void StringFormatTest() {
+    cout << "==== StringFormatTest ====" << endl;
     ostringstream oss;
     oss << " my age : " << 16;
     oss << " my height : " << 170;
@@ -138,6 +142,7 @@ void StringFormatTest() {
 }
 
 void PrintfTest() {
+    cout << "==== PrintfTest ====" << endl;
     unsigned char a = 23;
     unsigned char b = 24;
     printf("%d %d\n", a, b);
@@ -145,6 +150,7 @@ void PrintfTest() {
 }
 
 void MemoryLeakTest() {
+    cout << "==== MemoryLeakTest ====" << endl;
     // 이것을 하면 프로그램 종료시 디버그 출력창에 메모리 릭 정보를 아래와 같이 표시해 준다.
     // Detected memory leaks!
     // Dumping objects ->
@@ -173,6 +179,7 @@ void UnrefFunctionList() {
 void Func(int a) { printf("정수를 인자로 받는 함수\n"); }
 void Func(int* a) { printf("포인터를 인자로 받는 함수\n"); }
 void NullPtrTest() {
+    cout << "==== NullPtrTest ====" << endl;
     Func(1);
     Func(NULL); // 이것을 정수 인자 함수가 호출된다. 포인터 인자 함수를 널포인터 인자로 호출 하고 싶을때 난감
     Func(nullptr);
@@ -194,6 +201,7 @@ public:
 };
 
 void SharedPtrTest() {
+    cout << "==== SharedPtrTest ====" << endl;
     wcout.imbue(locale("korean"));
     auto car = Car(L"아반떼");
     auto car2 = Car();
@@ -227,11 +235,12 @@ public:
     void Draw() { puts("요건 사각형입니다."); }
 };
 
-void del(Graphic *g) {
+void del(Graphic* g) {
     delete g;
 }
 
 void VectorTest() {
+    cout << "==== VectorTest ====" << endl;
     vector<int> intlist;
     intlist.push_back(1);
     intlist.push_back(2);
@@ -241,13 +250,13 @@ void VectorTest() {
     //   printf("%d\n", i);
     for_each(intlist.begin(), intlist.end(), [](int a) { printf("%d\n", a); });
 
-    vector<Graphic *> vg;
+    vector<Graphic*> vg;
     vg.push_back(new Graphic());
     vg.push_back(new Rect());
     vg.push_back(new Circle());
     vg.push_back(new Line());
 
-    vector<Graphic *>::iterator it;
+    vector<Graphic*>::iterator it;
     for (it = vg.begin(); it != vg.end(); it++) {
         (*it)->Draw();
     }
@@ -255,6 +264,7 @@ void VectorTest() {
 }
 
 void VectorTest2() {
+    cout << "==== VectorTest2 ====" << endl;
     vector<int> intlist;
     intlist.push_back(1);
     intlist.push_back(2);
@@ -278,17 +288,19 @@ void VectorTest2() {
 }
 
 void VectorTest3() {
+    cout << "==== VectorTest3 ====" << endl;
     vector<int> intlist;
     intlist.push_back(0);
     intlist.push_back(1);
     intlist.push_back(2);
     intlist.push_back(3);
     intlist.push_back(4);
-    for (size_t i=0; i<intlist.size(); i++)
+    for (size_t i = 0; i < intlist.size(); i++)
         printf("%d\n", intlist[i]);
 }
 
 void VectorTest4() {
+    cout << "==== VectorTest4 ====" << endl;
     vector<int> ints;
     int cap = ints.capacity();
     cout << "size : " << ints.size() << ", cap : " << cap << endl;
@@ -296,13 +308,14 @@ void VectorTest4() {
         ints.push_back(i);
         int cap2 = ints.capacity();
         //if (cap2 != cap) {
-            cap = cap2;
-            cout << "size : " << ints.size() << ", cap : " << cap << ", &ints.front() : " << &ints.front() << endl;
+        cap = cap2;
+        cout << "size : " << ints.size() << ", cap : " << cap << ", &ints.front() : " << &ints.front() << endl;
         //}
     }
 }
 
 void VectorTestString() {
+    cout << "==== VectorTestString ====" << endl;
     vector<string> strList;
     strList.push_back("aaa");
     strList.push_back("bbb");
@@ -318,6 +331,7 @@ void VectorTestString() {
 }
 
 void ChronoTestDuration() {
+    cout << "==== ChronoTestDuration ====" << endl;
     time_point<system_clock> t0 = system_clock::now();
     this_thread::sleep_for(seconds(3));
     system_clock::time_point t1 = system_clock::now();
@@ -326,6 +340,7 @@ void ChronoTestDuration() {
 }
 
 void ChronoTestNow() {
+    cout << "==== ChronoTestNow ====" << endl;
     time_point<system_clock> now = system_clock::now();
     time_t t = system_clock::to_time_t(now);
     string ts = ctime(&t);
@@ -345,6 +360,7 @@ MyCar GetMyCar() {
 }
 
 void ObjectReturnTest() {
+    cout << "==== ObjectReturnTest ====" << endl;
     MyCar car = GetMyCar();
     printf("object from caller : %p\n", &car);
 }
@@ -358,6 +374,7 @@ int fun() {
 }
 
 void PromiseFutureTest() {
+    cout << "==== PromiseFutureTest ====" << endl;
     //future<int> fut = async(fun);
     future<int> fut = async(launch::async, fun);  // 비동기로 실행
     //future<int> fut = async(launch::deferred, fun);
@@ -373,12 +390,13 @@ void PromiseFutureTest() {
 }
 
 void ConstPointerTest() {
+    cout << "==== ConstPointerTest ====" << endl;
     int a = 5;
     int b = 10;
-    const int* ptr1= &a;    // int 변경 불가
+    const int* ptr1 = &a;    // int 변경 불가
     //*ptr1 = 10;             // 포인터가 가리키는 값 변경 불가
     ptr1 = &b;              // 포인터 변수 변경 가능
-    
+
     int* const ptr2 = &a;   // 포인터 변경 불가
     *ptr2 = 10;             // 포인커가 가리키는 값은 변경 가능
     //ptr2 = &b;              // 포인터 변수 변경 가능
@@ -400,6 +418,7 @@ public:
 //GraphicSet globalObj("Global Object");
 
 void GraphicSetTest() {
+    cout << "==== GraphicSetTest ====" << endl;
     GraphicSet localObj("Local Object");
     int a = 1;
 }
@@ -410,28 +429,29 @@ public:
 };
 int MyClass::num;
 void StaticMemberTest() {
+    cout << "==== StaticMemberTest ====" << endl;
     MyClass::num = 100;
     cout << MyClass::num << endl;
 }
 
 class CarBase {
 public:
-   virtual void Run();
+    virtual void Run();
 };
 
 class Truck : CarBase {
 public:
-   virtual void Run();
+    virtual void Run();
 };
 
 class Bus : CarBase {
 public:
-   virtual void Run();
+    virtual void Run();
 };
 
 class Taxi : CarBase {
 public:
-   virtual void Run();
+    virtual void Run();
 };
 
 class SomeSet {
@@ -441,15 +461,15 @@ public:
     }
 };
 
-class CarSet : SomeSet{
+class CarSet : SomeSet {
 public:
-   CarBase car;
-   Bus bus;
-   Truck truck;
-   Taxi taxi;
-   virtual void SomeDo() {
+    CarBase car;
+    Bus bus;
+    Truck truck;
+    Taxi taxi;
+    virtual void SomeDo() {
 
-   }
+    }
 };
 
 extern CarSet carSet;
@@ -461,38 +481,40 @@ void Taxi::Run() {}
 void Truck::Run() {}
 
 void CarSetTest() {
+    cout << "==== CarSetTest ====" << endl;
     carSet.bus.Run();
 }
 
 wstring StrToWstr(string const& str)
 {
     auto len = str.size();
-    wchar_t* wc = new wchar_t[len+1];
+    wchar_t* wc = new wchar_t[len + 1];
     mbstowcs(wc, str.c_str(), len);
     wstring wstr(wc);
-    delete [] wc;
+    delete[] wc;
     return wstr;
 }
 
 string WstrToStr(wstring const& wstr)
 {
     auto len = wstr.size();
-    char* c = new char[len*2+1];
-    wcstombs(c, wstr.c_str(), len*2);
+    char* c = new char[len * 2 + 1];
+    wcstombs(c, wstr.c_str(), len * 2);
     string str(c);
-    delete [] c;
+    delete[] c;
     return str;
 }
 
 void StringConvertTest() {
+    cout << "==== StringConvertTest ====" << endl;
     //locale::global(locale("ko-KR"));
     //setlocale(LC_ALL, "ko-KR");
-    
+
     const char* _0_ch = "안녕AB";
-	const wchar_t* _1_wch = L"안녕AB";
+    const wchar_t* _1_wch = L"안녕AB";
 
     string  _2_str = "안녕AB";
-	wstring _3_wstr = L"안녕AB";
+    wstring _3_wstr = L"안녕AB";
 
     string _4_str2 = WstrToStr(_3_wstr);
     wstring _5_wstr2 = StrToWstr(_2_str);
@@ -536,14 +558,15 @@ string wcs_to_mbs(wstring const& str, locale const& loc = locale("")) {
 }
 
 void StringConvertTest2() {
+    cout << "==== StringConvertTest2 ====" << endl;
     //locale::global(locale("ko-KR"));
     //setlocale(LC_ALL, "ko-KR");
-    
+
     const char* _0_ch = "안녕AB";
-	const wchar_t* _1_wch = L"안녕AB";
+    const wchar_t* _1_wch = L"안녕AB";
 
     string  _2_str = "안녕AB";
-	wstring _3_wstr = L"안녕AB";
+    wstring _3_wstr = L"안녕AB";
 
     string _4_str2 = wcs_to_mbs(_3_wstr);
     wstring _5_wstr2 = mbs_to_wcs(_2_str);
@@ -565,6 +588,7 @@ void StringConvertTest2() {
 }
 
 void RangeBasedForTest() {
+    cout << "==== RangeBasedForTest ====" << endl;
     int arr1[] = { 1,2,3,4,5 };
     // int *arr1 = new int[5];  // error
     for (auto a : arr1) {
@@ -588,11 +612,12 @@ void PrintVector(vector<T> arr) {
 }
 
 void MapTest() {
+    cout << "==== MapTest ====" << endl;
     vector<int> inarr = { 1,2,3,4,5 };
     PrintVector(inarr);
 
     cout << endl;
-    
+
     vector<int> outarr;
     outarr.resize(5);
     transform(inarr.begin(), inarr.end(), outarr.begin(), [](auto num) { return num * 2; });
@@ -605,6 +630,7 @@ void MapTest() {
 }
 
 void ForTest() {
+    cout << "==== ForTest ====" << endl;
     vector<wstring> msg{ L"Hello", L"C++", L"World", L"from", L"VS Code!" };
 
     for (const auto& word : msg) {
@@ -614,6 +640,7 @@ void ForTest() {
 }
 
 void RemainderTest() {
+    cout << "==== RemainderTest ====" << endl;
     for (int i = -10; i <= 10; i++) {
         printf("%d / 2 = %d, %d %% 2 = %d\n", i, i / 2, i, i % 2);
     }
@@ -635,6 +662,7 @@ ostream& operator <<(ostream& c, const Student& T) {
 }
 
 void VectorSortTest() {
+    cout << "==== VectorSortTest ====" << endl;
     //cout << "vector<int> sort" << endl;
     //vector<int> items { 2, 9, 1, 5, 4, 7, 6, 3, 0, 8,  };
     //sort(items.begin(), items.end(), [](int a, int b) -> bool { return a < b; });
@@ -658,106 +686,36 @@ void VectorSortTest() {
         cout << item << " ";
 }
 
-
-
 int main() {
-    //printf("== VariableArgumentTest ==\n");
     //VariableArgumentTest();
-
-    //printf("== ArrayTest ==\n");
-    //VariableArgumentTest();
-
-    //printf("== PplTest ==\n");
     //PplTest();
-
-    //printf("== OpenMPTest ==\n");
     //OpenMPTest();
-
-    //printf("== DuckTypingTest ==\n");
     //DuckTypingTest();
-
-    //printf("== RangeForTest ==\n");
     //RangeForTest();
-
-    //printf("== StringTest ==\n");
-    //StringTest();
-
-    //printf("== StringFormatTest ==\n");
     //StringFormatTest();
-
-    //printf("== UnicodeTest ==\n");
-    //StringConvertTest();
-
-    //printf("== PrintfTest ==\n");
     //PrintfTest();
-
-    //printf("== MemoryLeakTest ==\n");
     //MemoryLeakTest();
-
-    //printf("== NullPtrTest ==\n");
     //NullPtrTest();
-
-    //printf("== SharedPtrTest ==\n");
     //SharedPtrTest();
-
-    //printf("== VectorTest ==\n");
     //VectorTest();
-
-    //printf("== VectorTest2 ==\n");
     //VectorTest2();
-
-    //printf("== VectorTest3 ==\n");
     //VectorTest3();
-
-    //printf("== VectorTest4 ==\n");
     //VectorTest4();
-
-    //printf("== VectorTestString ==\n");
     //VectorTestString();
-
-    //printf("== ChronoTestDuration ==\n");
     //ChronoTestDuration();
-
-    //printf("== ChronoTestNow ==\n");
     //ChronoTestNow();
-
-    //printf("== ObjectReturnTest ==\n");
     //ObjectReturnTest();
-
-    //printf("== PromiseFutureTest ==\n");
     //PromiseFutureTest();
-
-    //printf("== ConstTest ==\n");
     //ConstPointerTest();
-
-    //printf("== StaticMemberTest ==\n");
     //StaticMemberTest();
-
-    //printf("== CarSetTest ==\n");
     //CarSetTest();
-
-    //printf("== GraphicSetTest ==\n");
     //GraphicSetTest();
-
-    //printf("== StringConvertTest ==\n");
     //StringConvertTest();
-
-    //printf("== StringConvertTest2 ==\n");
     //StringConvertTest2();
-
-    //printf("== RangeBasedForTest ==\n");
     //RangeBasedForTest();
-
-    //printf("== MapTest ==\n");
     //MapTest();
-
-    //printf("== ForTest ==\n");
     //ForTest();
-
-    //printf("== RemainderTest ==\n");
     //RemainderTest();
-
-    printf("== VectorSortTest ==\n");
     VectorSortTest();
 
     getchar();
