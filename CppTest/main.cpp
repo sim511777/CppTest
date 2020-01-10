@@ -12,6 +12,7 @@
 #include <codecvt>
 #include <windows.h>
 #include <algorithm>
+#include <list>
 
 using namespace std;
 using namespace concurrency;
@@ -723,6 +724,45 @@ void StructInitialize() {
     RECT rect3{ 1,2,3,4 };
 }
 
+template<typename IT>
+void PrintIterator(IT s, IT e) {
+    IT it;
+    for (it = s; it != e; it++) {
+        printf("%d ", *it);
+    }
+}
+
+template<typename T>
+void PrintIndex(T seq, int s, int e) {
+    int i;
+    for (i = s; i != e; i++) {
+        printf("%d ", seq[i]);
+    }
+}
+
+void IteratorTest() {
+    cout << "==== IteratorTest ====" << endl << endl;
+    
+    int ari[] = { 1,2,3,4,5 };
+    vector<int> vi(&ari[0], &ari[5]);
+    list<int> li(&ari[0], &ari[5]);
+
+    cout << endl << "iterate array" << endl;
+    PrintIterator(&ari[0], &ari[5]);
+    cout << endl << "iterate vector" << endl;
+    PrintIterator(vi.begin(), vi.end());
+    cout << endl << "iterate list" << endl;
+    PrintIterator(li.begin(), li.end());
+
+    cout << endl << "index array" << endl;
+    PrintIndex(ari, 0, 5);
+    cout << endl << "index vector" << endl;
+    PrintIndex(vi, 0, vi.size());
+    // error : list는 인덱싱 연산자([])가 정의되어 있지 않다.
+    //cout << endl << "index list" << endl;
+    //PrintIndex(li, 0, li.size());
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -755,7 +795,8 @@ int main() {
     //RemainderTest();
     //VectorSortTest();
     //ReferenceTest();
-    StructInitialize();
+    //StructInitialize();
+    IteratorTest();
 
     getchar();
     return 0;
