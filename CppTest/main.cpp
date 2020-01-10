@@ -302,11 +302,11 @@ void VectorTest3() {
 void VectorTest4() {
     cout << "==== VectorTest4 ====" << endl << endl;
     vector<int> ints;
-    int cap = ints.capacity();
+    size_t cap = ints.capacity();
     cout << "size : " << ints.size() << ", cap : " << cap << endl;
     for (int i = 0; i < 100000; i++) {
         ints.push_back(i);
-        int cap2 = ints.capacity();
+        size_t cap2 = ints.capacity();
         //if (cap2 != cap) {
         cap = cap2;
         cout << "size : " << ints.size() << ", cap : " << cap << ", &ints.front() : " << &ints.front() << endl;
@@ -343,8 +343,9 @@ void ChronoTestNow() {
     cout << "==== ChronoTestNow ====" << endl << endl;
     time_point<system_clock> now = system_clock::now();
     time_t t = system_clock::to_time_t(now);
-    string ts = ctime(&t);
-    printf("%s\n", ts.c_str());
+    char str[26];
+    ctime_s(str, sizeof str, &t);
+    printf("%s\n", str);
 }
 
 struct MyCar {
@@ -709,7 +710,7 @@ int main() {
     //VectorTest4();
     //VectorTestString();
     //ChronoTestDuration();
-    //ChronoTestNow();
+    ChronoTestNow();
     //ObjectReturnTest();
     //PromiseFutureTest();
     //ConstPointerTest();
@@ -722,7 +723,7 @@ int main() {
     //MapTest();
     //ForTest();
     //RemainderTest();
-    VectorSortTest();
+    //VectorSortTest();
 
     getchar();
     return 0;
