@@ -697,6 +697,32 @@ void VectorSortTest() {
     cout << endl << endl;
 }
 
+ostream& operator <<(ostream& c, const RECT& T) {
+    return c << "{" << T.left << "," << T.top << "," << T.right << "," << T.bottom << "}";
+}
+
+void ReferenceTest() {
+    cout << "==== ReferenceTest ====" << endl << endl;
+    RECT rect1 = {1,2,3,4,};
+    RECT rect2 = {11,12,13,14};
+    RECT & refRect = rect1;
+    cout << rect1 << " " << rect2 << " " << refRect << endl;
+    refRect = rect2;
+    cout << rect1 << " " << rect2 << " " << refRect << endl;
+}
+
+void StructInitialize() {
+    cout << "==== StructInitialize ====" << endl << endl;
+    RECT rect1;
+    rect1.left = 1;
+    rect1.top = 2;
+    rect1.right = 3;
+    rect1.bottom = 4;
+
+    RECT rect2 = { 1,2,3,4, };
+    RECT rect3{ 1,2,3,4 };
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -721,13 +747,15 @@ int main() {
     //StaticMemberTest();
     //CarSetTest();
     //GraphicSetTest();
-    StringConvertTest();
-    StringConvertTest2();
+    //StringConvertTest();
+    //StringConvertTest2();
     //RangeBasedForTest();
     //MapTest();
     //ForTest();
     //RemainderTest();
     //VectorSortTest();
+    //ReferenceTest();
+    StructInitialize();
 
     getchar();
     return 0;
