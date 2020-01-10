@@ -488,9 +488,11 @@ void CarSetTest() {
 
 wstring StrToWstr(string const& str)
 {
-    auto len = str.size();
-    wchar_t* wc = new wchar_t[len + 1];
-    mbstowcs(wc, str.c_str(), len);
+    size_t len = str.size();
+    size_t bufSize = len + 1;
+    wchar_t* wc = new wchar_t[bufSize];
+    size_t lenDone;
+    mbstowcs_s(&lenDone, wc, bufSize, str.c_str(), len);
     wstring wstr(wc);
     delete[] wc;
     return wstr;
@@ -498,9 +500,11 @@ wstring StrToWstr(string const& str)
 
 string WstrToStr(wstring const& wstr)
 {
-    auto len = wstr.size();
-    char* c = new char[len * 2 + 1];
-    wcstombs(c, wstr.c_str(), len * 2);
+    size_t len = wstr.size();
+    size_t bufSize = len * 2 + 1;
+    char* c = new char[bufSize];
+    size_t lenDone;
+    wcstombs_s(&lenDone, c, bufSize, wstr.c_str(), len);
     string str(c);
     delete[] c;
     return str;
@@ -710,15 +714,15 @@ int main() {
     //VectorTest4();
     //VectorTestString();
     //ChronoTestDuration();
-    ChronoTestNow();
+    //ChronoTestNow();
     //ObjectReturnTest();
     //PromiseFutureTest();
     //ConstPointerTest();
     //StaticMemberTest();
     //CarSetTest();
     //GraphicSetTest();
-    //StringConvertTest();
-    //StringConvertTest2();
+    StringConvertTest();
+    StringConvertTest2();
     //RangeBasedForTest();
     //MapTest();
     //ForTest();
