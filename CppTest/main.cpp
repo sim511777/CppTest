@@ -763,6 +763,56 @@ void IteratorTest() {
     //PrintIndex(li, 0, li.size());
 }
 
+void StlFindTest() {
+    cout << "==== StlFindTest ====" << endl << endl;
+    
+    int arr[] = { 1,2,3,4,5 };
+    vector<int> vi = { 1,2,3,4,5 };
+    list<int> li = { 1,2,3,4,5 };
+
+    puts(find(vi.begin(), vi.end(), 4) == vi.end() ? "없다." : "있다.");
+    puts(find(li.begin(), li.end(), 8) == li.end() ? "없다." : "있다.");
+    puts(find(&arr[0], &arr[5], 3) == &arr[5] ? "없다." : "있다.");
+}
+
+void StlSortTest() {
+    cout << "==== StlSortTest ====" << endl << endl;
+
+    vector<int> vi = { 2,8,5,1,9 };
+
+    sort(vi.begin(), vi.end());
+    for (int i : vi)
+        cout << i << endl;
+}
+
+void StlReverseTest() {
+    cout << "==== StlReverseTest ====" << endl << endl;
+
+    vector<int> vi = { 1,2,3,4,5,6,7,8,9 };
+
+    for (int i : vi)
+        cout << i << " ";
+    cout << endl;
+
+    reverse(vi.begin(), vi.end());
+    for (int i : vi)
+        cout << i << " ";
+}
+
+void StlRandomShuffleTest() {
+    cout << "==== StlRandomShuffleTest ====" << endl << endl;
+
+    vector<int> vi = { 1,2,3,4,5,6,7,8,9 };
+
+    for (int i : vi)
+        cout << i << " ";
+    cout << endl;
+
+    random_shuffle(vi.begin(), vi.end());
+    for (int i : vi)
+        cout << i << " ";
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -796,7 +846,11 @@ int main() {
     //VectorSortTest();
     //ReferenceTest();
     //StructInitialize();
-    IteratorTest();
+    //IteratorTest();
+    //StlFindTest();
+    //StlSortTest();
+    //StlReverseTest();
+    StlRandomShuffleTest();
 
     getchar();
     return 0;
