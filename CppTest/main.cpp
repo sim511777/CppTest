@@ -214,26 +214,26 @@ void SharedPtrTest() {
 
 class Graphic {
 public:
-    Graphic() { puts("그래픽 생성"); }
-    virtual void Draw() { puts("그래픽 오브젝트입니다."); }
+    Graphic() { cout << "그래픽 생성" << endl; }
+    virtual void Draw() { cout << "그래픽 오브젝트입니다." << endl; }
 };
 
 class Line : public Graphic {
 public:
-    Line() { puts("선 생성"); }
-    void Draw() { puts("선을 긋습니다."); }
+    Line() { cout << "선 생성" << endl; }
+    void Draw() { cout << "선을 긋습니다." << endl; }
 };
 
 class Circle : public Graphic {
 public:
-    Circle() { puts("원 생성"); }
-    void Draw() { puts("동그라미 그렸다 치고."); }
+    Circle() { cout << "원 생성" << endl; }
+    void Draw() { cout << "동그라미 그렸다 치고." << endl; }
 };
 
 class Rect : public Graphic {
 public:
-    Rect() { puts("사각형 생성"); }
-    void Draw() { puts("요건 사각형입니다."); }
+    Rect() { cout << "사각형 생성" << endl; }
+    void Draw() { cout << "요건 사각형입니다." << endl; }
 };
 
 void del(Graphic* g) {
@@ -770,9 +770,9 @@ void StlFindTest() {
     vector<int> vi = { 1,2,3,4,5 };
     list<int> li = { 1,2,3,4,5 };
 
-    puts(find(vi.begin(), vi.end(), 4) == vi.end() ? "없다." : "있다.");
-    puts(find(li.begin(), li.end(), 8) == li.end() ? "없다." : "있다.");
-    puts(find(&arr[0], &arr[5], 3) == &arr[5] ? "없다." : "있다.");
+    cout << (find(vi.begin(), vi.end(), 4) == vi.end() ? "없다." : "있다.") << endl;
+    cout << (find(li.begin(), li.end(), 8) == li.end() ? "없다." : "있다.") << endl;
+    cout << (find(&arr[0], &arr[5], 3) == &arr[5] ? "없다." : "있다.") << endl;
 }
 
 void StlSortTest() {
