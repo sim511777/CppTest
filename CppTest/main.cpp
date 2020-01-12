@@ -813,6 +813,25 @@ void StlRandomShuffleTest() {
         cout << i << " ";
 }
 
+class MyMesmerize {
+public:
+    MyMesmerize(int a, int b) {
+        cout << "MyMesmerize is consturcted." << endl;
+    }
+    ~MyMesmerize() {
+        cout << "MyMesmerize is destroyed." << endl;
+    }
+};
+
+void SomeMesmerizeTest1() {
+    cout << "==== SomeMesmerizeTest1 ====" << endl << endl;
+    MyMesmerize obj();  // 햇갈리지 말자. MyMesmerize객체 생성이 아니고 MyMesmerize를 리턴하는 파라미터 없는 obj함수 선언. 아무것도 안함.
+    // obj(); // 이것은 에러. 위에서 함수선언은 했지만 정의를 안했으므로 링크 에러 발생
+    MyMesmerize obj1(1,2);
+    MyMesmerize obj2 = {1,2};
+    MyMesmerize obj3{2,3};
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -850,7 +869,8 @@ int main() {
     //StlFindTest();
     //StlSortTest();
     //StlReverseTest();
-    StlRandomShuffleTest();
+    //StlRandomShuffleTest();
+    SomeMesmerizeTest1();
 
     getchar();
     return 0;
