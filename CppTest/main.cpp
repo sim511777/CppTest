@@ -827,9 +827,28 @@ void SomeMesmerizeTest1() {
     cout << "==== SomeMesmerizeTest1 ====" << endl << endl;
     MyMesmerize obj();  // 햇갈리지 말자. MyMesmerize객체 생성이 아니고 MyMesmerize를 리턴하는 파라미터 없는 obj함수 선언. 아무것도 안함.
     // obj(); // 이것은 에러. 위에서 함수선언은 했지만 정의를 안했으므로 링크 에러 발생
-    MyMesmerize obj1(1,2);
-    MyMesmerize obj2 = {1,2};
-    MyMesmerize obj3{2,3};
+    MyMesmerize obj1(1, 2);
+    MyMesmerize obj2 = { 1,2 };
+    MyMesmerize obj3{ 2,3 };
+}
+
+void VectorElementAccessTest() {
+    cout << "==== VectorElementAccessTest ====" << endl << endl;
+    vector<int> intList = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, };
+    for (int i : intList)
+        cout << i << " ";
+    cout << endl;
+
+    int a = intList.at(3);  // get
+    int b = intList[4];     // get
+    cout << a << endl;
+    cout << b << endl;
+
+    intList.at(3) = 8;      // set
+    intList[4] = 9;         // set
+    for (int i : intList)
+        cout << i << " ";
+    cout << endl;
 }
 
 int main() {
@@ -870,7 +889,8 @@ int main() {
     //StlSortTest();
     //StlReverseTest();
     //StlRandomShuffleTest();
-    SomeMesmerizeTest1();
+    //SomeMesmerizeTest1();
+    VectorElementAccessTest();
 
     getchar();
     return 0;
