@@ -839,13 +839,28 @@ void VectorElementAccessTest() {
         cout << i << " ";
     cout << endl;
 
+    // reference at (size_type n); 함수로 접근
     int a = intList.at(3);  // get
-    int b = intList[4];     // get
     cout << a << endl;
-    cout << b << endl;
+    intList.at(3) = 7;      // set
+    for (int i : intList)
+        cout << i << " ";
+    cout << endl;
 
-    intList.at(3) = 8;      // set
-    intList[4] = 9;         // set
+    // reference operator[] (size_type n); 연산자로 접근
+    int b = intList[4];     // get
+    cout << b << endl;
+    intList[4] = 8;         // set
+    for (int i : intList)
+        cout << i << " ";
+    cout << endl;
+
+    // iterator 통해서 접근
+    auto it = intList.begin();
+    advance(it, 5);
+    int c = *it;            // get
+    cout << c << endl;
+    *it = 9;                // set
     for (int i : intList)
         cout << i << " ";
     cout << endl;
@@ -908,8 +923,8 @@ int main() {
     //StlReverseTest();
     //StlRandomShuffleTest();
     //SomeMesmerizeTest1();
-    //VectorElementAccessTest();
-    ListElementAccessTest();
+    VectorElementAccessTest();
+    //ListElementAccessTest();
 
     getchar();
     return 0;
