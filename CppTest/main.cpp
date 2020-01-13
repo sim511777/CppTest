@@ -979,6 +979,17 @@ void FindIfTest() {
     }
 }
 
+void PredefFunctorTest() {
+    cout << "==== PredefFunctorTest ====" << endl << endl;
+    int r1 = plus<int>()(3, 4);
+    cout << r1 << endl;
+
+    vector<string> vs = { "STL", "MFC", "owl", "html", "pascal", "Ada", "Delphi", "C/C++", "Python", "basic" };
+    sort(vs.begin(), vs.end(), less<string>());
+    for (auto v : vs)
+        cout << v << " ";
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -1021,7 +1032,8 @@ int main() {
     //VectorElementAccessTest();
     //ListElementAccessTest();
     //ForeachFunctorTest();
-    FindIfTest();
+    //FindIfTest();
+    PredefFunctorTest();
 
     getchar();
     return 0;
