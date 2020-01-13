@@ -947,6 +947,38 @@ void ForeachFunctorTest() {
     s2.Call(4);
 }
 
+struct IsKim {
+    bool operator()(string name) const {
+        return (strncmp(name.c_str(), "김", 2) == 0);
+    }
+};
+void FindIfTest() {
+    cout << "==== ForeachFunctorTest ====" << endl << endl;
+    vector<string> nameList = { "김유신", "이순신", "성삼문", "장보고", "조광조", "신숙주", "김홍도", "정도전", "이성계", "정몽주" };
+    
+    vector<string>::iterator it = find_if(nameList.begin(), nameList.end(), IsKim());
+    if (it == nameList.end()) {
+        cout << "김가 없다." << endl;
+    } else {
+        cout << *it << "이(가) 있다." << endl;
+    }
+
+    vector<string>::iterator it2 = find_if(nameList.begin(), nameList.end(), [](string name) ->bool { return (strncmp(name.c_str(), "신", 2) == 0); });
+    if (it2 == nameList.end()) {
+        cout << "신가 없다." << endl;
+    }
+    else {
+        cout << *it2 << "이(가) 있다." << endl;
+    }
+
+    vector<string>::iterator it3;
+    for (it3 = nameList.begin();; it3++) {
+        it3 = find_if(it3, nameList.end(), IsKim());
+        if (it3 == nameList.end()) break;
+            cout << *it3 << "이(가) 있다" << endl;
+    }
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -988,7 +1020,8 @@ int main() {
     //SomeMesmerizeTest1();
     //VectorElementAccessTest();
     //ListElementAccessTest();
-    ForeachFunctorTest();
+    //ForeachFunctorTest();
+    FindIfTest();
 
     getchar();
     return 0;
