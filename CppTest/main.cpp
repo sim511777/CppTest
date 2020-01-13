@@ -52,60 +52,60 @@ double DoubleSum(int num, ...) {
 void VariableArgumentTest() {
     cout << "==== VariableArgumentTest ====" << endl << endl;
     int iSum = IntSum(3, 1, 2, 3);
-    printf("int sum = %d\n", iSum);
+    cout << "int sum = " << iSum << endl;
     double dSum = DoubleSum(3, 1.1, 2.2, 3.3);
-    printf("double sum = %f\n", dSum);
+    cout << "double sum = " << dSum << endl;
 }
 
 void PplTest() {
     cout << "==== PplTest ====" << endl << endl;
-    printf("normal\n");
+    cout << "normal" << endl;
     for (int i = 0; i < 10; i++) {
-        printf("%d ", i);
+        cout << i << " ";
     }
-    printf("\npareallel_for\n");
+    cout << endl << "npareallel_for" << endl;
     // start로부터 시작해서 last가 아닌 동안 한번 할때마다 step 씩 증가
     parallel_for(0, 10, 1, [&](int i) {
-        printf("%d ", i);
+        cout << i << " ";
         });
 }
 
 void OpenMPTest() {
     cout << "==== OpenMPTest ====" << endl << endl;
-    //#pragma omp parallel
-    //{
-    //    printf("Hello, OpenMP\n");
-    //    printf("Bye, world\n");
-    //}
+    #pragma omp parallel
+    {
+        cout << "Hello, OpenMP" << endl;
+        cout << "Bye, world" << endl;
+    }
 
-    //int sum = 0;
-    //#pragma omp parallel for
-    //for (int i = 0; i < 10; i++) {
-    //    printf("i = %d\n", i);
-    //    sum += i;
-    //}
-    //printf("Sum = %d\n", sum);
+    int sum = 0;
+    #pragma omp parallel for
+    for (int i = 0; i < 10; i++) {
+        cout << "i = " << i << endl;
+        sum += i;
+    }
+    cout << "Sum = " << sum << endl;
 }
 
 class Duck {
 public:
     void quack() {
-        printf("Quaaaaaack!\n");
+        cout << "Quaaaaaack!" << endl;
     }
 
     void feathers() {
-        printf("The duck has white and gray feathers.\n");
+        cout << "The duck has white and gray feathers." << endl;
     }
 };
 
 class Person {
 public:
     void quack() {
-        printf("The person imitates a duck.\n");
+        cout << "The person imitates a duck." << endl;
     }
 
     void feathers() {
-        printf("The person takes a feather from the ground and shows it.\n");
+        cout << "The person takes a feather from the ground and shows it." << endl;
     }
 };
 
@@ -129,7 +129,7 @@ void RangeForTest() {
     // 배열의 경우 로컬에서만 가능
     int arr[5] = { 0, 1, 2, 3, 4, };
     for (int i : arr)
-        printf("%d\n", i);
+        cout << i << endl;
 }
 
 void StringFormatTest() {
@@ -139,7 +139,7 @@ void StringFormatTest() {
     oss << " my height : " << 170;
     auto str = oss.str();
     auto cp = str.c_str();
-    printf(cp);
+    cout << cp;
 }
 
 void PrintfTest() {
@@ -177,8 +177,8 @@ void UnrefFunctionList() {
     // 링커 -> 명령줄 -> 추가옵션 : /VERBOSE:REF 추가
 }
 
-void Func(int a) { printf("정수를 인자로 받는 함수\n"); }
-void Func(int* a) { printf("포인터를 인자로 받는 함수\n"); }
+void Func(int a) { cout << "정수를 인자로 받는 함수" << endl; }
+void Func(int* a) { cout << "포인터를 인자로 받는 함수" << endl; }
 void NullPtrTest() {
     cout << "==== NullPtrTest ====" << endl << endl;
     Func(1);
@@ -248,8 +248,8 @@ void VectorTest() {
     intlist.push_back(3);
     intlist.push_back(4);
     //for (int i : intlist)
-    //   printf("%d\n", i);
-    for_each(intlist.begin(), intlist.end(), [](int a) { printf("%d\n", a); });
+    //   cout << i << endl;
+    for_each(intlist.begin(), intlist.end(), [](int a) { cout << a << endl; });
 
     vector<Graphic*> vg;
     vg.push_back(new Graphic());
@@ -272,8 +272,8 @@ void VectorTest2() {
     intlist.push_back(3);
     intlist.push_back(4);
     //for (int i : intlist)
-    //   printf("%d\n", i);
-    for_each(intlist.begin(), intlist.end(), [](int a) { printf("%d\n", a); });
+    //   cout << i << endl;
+    for_each(intlist.begin(), intlist.end(), [](int a) { cout << a << endl; });
 
     vector<Graphic> vg;
     vg.push_back(Graphic());
@@ -297,7 +297,7 @@ void VectorTest3() {
     intlist.push_back(3);
     intlist.push_back(4);
     for (size_t i = 0; i < intlist.size(); i++)
-        printf("%d\n", intlist[i]);
+        cout << intlist[i] << endl;
 }
 
 void VectorTest4() {
@@ -327,7 +327,7 @@ void VectorTestString() {
     strList.push_back(str2);
     strList.push_back(string("str3"));
     for (auto it = strList.begin(); it != strList.end(); it++) {
-        printf("%s\n", (*it).c_str());
+        cout << (*it).c_str() << endl;
     }
 }
 
@@ -337,7 +337,7 @@ void ChronoTestDuration() {
     this_thread::sleep_for(seconds(3));
     system_clock::time_point t1 = system_clock::now();
     duration<double> sec = t1 - t0;
-    printf("%f\n", sec.count());
+    cout << sec.count() << endl;
 }
 
 void ChronoTestNow() {
@@ -346,7 +346,7 @@ void ChronoTestNow() {
     time_t t = system_clock::to_time_t(now);
     char str[26];
     ctime_s(str, sizeof str, &t);
-    printf("%s\n", str);
+    cout << str << endl;
 }
 
 struct MyCar {
@@ -357,19 +357,19 @@ struct MyCar {
 
 MyCar GetMyCar() {
     MyCar car;
-    printf("object from callee : %p\n", &car);
+    cout << "object from callee : " << &car << endl;
     return car;
 }
 
 void ObjectReturnTest() {
     cout << "==== ObjectReturnTest ====" << endl << endl;
     MyCar car = GetMyCar();
-    printf("object from caller : %p\n", &car);
+    cout << "object from caller : " << &car << endl;
 }
 
 int fun() {
     for (int i = 1; i <= 10; i++) {
-        printf("fun[%d]\n", i);
+        cout << "fun[" << i << "]" << endl;
     }
 
     return 200;
@@ -382,13 +382,13 @@ void PromiseFutureTest() {
     //future<int> fut = async(launch::deferred, fun);
 
     for (int i = 1; i <= 10; i++) {
-        printf("main[%d]\n", i);
+        cout << "main[" << i << "]" << endl;
     }
-    printf("\n");
+    cout << endl;
 
     int result = fut.get();   // 비동기 작업이 완료될때까지 대기하고 리턴값 받음
 
-    printf("result : %d\n", result);
+    cout << "result : " << result << endl;
 }
 
 void ConstPointerTest() {
@@ -648,7 +648,7 @@ void ForTest() {
 void RemainderTest() {
     cout << "==== RemainderTest ====" << endl << endl;
     for (int i = -10; i <= 10; i++) {
-        printf("%d / 2 = %d, %d %% 2 = %d\n", i, i / 2, i, i % 2);
+        cout << i << " / 2 = " << i / 2 << ", " << i << " %% 2 = " << i % 2 << endl;
     }
 }
 
@@ -728,14 +728,14 @@ template<typename IT>
 void PrintIterator(IT s, IT e) {
     IT it;
     for (it = s; it != e; it++) {
-        printf("%d ", *it);
+        cout << *it << " ";
     }
 }
 
 template<typename T>
 void PrintIndex(T seq, size_t s, size_t e) {
     for (size_t i = s; i != e; i++) {
-        printf("%d ", seq[i]);
+        cout << seq[i] << " ";
     }
 }
 
