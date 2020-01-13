@@ -13,6 +13,7 @@
 #include <windows.h>
 #include <algorithm>
 #include <list>
+#include <numeric>
 
 using namespace std;
 using namespace concurrency;
@@ -996,10 +997,70 @@ struct StringCompareNoCase {
     }
 };
 void StringSortNoCaseTest() {
+    cout << "==== StringSortNoCaseTest ====" << endl << endl;
     vector<string> vs = { "STL", "MFC", "owl", "html", "pascal", "Ada", "Delphi", "C/C++", "Python", "basic" };
     sort(vs.begin(), vs.end(), StringCompareNoCase());
     for (auto v : vs)
         cout << v << " ";
+}
+
+bool IntCompare(int a, int b) {
+    return a < b;
+}
+
+struct SIntCompare {
+    bool operator()(int a, int b) {
+        return a < b;
+    }
+};
+
+void PrintIntVector(vector<int> vs) {
+    return;
+    for (int v : vs) {
+        cout << v << " ";
+    }
+    cout << endl;
+}
+
+void VectorSortSpeedTest() {
+    cout << "==== VectorSortSpeedTest ====" << endl << endl;
+    int num = 10000000;
+    vector<int> vs1(num);
+
+    iota(vs1.begin(), vs1.end(), 0);
+    PrintIntVector(vs1);
+
+    random_shuffle(vs1.begin(), vs1.end());
+    PrintIntVector(vs1);
+    
+    vector<int> vs2(num);
+    copy(vs1.begin(), vs1.end(), vs2.begin());
+    PrintIntVector(vs2);
+
+    vector<int> vs3(num);
+    copy(vs1.begin(), vs1.end(), vs3.begin());
+    PrintIntVector(vs3);
+
+    time_point<system_clock> st;
+    duration<double> sec;
+
+    st = system_clock::now();
+    sort(vs1.begin(), vs1.end(), IntCompare);
+    sec = system_clock::now() - st;
+    cout << "function pointer(sec) : " << sec.count() << endl;
+    PrintIntVector(vs1);
+
+    st = system_clock::now();
+    sort(vs2.begin(), vs2.end(), SIntCompare());
+    sec = system_clock::now() - st;
+    cout << "functor object(sec) : " << sec.count() << endl;
+    PrintIntVector(vs2);
+
+    st = system_clock::now();
+    sort(vs3.begin(), vs3.end(), [](int a, int b) -> bool { return a < b; });
+    sec = system_clock::now() - st;
+    cout << "lambda function(sec) : " << sec.count() << endl;
+    PrintIntVector(vs3);
 }
 
 int main() {
@@ -1046,7 +1107,8 @@ int main() {
     //ForeachFunctorTest();
     //FindIfTest();
     //PredefFunctorTest();
-    StringSortNoCaseTest();
+    //StringSortNoCaseTest();
+    VectorSortSpeedTest();
 
     getchar();
     return 0;
