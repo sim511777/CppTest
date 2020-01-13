@@ -993,7 +993,7 @@ void PredefFunctorTest() {
 
 struct StringCompareNoCase {
     bool operator()(string& a, string& b) {
-        return stricmp(a.c_str(), b.c_str()) < 0;
+        return _stricmp(a.c_str(), b.c_str()) < 0;
     }
 };
 void StringSortNoCaseTest() {
