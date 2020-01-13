@@ -990,6 +990,18 @@ void PredefFunctorTest() {
         cout << v << " ";
 }
 
+struct StringCompareNoCase {
+    bool operator()(string& a, string& b) {
+        return stricmp(a.c_str(), b.c_str()) < 0;
+    }
+};
+void StringSortNoCaseTest() {
+    vector<string> vs = { "STL", "MFC", "owl", "html", "pascal", "Ada", "Delphi", "C/C++", "Python", "basic" };
+    sort(vs.begin(), vs.end(), StringCompareNoCase());
+    for (auto v : vs)
+        cout << v << " ";
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -1033,7 +1045,8 @@ int main() {
     //ListElementAccessTest();
     //ForeachFunctorTest();
     //FindIfTest();
-    PredefFunctorTest();
+    //PredefFunctorTest();
+    StringSortNoCaseTest();
 
     getchar();
     return 0;
