@@ -733,9 +733,8 @@ void PrintIterator(IT s, IT e) {
 }
 
 template<typename T>
-void PrintIndex(T seq, int s, int e) {
-    int i;
-    for (i = s; i != e; i++) {
+void PrintIndex(T seq, size_t s, size_t e) {
+    for (size_t i = s; i != e; i++) {
         printf("%d ", seq[i]);
     }
 }
