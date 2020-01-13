@@ -886,6 +886,67 @@ void ListElementAccessTest() {
     cout << endl;
 }
 
+void fPrint(int a) {
+    cout << a << " ";
+}
+
+struct SPrint {
+    void operator()(int a) const {
+        cout << a << " ";
+    }
+};
+
+struct SSum {
+    int sum;
+    SSum() {
+        sum = 0;
+    }
+    void operator()(int a) {
+        sum += a;
+    }
+};
+
+struct SPrintString {
+    string mes;
+    SPrintString(string m) : mes(m) { }
+    void operator()(int a) const {
+        cout << mes << a << endl;
+    }
+};
+
+template <typename T>
+struct SomeClass {
+    T functor;
+    SomeClass(T _functor) {
+        functor = _functor;
+    };
+    void Call(int a) {
+        functor(a);
+    }
+};
+
+void ForeachFunctorTest() {
+    cout << "==== ForeachFunctorTest ====" << endl << endl;
+    vector<int> intList = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, };
+    for_each(intList.begin(), intList.end(), fPrint);
+    cout << endl;
+    for_each(intList.begin(), intList.end(), SPrint());
+    cout << endl;
+    for_each(intList.begin(), intList.end(), [](int a) -> void { cout << a << " "; });
+    cout << endl;
+
+    SSum sumObj = for_each(intList.begin(), intList.end(), SSum());  // 함수 객체의 복사본이 넘어가기 때문에 그 복사본을 리턴받아 와야 한다.
+    cout << "sum = " << sumObj.sum << endl;
+    
+    for_each(intList.begin(), intList.end(), SPrintString(string("요소값은 ")));
+    for_each(intList.begin(), intList.end(), SPrintString(string("다른 메시지 ")));
+    // SomeClass<SPrint> s1(SPrint());           // 이거 애매 모호 함, SPrint()를 SPrint(*)() 함수 포인터 타입으로 인식하여 객체 생성구문이 아닌 함수 선언 구문으로 이식함
+    SomeClass<SPrint> s1 = SomeClass<SPrint>(SPrint());           // 템플릿 변수 선언
+    SomeClass<void (*)(int)> s2(fPrint);    // 템플릿 변수 선언
+    s1.Call(3);
+    s2.Call(4);
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -926,7 +987,8 @@ int main() {
     //StlRandomShuffleTest();
     //SomeMesmerizeTest1();
     //VectorElementAccessTest();
-    ListElementAccessTest();
+    //ListElementAccessTest();
+    ForeachFunctorTest();
 
     getchar();
     return 0;
