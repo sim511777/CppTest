@@ -873,12 +873,15 @@ void ListElementAccessTest() {
         cout << i << " ";
     cout << endl;
 
-    list<int>::iterator it = intList.begin();
-    advance(it, 3);  // get
-    int a = *it;
-    cout << a << endl;
+    // reference at (size_type n); 함수로 접근 불가
+    // reference operator[] (size_type n); 연산자로 접근 불가
 
-    *it = 8;      // set
+    // iterator 통해서 접근
+    auto it = intList.begin();
+    advance(it, 5);
+    int c = *it;            // get
+    cout << c << endl;
+    *it = 9;                // set
     for (int i : intList)
         cout << i << " ";
     cout << endl;
@@ -923,8 +926,8 @@ int main() {
     //StlReverseTest();
     //StlRandomShuffleTest();
     //SomeMesmerizeTest1();
-    VectorElementAccessTest();
-    //ListElementAccessTest();
+    //VectorElementAccessTest();
+    ListElementAccessTest();
 
     getchar();
     return 0;
