@@ -727,8 +727,8 @@ void StructInitialize() {
 
 template<typename IT>
 void PrintIterator(IT s, IT e) {
-    IT it;
-    for (it = s; it != e; it++) {
+    return;
+    for (auto it = s; it != e; it++) {
         cout << *it << " ";
     }
     cout << endl;
@@ -1021,14 +1021,21 @@ void PrintSequence(SEQ v) {
     PrintIterator(v.begin(), v.end());
 }
 
+int cmpfunc(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
 void VectorSortSpeedTest() {
     cout << "==== VectorSortSpeedTest ====" << endl << endl;
-    int num = 10;
+    int num = 10000000;
     vector<int> vs1(num);
 
+    cout << "generate" << endl;
     iota(vs1.begin(), vs1.end(), 0);
     PrintSequence(vs1);
 
+    cout << endl;
+    cout << "shuffle" << endl;
     random_shuffle(vs1.begin(), vs1.end());
     PrintSequence(vs1);
     
@@ -1040,26 +1047,51 @@ void VectorSortSpeedTest() {
     copy(vs1.begin(), vs1.end(), vs3.begin());
     PrintSequence(vs3);
 
+    int* arr1 = new int[num];
+    copy(vs1.begin(), vs1.end(), arr1);
+    PrintIterator(arr1, arr1 + num);
+
+    int* arr2 = new int[num];
+    copy(vs1.begin(), vs1.end(), arr2);
+    PrintIterator(arr2, arr2 + num);
+
     time_point<system_clock> st;
     duration<double> sec;
 
+    cout << endl;
+    cout << "sort" << endl;
     st = system_clock::now();
     sort(vs1.begin(), vs1.end(), IntCompare);
     sec = system_clock::now() - st;
-    cout << "function pointer(sec) : " << sec.count() << endl;
+    cout << "stl::sort function : " << sec.count() << "sec" << endl;
     PrintSequence(vs1);
 
     st = system_clock::now();
     sort(vs2.begin(), vs2.end(), SIntCompare());
     sec = system_clock::now() - st;
-    cout << "functor object(sec) : " << sec.count() << endl;
+    cout << "stl::sort functor  : " << sec.count() << "sec" << endl;
     PrintSequence(vs2);
 
     st = system_clock::now();
     sort(vs3.begin(), vs3.end(), [](int a, int b) -> bool { return a < b; });
     sec = system_clock::now() - st;
-    cout << "lambda function(sec) : " << sec.count() << endl;
+    cout << "stl::sort lambda   : " << sec.count() << "sec" << endl;
     PrintSequence(vs3);
+
+    st = system_clock::now();
+    qsort(arr1, num, sizeof(int), cmpfunc);
+    sec = system_clock::now() - st;
+    cout << "qsort     function : " << sec.count() << "sec" << endl;
+    PrintIterator(arr1, arr1 + num);
+
+    st = system_clock::now();
+    qsort(arr2, num, sizeof(int), [](const void* pt1, const void* pt2)->int { return *(int*)pt1 - *(int*)pt2; });
+    sec = system_clock::now() - st;
+    cout << "qsort     lambda   : " << sec.count() << "sec" << endl;
+    PrintIterator(arr2, arr2 + num);
+
+    delete[] arr1;
+    delete[] arr2;
 }
 
 void RoundTest(double start, double end, double) {
