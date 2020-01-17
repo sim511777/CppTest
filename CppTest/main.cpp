@@ -1135,6 +1135,13 @@ void NegativeModulusTest() {
     }
 }
 
+void SizeOfPrimitiveTest() {
+    cout << "==== SizeOfPrimitiveTest ====" << endl << endl;
+    cout << "sizeof(long) : " << sizeof(long) << endl;
+    cout << "sizeof(long double) : " << sizeof(long double) << endl;
+    cout << "sizeof(long long) : " << sizeof(long long) << endl;
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -1180,9 +1187,10 @@ int main() {
     //FindIfTest();
     //PredefFunctorTest();
     //StringSortNoCaseTest();
-    VectorSortSpeedTest();
+    //VectorSortSpeedTest();
     //RoundTest(-10, 10, 0.5);
     //NegativeModulusTest();
+    SizeOfPrimitiveTest();
 
     getchar();
     return 0;
