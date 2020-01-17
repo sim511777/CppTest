@@ -1094,7 +1094,7 @@ void VectorSortSpeedTest() {
     delete[] arr2;
 }
 
-void RoundTest(double start, double end, double) {
+void RoundTest() {
     cout << "==== RoundTest ====" << endl << endl;
 
     cout << "input\n";
@@ -1105,7 +1105,8 @@ void RoundTest(double start, double end, double) {
     cout << "      :     :     :     :     (int)\n";
     cout << "      :     :     :     :     :     floor(+0.5)\n";
     cout << "      :     :     :     :     :     :     (int)(+0.5)\n";
-
+    double start = -10;
+    double end = 10;
     for (double item = start; item < end; item += 0.5) {
         auto Round = round(item);
         auto RoundF = roundf(item);
@@ -1188,9 +1189,9 @@ int main() {
     //PredefFunctorTest();
     //StringSortNoCaseTest();
     //VectorSortSpeedTest();
-    //RoundTest(-10, 10, 0.5);
+    RoundTest();
     //NegativeModulusTest();
-    SizeOfPrimitiveTest();
+    //SizeOfPrimitiveTest();
 
     getchar();
     return 0;
