@@ -1063,6 +1063,37 @@ void VectorSortSpeedTest() {
     PrintIntVector(vs3);
 }
 
+void RoundTest(double start, double end, double) {
+    cout << "==== RoundTest ====" << endl << endl;
+
+    cout << "input\n";
+    cout << "      round\n";
+    cout << "      :     roundf(ToEven)\n";
+    cout << "      :     :     roundl(AwayFromZero)\n";
+    cout << "      :     :     :     floor\n";
+    cout << "      :     :     :     :     (int)\n";
+    cout << "      :     :     :     :     :     floor(+0.5)\n";
+    cout << "      :     :     :     :     :     :     (int)(+0.5)\n";
+
+    for (double item = start; item < end; item += 0.5) {
+        auto Round = round(item);
+        auto RoundF = roundf(item);
+        auto RoundL = roundl(item);
+        auto Floor = floor(item);
+        auto CastInt = (int)item;
+        auto AddHalfFloor = floor(item + 0.5);
+        auto AddHalfIntCast = (int)(item + 0.5);
+        cout.width(5); cout << item << " : ";
+        cout.width(3); cout << Round << " : ";
+        cout.width(3); cout << RoundF << " : ";
+        cout.width(3); cout << RoundL << " : ";
+        cout.width(3); cout << Floor << " : ";
+        cout.width(3); cout << CastInt << " : ";
+        cout.width(3); cout << AddHalfFloor << " : ";
+        cout.width(3); cout << AddHalfIntCast << endl;
+    }
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -1108,7 +1139,8 @@ int main() {
     //FindIfTest();
     //PredefFunctorTest();
     //StringSortNoCaseTest();
-    VectorSortSpeedTest();
+    //VectorSortSpeedTest();
+    RoundTest(-10, 10, 0.5);
 
     getchar();
     return 0;
