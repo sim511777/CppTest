@@ -1094,6 +1094,16 @@ void RoundTest(double start, double end, double) {
     }
 }
 
+void NegativeModulusTest() {
+    cout << "==== NegativeModulusTest ====" << endl << endl;
+    int n = 3;
+    for (int i = -20; i < 20; i++) {
+        int mod1 = i % n;
+        int mod2 = (i % n + n) % n;
+        cout << i << " : " << mod1 << " " << mod2 << endl;
+    }
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -1140,7 +1150,8 @@ int main() {
     //PredefFunctorTest();
     //StringSortNoCaseTest();
     //VectorSortSpeedTest();
-    RoundTest(-10, 10, 0.5);
+    //RoundTest(-10, 10, 0.5);
+    NegativeModulusTest();
 
     getchar();
     return 0;
