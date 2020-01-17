@@ -731,6 +731,7 @@ void PrintIterator(IT s, IT e) {
     for (it = s; it != e; it++) {
         cout << *it << " ";
     }
+    cout << endl;
 }
 
 template<typename T>
@@ -738,6 +739,7 @@ void PrintIndex(T seq, size_t s, size_t e) {
     for (size_t i = s; i != e; i++) {
         cout << seq[i] << " ";
     }
+    cout << endl;
 }
 
 void IteratorTest() {
@@ -747,19 +749,19 @@ void IteratorTest() {
     vector<int> vi(&ari[0], &ari[5]);
     list<int> li(&ari[0], &ari[5]);
 
-    cout << endl << "iterate array" << endl;
+    cout << "iterate array" << endl;
     PrintIterator(&ari[0], &ari[5]);
-    cout << endl << "iterate vector" << endl;
+    cout << "iterate vector" << endl;
     PrintIterator(vi.begin(), vi.end());
-    cout << endl << "iterate list" << endl;
+    cout << "iterate list" << endl;
     PrintIterator(li.begin(), li.end());
 
-    cout << endl << "index array" << endl;
+    cout << "index array" << endl;
     PrintIndex(ari, 0, 5);
-    cout << endl << "index vector" << endl;
+    cout << "index vector" << endl;
     PrintIndex(vi, 0, vi.size());
     // error : list는 인덱싱 연산자([])가 정의되어 있지 않다.
-    //cout << endl << "index list" << endl;
+    //cout << "index list" << endl;
     //PrintIndex(li, 0, li.size());
 }
 
@@ -1014,32 +1016,29 @@ struct SIntCompare {
     }
 };
 
-void PrintIntVector(vector<int> vs) {
-    return;
-    for (int v : vs) {
-        cout << v << " ";
-    }
-    cout << endl;
+template<typename SEQ>
+void PrintSequence(SEQ v) {
+    PrintIterator(v.begin(), v.end());
 }
 
 void VectorSortSpeedTest() {
     cout << "==== VectorSortSpeedTest ====" << endl << endl;
-    int num = 10000000;
+    int num = 10;
     vector<int> vs1(num);
 
     iota(vs1.begin(), vs1.end(), 0);
-    PrintIntVector(vs1);
+    PrintSequence(vs1);
 
     random_shuffle(vs1.begin(), vs1.end());
-    PrintIntVector(vs1);
+    PrintSequence(vs1);
     
     vector<int> vs2(num);
     copy(vs1.begin(), vs1.end(), vs2.begin());
-    PrintIntVector(vs2);
+    PrintSequence(vs2);
 
     vector<int> vs3(num);
     copy(vs1.begin(), vs1.end(), vs3.begin());
-    PrintIntVector(vs3);
+    PrintSequence(vs3);
 
     time_point<system_clock> st;
     duration<double> sec;
@@ -1048,19 +1047,19 @@ void VectorSortSpeedTest() {
     sort(vs1.begin(), vs1.end(), IntCompare);
     sec = system_clock::now() - st;
     cout << "function pointer(sec) : " << sec.count() << endl;
-    PrintIntVector(vs1);
+    PrintSequence(vs1);
 
     st = system_clock::now();
     sort(vs2.begin(), vs2.end(), SIntCompare());
     sec = system_clock::now() - st;
     cout << "functor object(sec) : " << sec.count() << endl;
-    PrintIntVector(vs2);
+    PrintSequence(vs2);
 
     st = system_clock::now();
     sort(vs3.begin(), vs3.end(), [](int a, int b) -> bool { return a < b; });
     sec = system_clock::now() - st;
     cout << "lambda function(sec) : " << sec.count() << endl;
-    PrintIntVector(vs3);
+    PrintSequence(vs3);
 }
 
 void RoundTest(double start, double end, double) {
@@ -1149,9 +1148,9 @@ int main() {
     //FindIfTest();
     //PredefFunctorTest();
     //StringSortNoCaseTest();
-    //VectorSortSpeedTest();
+    VectorSortSpeedTest();
     //RoundTest(-10, 10, 0.5);
-    NegativeModulusTest();
+    //NegativeModulusTest();
 
     getchar();
     return 0;
