@@ -14,6 +14,8 @@
 #include <algorithm>
 #include <list>
 #include <numeric>
+#include <functional>
+#include <map>
 
 using namespace std;
 using namespace concurrency;
@@ -1099,26 +1101,20 @@ void RoundTest() {
 
     cout << "input\n";
     cout << "      round\n";
-    cout << "      :     roundf(ToEven)\n";
-    cout << "      :     :     roundl(AwayFromZero)\n";
-    cout << "      :     :     :     floor\n";
-    cout << "      :     :     :     :     (int)\n";
-    cout << "      :     :     :     :     :     floor(+0.5)\n";
-    cout << "      :     :     :     :     :     :     (int)(+0.5)\n";
+    cout << "      :     floor\n";
+    cout << "      :     :     (int)\n";
+    cout << "      :     :     :     floor(+0.5)\n";
+    cout << "      :     :     :     :     (int)(+0.5)\n";
     double start = -10;
     double end = 10;
     for (double item = start; item < end; item += 0.5) {
         auto Round = round(item);
-        auto RoundF = roundf(item);
-        auto RoundL = roundl(item);
         auto Floor = floor(item);
         auto CastInt = (int)item;
         auto AddHalfFloor = floor(item + 0.5);
         auto AddHalfIntCast = (int)(item + 0.5);
         cout.width(5); cout << item << " : ";
         cout.width(3); cout << Round << " : ";
-        cout.width(3); cout << RoundF << " : ";
-        cout.width(3); cout << RoundL << " : ";
         cout.width(3); cout << Floor << " : ";
         cout.width(3); cout << CastInt << " : ";
         cout.width(3); cout << AddHalfFloor << " : ";
@@ -1141,58 +1137,96 @@ void SizeOfPrimitiveTest() {
     cout << "sizeof(long) : " << sizeof(long) << endl;
     cout << "sizeof(long double) : " << sizeof(long double) << endl;
     cout << "sizeof(long long) : " << sizeof(long long) << endl;
+    function<void()> f;
+}
+
+vector<pair<string, function<void()>>> funclist = {
+    { "VariableArgumentTest", VariableArgumentTest },
+    { "PplTest", PplTest },
+    { "OpenMPTest", OpenMPTest },
+    { "DuckTypingTest", DuckTypingTest },
+    { "RangeForTest", RangeForTest },
+    { "StringFormatTest", StringFormatTest },
+    { "PrintfTest", PrintfTest },
+    { "MemoryLeakTest", MemoryLeakTest },
+    { "NullPtrTest", NullPtrTest },
+    { "SharedPtrTest", SharedPtrTest },
+    { "VectorTest", VectorTest },
+    { "VectorTest2", VectorTest2 },
+    { "VectorTest3", VectorTest3 },
+    { "VectorTest4", VectorTest4 },
+    { "VectorTestString", VectorTestString },
+    { "ChronoTestDuration", ChronoTestDuration },
+    { "ChronoTestNow", ChronoTestNow },
+    { "ObjectReturnTest", ObjectReturnTest },
+    { "PromiseFutureTest", PromiseFutureTest },
+    { "ConstPointerTest", ConstPointerTest },
+    { "StaticMemberTest", StaticMemberTest },
+    { "CarSetTest", CarSetTest },
+    { "GraphicSetTest", GraphicSetTest },
+    { "StringConvertTest", StringConvertTest },
+    { "StringConvertTest2", StringConvertTest2 },
+    { "RangeBasedForTest", RangeBasedForTest },
+    { "MapTest", MapTest },
+    { "ForTest", ForTest },
+    { "RemainderTest", RemainderTest },
+    { "VectorSortTest", VectorSortTest },
+    { "ReferenceTest", ReferenceTest },
+    { "StructInitialize", StructInitialize },
+    { "IteratorTest", IteratorTest },
+    { "StlFindTest", StlFindTest },
+    { "StlSortTest", StlSortTest },
+    { "StlReverseTest", StlReverseTest },
+    { "StlRandomShuffleTest", StlRandomShuffleTest },
+    { "SomeMesmerizeTest1", SomeMesmerizeTest1 },
+    { "VectorElementAccessTest", VectorElementAccessTest },
+    { "ListElementAccessTest", ListElementAccessTest },
+    { "ForeachFunctorTest", ForeachFunctorTest },
+    { "FindIfTest", FindIfTest },
+    { "PredefFunctorTest", PredefFunctorTest },
+    { "StringSortNoCaseTest", StringSortNoCaseTest },
+    { "VectorSortSpeedTest", VectorSortSpeedTest },
+    { "RoundTest", RoundTest },
+    { "NegativeModulusTest", NegativeModulusTest },
+    { "SizeOfPrimitiveTest", SizeOfPrimitiveTest },
+};
+
+void PrintFunclist() {
+    for (size_t i = 0; i < funclist.size(); i++) {
+        cout << i << ". " << funclist.at(i).first << endl;
+    }
 }
 
 int main() {
-    //VariableArgumentTest();
-    //PplTest();
-    //OpenMPTest();
-    //DuckTypingTest();
-    //RangeForTest();
-    //StringFormatTest();
-    //PrintfTest();
-    //MemoryLeakTest();
-    //NullPtrTest();
-    //SharedPtrTest();
-    //VectorTest();
-    //VectorTest2();
-    //VectorTest3();
-    //VectorTest4();
-    //VectorTestString();
-    //ChronoTestDuration();
-    //ChronoTestNow();
-    //ObjectReturnTest();
-    //PromiseFutureTest();
-    //ConstPointerTest();
-    //StaticMemberTest();
-    //CarSetTest();
-    //GraphicSetTest();
-    //StringConvertTest();
-    //StringConvertTest2();
-    //RangeBasedForTest();
-    //MapTest();
-    //ForTest();
-    //RemainderTest();
-    //VectorSortTest();
-    //ReferenceTest();
-    //StructInitialize();
-    //IteratorTest();
-    //StlFindTest();
-    //StlSortTest();
-    //StlReverseTest();
-    //StlRandomShuffleTest();
-    //SomeMesmerizeTest1();
-    //VectorElementAccessTest();
-    //ListElementAccessTest();
-    //ForeachFunctorTest();
-    //FindIfTest();
-    //PredefFunctorTest();
-    //StringSortNoCaseTest();
-    //VectorSortSpeedTest();
-    RoundTest();
-    //NegativeModulusTest();
-    //SizeOfPrimitiveTest();
+    PrintFunclist();
+    while (true) {
+        cout << "input number?('q' quit, 'l' shows list) : ";
+        string input;
+        cin >> input;
 
+        if (input == "q")
+            break;
+
+        if (input == "l") {
+            PrintFunclist();
+            continue;
+        }
+
+        try {
+            size_t num = (size_t)stoi(input);
+            if (num < 0 || num >= funclist.size()) {
+                cout << "input out of range." << endl;
+                continue;
+            }
+
+            funclist.at(num).second();
+        }
+        catch (exception & ex) {
+            cout << ex.what() << endl;
+            continue;
+        }
+    }
+    cout << "good bye~" << endl;
     getchar();
     return 0;
 }
