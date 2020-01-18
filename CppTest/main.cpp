@@ -75,14 +75,14 @@ void PplTest() {
 
 void OpenMPTest() {
     cout << "==== OpenMPTest ====" << endl << endl;
-    #pragma omp parallel
+#pragma omp parallel
     {
         cout << "Hello, OpenMP" << endl;
         cout << "Bye, world" << endl;
     }
 
     int sum = 0;
-    #pragma omp parallel for
+#pragma omp parallel for
     for (int i = 0; i < 10; i++) {
         cout << "i = " << i << endl;
         sum += i;
@@ -673,7 +673,7 @@ ostream& operator <<(ostream& c, const Student& T) {
 void VectorSortTest() {
     cout << "==== VectorSortTest ====" << endl << endl;
     cout << "vector<int> sort" << endl;
-    vector<int> intList { 2, 9, 1, 5, 4, 7, 6, 3, 0, 8,  };
+    vector<int> intList{ 2, 9, 1, 5, 4, 7, 6, 3, 0, 8, };
     sort(intList.begin(), intList.end(), [](int a, int b) -> bool { return a < b; });
     for (int item : intList)
         cout << item << " ";
@@ -687,7 +687,7 @@ void VectorSortTest() {
     cout << endl << endl;
 
     vector<Student> studentList = { { "s4", 2 }, { "s7", 9 }, { "s6", 1 }, { "s8", 5 }, { "s2", 4 }, { "s0", 7 }, { "s9", 6 }, { "s5", 3 }, { "s3", 0 }, { "s1", 8 }, };
-    
+
     cout << "vector<Student> sort by age" << endl;
     sort(studentList.begin(), studentList.end(), [](Student a, Student b) -> bool { return a.age < b.age; });
     for (Student item : studentList)
@@ -707,9 +707,9 @@ ostream& operator <<(ostream& c, const RECT& T) {
 
 void ReferenceTest() {
     cout << "==== ReferenceTest ====" << endl << endl;
-    RECT rect1 = {1,2,3,4,};
-    RECT rect2 = {11,12,13,14};
-    RECT & refRect = rect1;
+    RECT rect1 = { 1,2,3,4, };
+    RECT rect2 = { 11,12,13,14 };
+    RECT& refRect = rect1;
     cout << rect1 << " " << rect2 << " " << refRect << endl;
     refRect = rect2;
     cout << rect1 << " " << rect2 << " " << refRect << endl;
@@ -746,7 +746,7 @@ void PrintIndex(T seq, size_t s, size_t e) {
 
 void IteratorTest() {
     cout << "==== IteratorTest ====" << endl << endl;
-    
+
     int ari[] = { 1,2,3,4,5 };
     vector<int> vi(&ari[0], &ari[5]);
     list<int> li(&ari[0], &ari[5]);
@@ -769,7 +769,7 @@ void IteratorTest() {
 
 void StlFindTest() {
     cout << "==== StlFindTest ====" << endl << endl;
-    
+
     int arr[] = { 1,2,3,4,5 };
     vector<int> vi = { 1,2,3,4,5 };
     list<int> li = { 1,2,3,4,5 };
@@ -942,7 +942,7 @@ void ForeachFunctorTest() {
 
     SSum sumObj = for_each(intList.begin(), intList.end(), SSum());  // 함수 객체의 복사본이 넘어가기 때문에 그 복사본을 리턴받아 와야 한다.
     cout << "sum = " << sumObj.sum << endl;
-    
+
     for_each(intList.begin(), intList.end(), SPrintString(string("요소값은 ")));
     for_each(intList.begin(), intList.end(), SPrintString(string("다른 메시지 ")));
     // SomeClass<SPrint> s1(SPrint());           // 이거 애매 모호 함, SPrint()를 SPrint(*)() 함수 포인터 타입으로 인식하여 객체 생성구문이 아닌 함수 선언 구문으로 이식함
@@ -960,11 +960,12 @@ struct IsKim {
 void FindIfTest() {
     cout << "==== ForeachFunctorTest ====" << endl << endl;
     vector<string> nameList = { "김유신", "이순신", "성삼문", "장보고", "조광조", "신숙주", "김홍도", "정도전", "이성계", "정몽주" };
-    
+
     vector<string>::iterator it = find_if(nameList.begin(), nameList.end(), IsKim());
     if (it == nameList.end()) {
         cout << "김가 없다." << endl;
-    } else {
+    }
+    else {
         cout << *it << "이(가) 있다." << endl;
     }
 
@@ -980,7 +981,7 @@ void FindIfTest() {
     for (it3 = nameList.begin();; it3++) {
         it3 = find_if(it3, nameList.end(), IsKim());
         if (it3 == nameList.end()) break;
-            cout << *it3 << "이(가) 있다" << endl;
+        cout << *it3 << "이(가) 있다" << endl;
     }
 }
 
@@ -1040,7 +1041,7 @@ void VectorSortSpeedTest() {
     cout << "shuffle" << endl;
     random_shuffle(vs1.begin(), vs1.end());
     PrintSequence(vs1);
-    
+
     vector<int> vs2(num);
     copy(vs1.begin(), vs1.end(), vs2.begin());
     PrintSequence(vs2);
