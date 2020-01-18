@@ -1141,93 +1141,55 @@ void SizeOfPrimitiveTest() {
     function<void()> f;
 }
 
-vector<pair<string, function<void()>>> funclist = {
-    { "VariableArgumentTest", VariableArgumentTest },
-    { "PplTest", PplTest },
-    { "OpenMPTest", OpenMPTest },
-    { "DuckTypingTest", DuckTypingTest },
-    { "RangeForTest", RangeForTest },
-    { "StringFormatTest", StringFormatTest },
-    { "PrintfTest", PrintfTest },
-    { "MemoryLeakTest", MemoryLeakTest },
-    { "NullPtrTest", NullPtrTest },
-    { "SharedPtrTest", SharedPtrTest },
-    { "VectorTest", VectorTest },
-    { "VectorTest2", VectorTest2 },
-    { "VectorTest3", VectorTest3 },
-    { "VectorTest4", VectorTest4 },
-    { "VectorTestString", VectorTestString },
-    { "ChronoTestDuration", ChronoTestDuration },
-    { "ChronoTestNow", ChronoTestNow },
-    { "ObjectReturnTest", ObjectReturnTest },
-    { "PromiseFutureTest", PromiseFutureTest },
-    { "ConstPointerTest", ConstPointerTest },
-    { "StaticMemberTest", StaticMemberTest },
-    { "CarSetTest", CarSetTest },
-    { "GraphicSetTest", GraphicSetTest },
-    { "StringConvertTest", StringConvertTest },
-    { "StringConvertTest2", StringConvertTest2 },
-    { "RangeBasedForTest", RangeBasedForTest },
-    { "MapTest", MapTest },
-    { "ForTest", ForTest },
-    { "RemainderTest", RemainderTest },
-    { "VectorSortTest", VectorSortTest },
-    { "ReferenceTest", ReferenceTest },
-    { "StructInitialize", StructInitialize },
-    { "IteratorTest", IteratorTest },
-    { "StlFindTest", StlFindTest },
-    { "StlSortTest", StlSortTest },
-    { "StlReverseTest", StlReverseTest },
-    { "StlRandomShuffleTest", StlRandomShuffleTest },
-    { "SomeMesmerizeTest1", SomeMesmerizeTest1 },
-    { "VectorElementAccessTest", VectorElementAccessTest },
-    { "ListElementAccessTest", ListElementAccessTest },
-    { "ForeachFunctorTest", ForeachFunctorTest },
-    { "FindIfTest", FindIfTest },
-    { "PredefFunctorTest", PredefFunctorTest },
-    { "StringSortNoCaseTest", StringSortNoCaseTest },
-    { "VectorSortSpeedTest", VectorSortSpeedTest },
-    { "RoundTest", RoundTest },
-    { "NegativeModulusTest", NegativeModulusTest },
-    { "SizeOfPrimitiveTest", SizeOfPrimitiveTest },
-};
-
-void PrintFunclist() {
-    for (size_t i = 0; i < funclist.size(); i++) {
-        cout << i << ". " << funclist.at(i).first << endl;
-    }
-}
-
 int main() {
-    PrintFunclist();
-    while (true) {
-        cout << "input number?('q' quit, 'l' shows list) : ";
-        string input;
-        cin >> input;
-
-        if (input == "q")
-            break;
-
-        if (input == "l") {
-            PrintFunclist();
-            continue;
-        }
-
-        try {
-            size_t num = (size_t)stoi(input);
-            if (num < 0 || num >= funclist.size()) {
-                cout << "input out of range." << endl;
-                continue;
-            }
-
-            funclist.at(num).second();
-        }
-        catch (exception & ex) {
-            cout << ex.what() << endl;
-            continue;
-        }
-    }
-    cout << "good bye~" << endl;
+    // VariableArgumentTest();
+    // PplTest();
+    // OpenMPTest();
+    // DuckTypingTest();
+    // RangeForTest();
+    // StringFormatTest();
+    // PrintfTest();
+    // MemoryLeakTest();
+    // NullPtrTest();
+    // SharedPtrTest();
+    // VectorTest();
+    // VectorTest2();
+    // VectorTest3();
+    // VectorTest4();
+    // VectorTestString();
+    // ChronoTestDuration();
+    // ChronoTestNow();
+    // ObjectReturnTest();
+    // PromiseFutureTest();
+    // ConstPointerTest();
+    // StaticMemberTest();
+    // CarSetTest();
+    // GraphicSetTest();
+    // StringConvertTest();
+    // StringConvertTest2();
+    // RangeBasedForTest();
+    // MapTest();
+    // ForTest();
+    // RemainderTest();
+    // VectorSortTest();
+    // ReferenceTest();
+    // StructInitialize();
+    // IteratorTest();
+    // StlFindTest();
+    // StlSortTest();
+    // StlReverseTest();
+    // StlRandomShuffleTest();
+    // SomeMesmerizeTest1();
+    // VectorElementAccessTest();
+    // ListElementAccessTest();
+    // ForeachFunctorTest();
+    // FindIfTest();
+    // PredefFunctorTest();
+    // StringSortNoCaseTest();
+    // VectorSortSpeedTest();
+    // RoundTest();
+    // NegativeModulusTest();
+    SizeOfPrimitiveTest();
 
     return 0;
 }
