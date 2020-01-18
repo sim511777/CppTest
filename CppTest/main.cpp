@@ -1228,6 +1228,6 @@ int main() {
         }
     }
     cout << "good bye~" << endl;
-    getchar();
+
     return 0;
 }
