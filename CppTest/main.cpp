@@ -1135,6 +1135,8 @@ void NegativeModulusTest() {
 
 void SizeOfPrimitiveTest() {
     cout << "==== SizeOfPrimitiveTest ====" << endl << endl;
+    cout << "sizeof(bool) : " << sizeof(bool) << endl;
+    cout << "sizeof(BOOL) : " << sizeof(BOOL) << endl;
     cout << "sizeof(long) : " << sizeof(long) << endl;
     cout << "sizeof(long double) : " << sizeof(long double) << endl;
     cout << "sizeof(long long) : " << sizeof(long long) << endl;
