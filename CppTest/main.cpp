@@ -1157,6 +1157,14 @@ void GenerateTest() {
     PrintIterator(vs.begin(), vs.end());
 }
 
+void IotaTest() {
+    cout << "==== IotaTest ====" << endl << endl;
+    auto vs = vector<int>(10);
+    int i = 0;
+    iota(vs.begin(), vs.end(), 0);
+    PrintIterator(vs.begin(), vs.end());
+}
+
 void TransformTest() {
     cout << "==== TransformTest ====" << endl << endl;
     auto vs0 = vector<int>(10);
@@ -1171,57 +1179,58 @@ void TransformTest() {
 }
 
 int main() {
-    // VariableArgumentTest();
-    // PplTest();
-    // OpenMPTest();
-    // DuckTypingTest();
-    // RangeForTest();
-    // StringFormatTest();
-    // PrintfTest();
-    // MemoryLeakTest();
-    // NullPtrTest();
-    // SharedPtrTest();
-    // VectorTest();
-    // VectorTest2();
-    // VectorTest3();
-    // VectorTest4();
-    // VectorTestString();
-    // ChronoTestDuration();
-    // ChronoTestNow();
-    // ObjectReturnTest();
-    // PromiseFutureTest();
-    // ConstPointerTest();
-    // StaticMemberTest();
-    // CarSetTest();
-    // GraphicSetTest();
-    // StringConvertTest();
-    // StringConvertTest2();
-    // RangeBasedForTest();
-    // MapTest();
-    // ForTest();
-    // RemainderTest();
-    // VectorSortTest();
-    // ReferenceTest();
-    // StructInitialize();
-    // IteratorTest();
-    // StlFindTest();
-    // StlSortTest();
-    // StlReverseTest();
-    // StlRandomShuffleTest();
-    // SomeMesmerizeTest1();
-    // VectorElementAccessTest();
-    // ListElementAccessTest();
-    // ForeachFunctorTest();
-    // FindIfTest();
-    // PredefFunctorTest();
-    // StringSortNoCaseTest();
-    // VectorSortSpeedTest();
-    // RoundTest();
-    // NegativeModulusTest();
+    //VariableArgumentTest();
+    //PplTest();
+    //OpenMPTest();
+    //DuckTypingTest();
+    //RangeForTest();
+    //StringFormatTest();
+    //PrintfTest();
+    //MemoryLeakTest();
+    //NullPtrTest();
+    //SharedPtrTest();
+    //VectorTest();
+    //VectorTest2();
+    //VectorTest3();
+    //VectorTest4();
+    //VectorTestString();
+    //ChronoTestDuration();
+    //ChronoTestNow();
+    //ObjectReturnTest();
+    //PromiseFutureTest();
+    //ConstPointerTest();
+    //StaticMemberTest();
+    //CarSetTest();
+    //GraphicSetTest();
+    //StringConvertTest();
+    //StringConvertTest2();
+    //RangeBasedForTest();
+    //MapTest();
+    //ForTest();
+    //RemainderTest();
+    //VectorSortTest();
+    //ReferenceTest();
+    //StructInitialize();
+    //IteratorTest();
+    //StlFindTest();
+    //StlSortTest();
+    //StlReverseTest();
+    //StlRandomShuffleTest();
+    //SomeMesmerizeTest1();
+    //VectorElementAccessTest();
+    //ListElementAccessTest();
+    //ForeachFunctorTest();
+    //FindIfTest();
+    //PredefFunctorTest();
+    //StringSortNoCaseTest();
+    //VectorSortSpeedTest();
+    //RoundTest();
+    //NegativeModulusTest();
     //SizeOfPrimitiveTest();
     //FillTest();
     //GenerateTest();
-    TransformTest();
+    //IotaTest();
+    //TransformTest();
 
     return 0;
 }
