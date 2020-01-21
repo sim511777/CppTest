@@ -160,10 +160,10 @@ void MemoryLeakTest() {
     // Dumping objects ->
     // {165} normal block at 0x0000018484721D80, 40 bytes long.
     //  Data: <                > CD CD CD CD CD CD CD CD CD CD CD CD CD CD CD CD
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
     // 할당 번호 {165} 를 아래에 함수에 넣어주면 해당 할당시 런타임 에러를 발생시켜 준다. 
-    _CrtSetBreakAlloc(165);
+    //_CrtSetBreakAlloc(161);
 
     auto a = new int[10];
     auto b = new int[10];
@@ -171,6 +171,8 @@ void MemoryLeakTest() {
 
     delete[] a;
     delete[] c;
+
+    _CrtDumpMemoryLeaks();    // _CrtSetDbgFlag 대시 프로그램 끝나기 전에 이걸 호출 해도 됨
 }
 
 void UnrefFunctionList() {
@@ -1186,7 +1188,7 @@ int main() {
     //RangeForTest();
     //StringFormatTest();
     //PrintfTest();
-    //MemoryLeakTest();
+    MemoryLeakTest();
     //NullPtrTest();
     //SharedPtrTest();
     //VectorTest();
