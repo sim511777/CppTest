@@ -729,7 +729,6 @@ void StructInitialize() {
 
 template<typename IT>
 void PrintIterator(IT s, IT e) {
-    return;
     for (auto it = s; it != e; it++) {
         cout << *it << " ";
     }
@@ -1143,6 +1142,34 @@ void SizeOfPrimitiveTest() {
     function<void()> f;
 }
 
+void FillTest() {
+    cout << "==== FillTest ====" << endl << endl;
+    auto vs = vector<int>(10);
+    fill(vs.begin(), vs.end(), 3);
+    PrintIterator(vs.begin(), vs.end());
+}
+
+void GenerateTest() {
+    cout << "==== GenerateTest ====" << endl << endl;
+    auto vs = vector<int>(10);
+    int i = 0;
+    generate(vs.begin(), vs.end(), [&i] { return i++; });
+    PrintIterator(vs.begin(), vs.end());
+}
+
+void TransformTest() {
+    cout << "==== TransformTest ====" << endl << endl;
+    auto vs0 = vector<int>(10);
+    int i = 0;
+    generate(vs0.begin(), vs0.end(), [&i] { return i++; });
+    PrintIterator(vs0.begin(), vs0.end());
+    cout << endl;
+
+    auto vs1 = vector<string>(vs0.size());
+    transform(vs0.begin(), vs0.end(), vs1.begin(), [](int i) { return (i % 2 == 0) ? "even" : "odd"; });
+    PrintIterator(vs1.begin(), vs1.end());
+}
+
 int main() {
     // VariableArgumentTest();
     // PplTest();
@@ -1191,7 +1218,10 @@ int main() {
     // VectorSortSpeedTest();
     // RoundTest();
     // NegativeModulusTest();
-    SizeOfPrimitiveTest();
+    //SizeOfPrimitiveTest();
+    //FillTest();
+    //GenerateTest();
+    TransformTest();
 
     return 0;
 }
