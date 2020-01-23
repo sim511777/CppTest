@@ -140,9 +140,7 @@ void StringFormatTest() {
     ostringstream oss;
     oss << " my age : " << 16;
     oss << " my height : " << 170;
-    auto str = oss.str();
-    auto cp = str.c_str();
-    cout << cp;
+    cout << oss.str();
 }
 
 void PrintfTest() {
@@ -220,24 +218,28 @@ void SharedPtrTest() {
 class Graphic {
 public:
     Graphic() { cout << "그래픽 생성" << endl; }
+    virtual ~Graphic() { cout << "그래픽 파괴" << endl; }
     virtual void Draw() { cout << "그래픽 오브젝트입니다." << endl; }
 };
 
 class Line : public Graphic {
 public:
     Line() { cout << "선 생성" << endl; }
+    ~Line() { cout << "선 파괴" << endl; }
     void Draw() { cout << "선을 긋습니다." << endl; }
 };
 
 class Circle : public Graphic {
 public:
     Circle() { cout << "원 생성" << endl; }
+    ~Circle() { cout << "원 파괴" << endl; }
     void Draw() { cout << "동그라미 그렸다 치고." << endl; }
 };
 
 class Rect : public Graphic {
 public:
     Rect() { cout << "사각형 생성" << endl; }
+    ~Rect() { cout << "사각형 파괴" << endl; }
     void Draw() { cout << "요건 사각형입니다." << endl; }
 };
 
@@ -1188,10 +1190,10 @@ int main() {
     //RangeForTest();
     //StringFormatTest();
     //PrintfTest();
-    MemoryLeakTest();
+    //MemoryLeakTest();
     //NullPtrTest();
     //SharedPtrTest();
-    //VectorTest();
+    VectorTest();
     //VectorTest2();
     //VectorTest3();
     //VectorTest4();
