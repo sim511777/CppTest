@@ -20,6 +20,7 @@
 using namespace std;
 using namespace concurrency;
 using namespace chrono;
+using namespace this_thread;
 
 int AlignedSize(int size) {
     int ptrSize = sizeof(void*);
@@ -340,11 +341,15 @@ void VectorTestString() {
 
 void ChronoTestDuration() {
     cout << "==== ChronoTestDuration ====" << endl << endl;
-    time_point<system_clock> t0 = system_clock::now();
-    this_thread::sleep_for(seconds(3));
-    system_clock::time_point t1 = system_clock::now();
-    duration<double> sec = t1 - t0;
-    cout << sec.count() << endl;
+    auto t0 = high_resolution_clock::now();
+    sleep_for(seconds(3));
+    auto t1 = high_resolution_clock::now();
+    auto diff = t1 - t0;
+    cout << "diff: " << diff.count() << endl;
+    cout << "sec : " << duration_cast<seconds>(diff).count() << endl;
+    cout << "ms  : " << duration_cast<milliseconds>(diff).count() << endl;
+    cout << "us  : " << duration_cast<microseconds>(diff).count() << endl;
+    cout << "ns  : " << duration_cast<nanoseconds>(diff).count() << endl;
 }
 
 void ChronoTestNow() {
@@ -1197,8 +1202,8 @@ int main() {
     //VectorTest2();
     //VectorTest3();
     //VectorTest4();
-    VectorTestString();
-    //ChronoTestDuration();
+    //VectorTestString();
+    ChronoTestDuration();
     //ChronoTestNow();
     //ObjectReturnTest();
     //PromiseFutureTest();
