@@ -334,7 +334,7 @@ void VectorTestString() {
     strList.push_back(str2);
     strList.push_back(string("str3"));
     for (auto it = strList.begin(); it != strList.end(); it++) {
-        cout << (*it).c_str() << endl;
+        cout << *it << endl;
     }
 }
 
@@ -1193,11 +1193,11 @@ int main() {
     //MemoryLeakTest();
     //NullPtrTest();
     //SharedPtrTest();
-    VectorTest();
+    //VectorTest();
     //VectorTest2();
     //VectorTest3();
     //VectorTest4();
-    //VectorTestString();
+    VectorTestString();
     //ChronoTestDuration();
     //ChronoTestNow();
     //ObjectReturnTest();
