@@ -1169,7 +1169,6 @@ void GenerateTest() {
 void IotaTest() {
     cout << "==== IotaTest ====" << endl << endl;
     auto vs = vector<int>(10);
-    int i = 0;
     iota(vs.begin(), vs.end(), 0);
     PrintIterator(vs.begin(), vs.end());
 }
@@ -1203,10 +1202,10 @@ int main() {
     //VectorTest3();
     //VectorTest4();
     //VectorTestString();
-    ChronoTestDuration();
+    //ChronoTestDuration();
     //ChronoTestNow();
     //ObjectReturnTest();
-    //PromiseFutureTest();
+    PromiseFutureTest();
     //ConstPointerTest();
     //StaticMemberTest();
     //CarSetTest();
