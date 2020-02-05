@@ -1186,6 +1186,33 @@ void TransformTest() {
     PrintIterator(vs1.begin(), vs1.end());
 }
 
+class B {
+protected:
+    string name;
+public:
+    B(string _name) : name(_name) {
+        cout << "Base construct : " << name << endl;
+    }
+    virtual ~B() {
+        cout << "Base destruct : " << name << endl;
+    }
+};
+
+class D : public B {
+public:
+    D(string _name) : B(_name) {
+        cout << "Derived construct : " << name << endl;
+    }
+    ~D() {
+        cout << "Derived destruct : " << name << endl;
+    }
+};
+
+void InheritConstructorTest() {
+    B* b = new D("starless");
+    delete b;
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -1205,7 +1232,7 @@ int main() {
     //ChronoTestDuration();
     //ChronoTestNow();
     //ObjectReturnTest();
-    PromiseFutureTest();
+    //PromiseFutureTest();
     //ConstPointerTest();
     //StaticMemberTest();
     //CarSetTest();
@@ -1239,6 +1266,7 @@ int main() {
     //GenerateTest();
     //IotaTest();
     //TransformTest();
+    InheritConstructorTest();
 
     return 0;
 }
