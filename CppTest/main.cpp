@@ -216,6 +216,14 @@ void SharedPtrTest() {
     auto sp4 = sp2;
 }
 
+void SharedPtrInitTest() {
+    cout << "==== SharedPtrInitTest ====" << endl << endl;
+    wcout.imbue(locale("korean"));
+    shared_ptr<Car> sp1(new Car(L"그랜저"));
+    auto sp2 = shared_ptr<Car>(new Car(L"소나타"));
+    auto sp3 = make_shared<Car>(L"아반떼");
+}
+
 shared_ptr<Car> fullRentCar;
 void SharedPtrVectorTest() {
     cout << "==== SharedPtrVectorTest ====" << endl << endl;
@@ -1237,7 +1245,8 @@ int main() {
     //MemoryLeakTest();
     //NullPtrTest();
     //SharedPtrTest();
-    SharedPtrVectorTest();
+    SharedPtrInitTest();
+    //SharedPtrVectorTest();
     //VectorTest();
     //VectorTest2();
     //VectorTest3();
