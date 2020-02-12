@@ -216,6 +216,19 @@ void SharedPtrTest() {
     auto sp4 = sp2;
 }
 
+shared_ptr<Car> fullRentCar;
+void SharedPtrVectorTest() {
+    cout << "==== SharedPtrVectorTest ====" << endl << endl;
+    wcout.imbue(locale("korean"));
+    vector<shared_ptr<Car>> carList;
+    carList.push_back(shared_ptr<Car>(new Car(L"그랜저")));
+    carList.push_back(shared_ptr<Car>(new Car(L"소나타")));
+    carList.push_back(shared_ptr<Car>(new Car(L"아반떼")));
+    carList.push_back(shared_ptr<Car>(new Car(L"마티즈")));
+    auto rentCar1 = carList[1];
+    fullRentCar = carList[2];
+}
+
 class Graphic {
 public:
     Graphic() { cout << "그래픽 생성" << endl; }
@@ -1224,6 +1237,7 @@ int main() {
     //MemoryLeakTest();
     //NullPtrTest();
     //SharedPtrTest();
+    SharedPtrVectorTest();
     //VectorTest();
     //VectorTest2();
     //VectorTest3();
@@ -1266,7 +1280,8 @@ int main() {
     //GenerateTest();
     //IotaTest();
     //TransformTest();
-    InheritConstructorTest();
+    //InheritConstructorTest();
 
+    cout << "hahah" << endl;
     return 0;
 }
