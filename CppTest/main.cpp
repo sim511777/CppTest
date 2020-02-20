@@ -1246,6 +1246,28 @@ void TryCatchTest() {
     }
 }
 
+void LambdaTest1() {
+    std::vector<float> flist { 5, 7, 4, 7, 3, 7, 6, 3, 6, 8, 3, 1, 0, };
+    //std::sort(flist.begin(), flist.end(), [](float a, float b) ->bool { return a < b; });
+    std::sort(flist.begin(), flist.end(), [](float a, float b) { return a < b; });
+    PrintIterator(flist.begin(), flist.end());
+}
+
+void LambdaTest2() {
+    int x = 1;
+    int y = 2;
+    auto func = [=]() mutable throw() ->int {
+        int n = x + y;
+        x = y;
+        y = n;
+        return n;
+    };
+    int ret = func();
+    cout << ret << endl;
+    cout << x << endl;
+    cout << y << endl;
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -1302,7 +1324,9 @@ int main() {
     //IotaTest();
     //TransformTest();
     //InheritConstructorTest();
-    TryCatchTest();
+    //TryCatchTest();
+    //LambdaTest1();
+    LambdaTest2();
 
     return 0;
 }
