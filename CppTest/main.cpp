@@ -1234,6 +1234,18 @@ void InheritConstructorTest() {
     delete b;
 }
 
+void TryCatchTest() {
+    // C++ 표준은 나누기 0은 잡지 못한다.
+    try {
+        int a = 10;
+        int b = 0;
+        int c = a / b;
+        cout << c << endl;
+    } catch (const std::exception& e) {
+        cout << e.what() << endl;
+    }
+}
+
 int main() {
     //VariableArgumentTest();
     //PplTest();
@@ -1245,7 +1257,7 @@ int main() {
     //MemoryLeakTest();
     //NullPtrTest();
     //SharedPtrTest();
-    SharedPtrInitTest();
+    //SharedPtrInitTest();
     //SharedPtrVectorTest();
     //VectorTest();
     //VectorTest2();
@@ -1290,7 +1302,7 @@ int main() {
     //IotaTest();
     //TransformTest();
     //InheritConstructorTest();
+    TryCatchTest();
 
-    cout << "hahah" << endl;
     return 0;
 }
