@@ -71,7 +71,7 @@ void PplTest() {
     // start로부터 시작해서 last가 아닌 동안 한번 할때마다 step 씩 증가
     parallel_for(0, 10, 1, [&](int i) {
         cout << i << " ";
-        });
+    });
 }
 
 void OpenMPTest() {
@@ -993,16 +993,14 @@ void FindIfTest() {
     vector<string>::iterator it = find_if(nameList.begin(), nameList.end(), IsKim());
     if (it == nameList.end()) {
         cout << "김가 없다." << endl;
-    }
-    else {
+    } else {
         cout << *it << "이(가) 있다." << endl;
     }
 
     vector<string>::iterator it2 = find_if(nameList.begin(), nameList.end(), [](string name) ->bool { return (strncmp(name.c_str(), "신", 2) == 0); });
     if (it2 == nameList.end()) {
         cout << "신가 없다." << endl;
-    }
-    else {
+    } else {
         cout << *it2 << "이(가) 있다." << endl;
     }
 
@@ -1048,11 +1046,6 @@ struct SIntCompare {
     }
 };
 
-template<typename SEQ>
-void PrintSequence(SEQ v) {
-    PrintIterator(v.begin(), v.end());
-}
-
 int cmpfunc(const void* a, const void* b) {
     return (*(int*)a - *(int*)b);
 }
@@ -1064,20 +1057,20 @@ void VectorSortSpeedTest() {
 
     cout << "generate" << endl;
     iota(vs1.begin(), vs1.end(), 0);
-    PrintSequence(vs1);
+    PrintIterator(vs1.begin(), vs1.end());
 
     cout << endl;
     cout << "shuffle" << endl;
     random_shuffle(vs1.begin(), vs1.end());
-    PrintSequence(vs1);
+    PrintIterator(vs1.begin(), vs1.end());
 
     vector<int> vs2(num);
     copy(vs1.begin(), vs1.end(), vs2.begin());
-    PrintSequence(vs2);
+    PrintIterator(vs2.begin(), vs2.end());
 
     vector<int> vs3(num);
     copy(vs1.begin(), vs1.end(), vs3.begin());
-    PrintSequence(vs3);
+    PrintIterator(vs3.begin(), vs3.end());
 
     int* arr1 = new int[num];
     copy(vs1.begin(), vs1.end(), arr1);
@@ -1096,19 +1089,19 @@ void VectorSortSpeedTest() {
     sort(vs1.begin(), vs1.end(), IntCompare);
     sec = system_clock::now() - st;
     cout << "stl::sort function : " << sec.count() << "sec" << endl;
-    PrintSequence(vs1);
+    PrintIterator(vs1.begin(), vs1.end());
 
     st = system_clock::now();
     sort(vs2.begin(), vs2.end(), SIntCompare());
     sec = system_clock::now() - st;
     cout << "stl::sort functor  : " << sec.count() << "sec" << endl;
-    PrintSequence(vs2);
+    PrintIterator(vs2.begin(), vs2.end());
 
     st = system_clock::now();
     sort(vs3.begin(), vs3.end(), [](int a, int b) -> bool { return a < b; });
     sec = system_clock::now() - st;
     cout << "stl::sort lambda   : " << sec.count() << "sec" << endl;
-    PrintSequence(vs3);
+    PrintIterator(vs3.begin(), vs3.end());
 
     st = system_clock::now();
     qsort(arr1, num, sizeof(int), cmpfunc);
@@ -1241,13 +1234,13 @@ void TryCatchTest() {
         int b = 0;
         int c = a / b;
         cout << c << endl;
-    } catch (const std::exception& e) {
+    } catch (const std::exception & e) {
         cout << e.what() << endl;
     }
 }
 
 void LambdaTest1() {
-    std::vector<float> flist { 5, 7, 4, 7, 3, 7, 6, 3, 6, 8, 3, 1, 0, };
+    std::vector<float> flist{ 5, 7, 4, 7, 3, 7, 6, 3, 6, 8, 3, 1, 0, };
     //std::sort(flist.begin(), flist.end(), [](float a, float b) ->bool { return a < b; });
     std::sort(flist.begin(), flist.end(), [](float a, float b) { return a < b; });
     PrintIterator(flist.begin(), flist.end());
