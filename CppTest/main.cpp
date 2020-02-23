@@ -1,26 +1,21 @@
-#include <stdio.h>
-#include <ppl.h>
-#include <string.h>
-#include <tchar.h>
+#include <string>
 #include <sstream>
 #include <iostream>
-#include <vector>
+#include <locale>
+#include <codecvt>
 #include <chrono>
 #include <thread>
 #include <future>
-#include <locale>
-#include <codecvt>
-#include <windows.h>
-#include <algorithm>
+#include <vector>
 #include <list>
+#include <map>
+#include <algorithm>
 #include <numeric>
 #include <functional>
-#include <map>
 
 using namespace std;
-using namespace concurrency;
-using namespace chrono;
-using namespace this_thread;
+using namespace std::chrono;
+using namespace std::this_thread;
 
 int AlignedSize(int size) {
     int ptrSize = sizeof(void*);
@@ -59,19 +54,6 @@ void VariableArgumentTest() {
     cout << "int sum = " << iSum << endl;
     double dSum = DoubleSum(3, 1.1, 2.2, 3.3);
     cout << "double sum = " << dSum << endl;
-}
-
-void PplTest() {
-    cout << "==== PplTest ====" << endl << endl;
-    cout << "normal" << endl;
-    for (int i = 0; i < 10; i++) {
-        cout << i << " ";
-    }
-    cout << endl << "npareallel_for" << endl;
-    // start로부터 시작해서 last가 아닌 동안 한번 할때마다 step 씩 증가
-    parallel_for(0, 10, 1, [&](int i) {
-        cout << i << " ";
-    });
 }
 
 void OpenMPTest() {
@@ -384,7 +366,7 @@ void ChronoTestNow() {
 
 struct MyCar {
     int speed;
-    int fule;
+    int fuel;
     int direction;
 };
 
@@ -731,30 +713,29 @@ void VectorSortTest() {
     cout << endl << endl;
 }
 
-ostream& operator <<(ostream& c, const RECT& T) {
-    return c << "{" << T.left << "," << T.top << "," << T.right << "," << T.bottom << "}";
+ostream& operator <<(ostream& c, const MyCar& T) {
+    return c << "{" << T.speed << "," << T.fuel << "," << T.direction << "}";
 }
 
 void ReferenceTest() {
     cout << "==== ReferenceTest ====" << endl << endl;
-    RECT rect1 = { 1,2,3,4, };
-    RECT rect2 = { 11,12,13,14 };
-    RECT& refRect = rect1;
-    cout << rect1 << " " << rect2 << " " << refRect << endl;
-    refRect = rect2;
-    cout << rect1 << " " << rect2 << " " << refRect << endl;
+    MyCar car1 = { 1,2,3, };
+    MyCar car2 = { 11,12,13, };
+    MyCar& refCar = car1;
+    cout << car1 << " " << car2 << " " << refCar << endl;
+    refCar = car2;
+    cout << car1 << " " << car2 << " " << refCar << endl;
 }
 
 void StructInitialize() {
     cout << "==== StructInitialize ====" << endl << endl;
-    RECT rect1;
-    rect1.left = 1;
-    rect1.top = 2;
-    rect1.right = 3;
-    rect1.bottom = 4;
+    MyCar car1;
+    car1.speed = 1;
+    car1.fuel = 2;
+    car1.direction = 3;
 
-    RECT rect2 = { 1,2,3,4, };
-    RECT rect3{ 1,2,3,4 };
+    MyCar car2 = { 1,2,3, };
+    MyCar car3 { 1,2,3 };
 }
 
 template<typename IT>
@@ -1158,7 +1139,6 @@ void NegativeModulusTest() {
 void SizeOfPrimitiveTest() {
     cout << "==== SizeOfPrimitiveTest ====" << endl << endl;
     cout << "sizeof(bool) : " << sizeof(bool) << endl;
-    cout << "sizeof(BOOL) : " << sizeof(BOOL) << endl;
     cout << "sizeof(long) : " << sizeof(long) << endl;
     cout << "sizeof(long double) : " << sizeof(long double) << endl;
     cout << "sizeof(long long) : " << sizeof(long long) << endl;
@@ -1234,15 +1214,15 @@ void TryCatchTest() {
         int b = 0;
         int c = a / b;
         cout << c << endl;
-    } catch (const std::exception & e) {
+    } catch (const exception & e) {
         cout << e.what() << endl;
     }
 }
 
 void LambdaTest1() {
-    std::vector<float> flist{ 5, 7, 4, 7, 3, 7, 6, 3, 6, 8, 3, 1, 0, };
-    //std::sort(flist.begin(), flist.end(), [](float a, float b) ->bool { return a < b; });
-    std::sort(flist.begin(), flist.end(), [](float a, float b) { return a < b; });
+    vector<float> flist{ 5, 7, 4, 7, 3, 7, 6, 3, 6, 8, 3, 1, 0, };
+    //sort(flist.begin(), flist.end(), [](float a, float b) ->bool { return a < b; });
+    sort(flist.begin(), flist.end(), [](float a, float b) { return a < b; });
     PrintIterator(flist.begin(), flist.end());
 }
 
@@ -1263,7 +1243,6 @@ void LambdaTest2() {
 
 int main() {
     //VariableArgumentTest();
-    //PplTest();
     //OpenMPTest();
     //DuckTypingTest();
     //RangeForTest();
@@ -1294,7 +1273,7 @@ int main() {
     //ForTest();
     //RemainderTest();
     //VectorSortTest();
-    //ReferenceTest();
+    ReferenceTest();
     //StructInitialize();
     //IteratorTest();
     //StlFindTest();
@@ -1319,7 +1298,7 @@ int main() {
     //InheritConstructorTest();
     //TryCatchTest();
     //LambdaTest1();
-    LambdaTest2();
+    //LambdaTest2();
 
     return 0;
 }
