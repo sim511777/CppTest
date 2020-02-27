@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <numeric>
 #include <functional>
+#include <fstream>
 
 using namespace std;
 using namespace std::chrono;
@@ -1203,11 +1204,13 @@ public:
 };
 
 void InheritConstructorTest() {
+    cout << "==== InheritConstructorTest ====" << endl << endl;
     B* b = new D("starless");
     delete b;
 }
 
 void TryCatchTest() {
+    cout << "==== TryCatchTest ====" << endl << endl;
     // C++ 표준은 나누기 0은 잡지 못한다.
     try {
         int a = 10;
@@ -1220,6 +1223,7 @@ void TryCatchTest() {
 }
 
 void LambdaTest1() {
+    cout << "==== LambdaTest1 ====" << endl << endl;
     vector<float> flist{ 5, 7, 4, 7, 3, 7, 6, 3, 6, 8, 3, 1, 0, };
     //sort(flist.begin(), flist.end(), [](float a, float b) ->bool { return a < b; });
     sort(flist.begin(), flist.end(), [](float a, float b) { return a < b; });
@@ -1227,6 +1231,7 @@ void LambdaTest1() {
 }
 
 void LambdaTest2() {
+    cout << "==== LambdaTest2 ====" << endl << endl;
     int x = 1;
     int y = 2;
     auto func = [=]() mutable throw() ->int {
@@ -1239,6 +1244,19 @@ void LambdaTest2() {
     cout << ret << endl;
     cout << x << endl;
     cout << y << endl;
+}
+
+void StringAppendTest() {
+    cout << "==== StringAppendTest ====" << endl << endl;
+    string str;
+    ofstream ofs("c:\\test\\StringAppendTest2.txt");
+    ofs << " c_str | data | length | size | capacity" << endl;
+    for (int i = 0; i < 10000; i++) {
+        str += "a";
+        ofs << (void*)str.c_str() << " " << (void*)str.data() << " " << str.length() << " " << str.size() << " " << str.capacity() << endl;
+    }
+    ofs.close();
+    cout << "writing to c:\\test\\StringAppendTest2.txt finished" << endl;
 }
 
 int main() {
@@ -1273,7 +1291,7 @@ int main() {
     //ForTest();
     //RemainderTest();
     //VectorSortTest();
-    ReferenceTest();
+    //ReferenceTest();
     //StructInitialize();
     //IteratorTest();
     //StlFindTest();
@@ -1299,6 +1317,7 @@ int main() {
     //TryCatchTest();
     //LambdaTest1();
     //LambdaTest2();
+    StringAppendTest();
 
     return 0;
 }
