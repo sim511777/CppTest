@@ -1211,14 +1211,29 @@ void InheritConstructorTest() {
 
 void TryCatchTest() {
     cout << "==== TryCatchTest ====" << endl << endl;
-    // C++ 표준은 나누기 0은 잡지 못한다.
     try {
-        int a = 10;
-        int b = 0;
-        int c = a / b;
-        cout << c << endl;
+        cout << "try start" << endl;
+        
+        // 나누기 0 못잡는다
+        //int a = 3;
+        //int b = 0;
+        //cout << a / b << endl;
+
+        // 배열 인덱스 못잡는다
+        //int arr[] = { 0,1,2,3 };
+        //cout << arr[-1] << endl;
+        
+        // 벡터 인덱스 못잡는다
+        //vector<int> vec = { 0,1,2,3 };
+        //cout << vec[-1] << endl;
+
+        // stoi는 잡는다
+        int n = std::stoi("abc");
+        cout << n << endl;
+
+        cout << "try end" << endl;
     } catch (const exception & e) {
-        cout << e.what() << endl;
+        cout << "catch exception : " << e.what() << endl;
     }
 }
 
@@ -1314,10 +1329,10 @@ int main() {
     //IotaTest();
     //TransformTest();
     //InheritConstructorTest();
-    //TryCatchTest();
+    TryCatchTest();
     //LambdaTest1();
     //LambdaTest2();
-    StringAppendTest();
+    //StringAppendTest();
 
     return 0;
 }
