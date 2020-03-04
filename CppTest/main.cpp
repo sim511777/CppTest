@@ -15,8 +15,6 @@
 #include <fstream>
 
 using namespace std;
-using namespace std::chrono;
-using namespace std::this_thread;
 
 int AlignedSize(int size) {
     int ptrSize = sizeof(void*);
@@ -345,21 +343,21 @@ void VectorTestString() {
 
 void ChronoTestDuration() {
     cout << "==== ChronoTestDuration ====" << endl << endl;
-    auto t0 = high_resolution_clock::now();
-    sleep_for(seconds(3));
-    auto t1 = high_resolution_clock::now();
+    auto t0 = chrono::high_resolution_clock::now();
+    this_thread::sleep_for(chrono::seconds(3));
+    auto t1 = chrono::high_resolution_clock::now();
     auto diff = t1 - t0;
     cout << "diff: " << diff.count() << endl;
-    cout << "sec : " << duration_cast<seconds>(diff).count() << endl;
-    cout << "ms  : " << duration_cast<milliseconds>(diff).count() << endl;
-    cout << "us  : " << duration_cast<microseconds>(diff).count() << endl;
-    cout << "ns  : " << duration_cast<nanoseconds>(diff).count() << endl;
+    cout << "sec : " << chrono::duration_cast<chrono::seconds>(diff).count() << endl;
+    cout << "ms  : " << chrono::duration_cast<chrono::milliseconds>(diff).count() << endl;
+    cout << "us  : " << chrono::duration_cast<chrono::microseconds>(diff).count() << endl;
+    cout << "ns  : " << chrono::duration_cast<chrono::nanoseconds>(diff).count() << endl;
 }
 
 void ChronoTestNow() {
     cout << "==== ChronoTestNow ====" << endl << endl;
-    time_point<system_clock> now = system_clock::now();
-    time_t t = system_clock::to_time_t(now);
+    chrono::time_point<chrono::system_clock> now = chrono::system_clock::now();
+    time_t t = chrono::system_clock::to_time_t(now);
     char str[26];
     ctime_s(str, sizeof str, &t);
     cout << str << endl;
@@ -1062,38 +1060,38 @@ void VectorSortSpeedTest() {
     copy(vs1.begin(), vs1.end(), arr2);
     PrintIterator(arr2, arr2 + num);
 
-    time_point<system_clock> st;
-    duration<double> sec;
+    chrono::time_point<chrono::system_clock> st;
+    chrono::duration<double> sec;
 
     cout << endl;
     cout << "sort" << endl;
-    st = system_clock::now();
+    st = chrono::system_clock::now();
     sort(vs1.begin(), vs1.end(), IntCompare);
-    sec = system_clock::now() - st;
+    sec = chrono::system_clock::now() - st;
     cout << "stl::sort function : " << sec.count() << "sec" << endl;
     PrintIterator(vs1.begin(), vs1.end());
 
-    st = system_clock::now();
+    st = chrono::system_clock::now();
     sort(vs2.begin(), vs2.end(), SIntCompare());
-    sec = system_clock::now() - st;
+    sec = chrono::system_clock::now() - st;
     cout << "stl::sort functor  : " << sec.count() << "sec" << endl;
     PrintIterator(vs2.begin(), vs2.end());
 
-    st = system_clock::now();
+    st = chrono::system_clock::now();
     sort(vs3.begin(), vs3.end(), [](int a, int b) -> bool { return a < b; });
-    sec = system_clock::now() - st;
+    sec = chrono::system_clock::now() - st;
     cout << "stl::sort lambda   : " << sec.count() << "sec" << endl;
     PrintIterator(vs3.begin(), vs3.end());
 
-    st = system_clock::now();
+    st = chrono::system_clock::now();
     qsort(arr1, num, sizeof(int), cmpfunc);
-    sec = system_clock::now() - st;
+    sec = chrono::system_clock::now() - st;
     cout << "qsort     function : " << sec.count() << "sec" << endl;
     PrintIterator(arr1, arr1 + num);
 
-    st = system_clock::now();
+    st = chrono::system_clock::now();
     qsort(arr2, num, sizeof(int), [](const void* pt1, const void* pt2)->int { return *(int*)pt1 - *(int*)pt2; });
-    sec = system_clock::now() - st;
+    sec = chrono::system_clock::now() - st;
     cout << "qsort     lambda   : " << sec.count() << "sec" << endl;
     PrintIterator(arr2, arr2 + num);
 
