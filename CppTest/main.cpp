@@ -1033,37 +1033,39 @@ int cmpfunc(const void* a, const void* b) {
 
 void VectorSortSpeedTest() {
     cout << "==== VectorSortSpeedTest ====" << endl << endl;
+    cout << "input : int[10000000]" << endl << endl;
+
     int num = 10000000;
-    vector<int> vs1(num);
+    int* arr1 = new int[num];
 
     cout << "generate" << endl;
-    iota(vs1.begin(), vs1.end(), 0);
-    PrintIterator(vs1.begin(), vs1.end());
+    iota(arr1, arr1 + num, 0);
+    PrintIterator(arr1, arr1 + num);
 
     cout << endl;
     cout << "shuffle" << endl;
-    random_shuffle(vs1.begin(), vs1.end());
-    PrintIterator(vs1.begin(), vs1.end());
-
-    vector<int> vs2(num);
-    copy(vs1.begin(), vs1.end(), vs2.begin());
-    PrintIterator(vs2.begin(), vs2.end());
-
-    vector<int> vs3(num);
-    copy(vs1.begin(), vs1.end(), vs3.begin());
-    PrintIterator(vs3.begin(), vs3.end());
-
-    vector<int> vs4(num);
-    copy(vs1.begin(), vs1.end(), vs4.begin());
-    PrintIterator(vs4.begin(), vs4.end());
-
-    int* arr1 = new int[num];
-    copy(vs1.begin(), vs1.end(), arr1);
+    random_shuffle(arr1, arr1 + num);
     PrintIterator(arr1, arr1 + num);
 
     int* arr2 = new int[num];
-    copy(vs1.begin(), vs1.end(), arr2);
+    copy(arr1, arr1 + num, arr2);
     PrintIterator(arr2, arr2 + num);
+
+    int* arr3 = new int[num];
+    copy(arr1, arr1 + num, arr3);
+    PrintIterator(arr3, arr3 + num);
+
+    int* arr4 = new int[num];
+    copy(arr1, arr1 + num, arr4);
+    PrintIterator(arr4, arr4 + num);
+
+    int* arr5 = new int[num];
+    copy(arr1, arr1 + num, arr5);
+    PrintIterator(arr5, arr5 + num);
+
+    int* arr6 = new int[num];
+    copy(arr1, arr1 + num, arr6);
+    PrintIterator(arr6, arr6 + num);
 
     chrono::time_point<chrono::system_clock> st;
     chrono::duration<double> sec;
@@ -1071,44 +1073,48 @@ void VectorSortSpeedTest() {
     cout << endl;
     cout << "sort" << endl;
     st = chrono::system_clock::now();
-    sort(vs1.begin(), vs1.end(), IntCompare);
+    sort(arr1, arr1 + num, IntCompare);
     sec = chrono::system_clock::now() - st;
     cout << "stl::sort function : " << sec.count() << "sec" << endl;
-    PrintIterator(vs1.begin(), vs1.end());
-
-    st = chrono::system_clock::now();
-    sort(vs2.begin(), vs2.end(), SIntCompare());
-    sec = chrono::system_clock::now() - st;
-    cout << "stl::sort functor  : " << sec.count() << "sec" << endl;
-    PrintIterator(vs2.begin(), vs2.end());
-
-    st = chrono::system_clock::now();
-    sort(vs3.begin(), vs3.end(), [](int a, int b) -> bool { return a < b; });
-    sec = chrono::system_clock::now() - st;
-    cout << "stl::sort lambda   : " << sec.count() << "sec" << endl;
-    PrintIterator(vs3.begin(), vs3.end());
-
-    auto lambdaObj = [](int a, int b) -> bool { return a < b; };
-    st = chrono::system_clock::now();
-    sort(vs4.begin(), vs4.end(), lambdaObj);
-    sec = chrono::system_clock::now() - st;
-    cout << "stl::sort lambda object  : " << sec.count() << "sec" << endl;
-    PrintIterator(vs4.begin(), vs4.end());
-
-    st = chrono::system_clock::now();
-    qsort(arr1, num, sizeof(int), cmpfunc);
-    sec = chrono::system_clock::now() - st;
-    cout << "qsort     function : " << sec.count() << "sec" << endl;
     PrintIterator(arr1, arr1 + num);
 
     st = chrono::system_clock::now();
-    qsort(arr2, num, sizeof(int), [](const void* pt1, const void* pt2)->int { return *(int*)pt1 - *(int*)pt2; });
+    sort(arr2, arr2 + num, SIntCompare());
+    sec = chrono::system_clock::now() - st;
+    cout << "stl::sort functor  : " << sec.count() << "sec" << endl;
+    PrintIterator(arr2, arr2 + num);
+
+    st = chrono::system_clock::now();
+    sort(arr3, arr3 + num, [](int a, int b) -> bool { return a < b; });
+    sec = chrono::system_clock::now() - st;
+    cout << "stl::sort lambda   : " << sec.count() << "sec" << endl;
+    PrintIterator(arr3, arr3 + num);
+
+    auto lambdaObj = [](int a, int b) -> bool { return a < b; };
+    st = chrono::system_clock::now();
+    sort(arr4, arr4 + num, lambdaObj);
+    sec = chrono::system_clock::now() - st;
+    cout << "stl::sort lambda object  : " << sec.count() << "sec" << endl;
+    PrintIterator(arr4, arr4 + num);
+
+    st = chrono::system_clock::now();
+    qsort(arr5, num, sizeof(int), cmpfunc);
+    sec = chrono::system_clock::now() - st;
+    cout << "qsort     function : " << sec.count() << "sec" << endl;
+    PrintIterator(arr5, arr5 + num);
+
+    st = chrono::system_clock::now();
+    qsort(arr6, num, sizeof(int), [](const void* pt1, const void* pt2)->int { return *(int*)pt1 - *(int*)pt2; });
     sec = chrono::system_clock::now() - st;
     cout << "qsort     lambda   : " << sec.count() << "sec" << endl;
-    PrintIterator(arr2, arr2 + num);
+    PrintIterator(arr6, arr6 + num);
 
     delete[] arr1;
     delete[] arr2;
+    delete[] arr3;
+    delete[] arr4;
+    delete[] arr5;
+    delete[] arr6;
 }
 
 void RoundTest() {
