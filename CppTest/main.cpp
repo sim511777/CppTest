@@ -739,6 +739,7 @@ void StructInitialize() {
 
 template<typename IT>
 void PrintIterator(IT s, IT e) {
+    return;
     for (auto it = s; it != e; it++) {
         cout << *it << " ";
     }
@@ -1052,6 +1053,10 @@ void VectorSortSpeedTest() {
     copy(vs1.begin(), vs1.end(), vs3.begin());
     PrintIterator(vs3.begin(), vs3.end());
 
+    vector<int> vs4(num);
+    copy(vs1.begin(), vs1.end(), vs4.begin());
+    PrintIterator(vs4.begin(), vs4.end());
+
     int* arr1 = new int[num];
     copy(vs1.begin(), vs1.end(), arr1);
     PrintIterator(arr1, arr1 + num);
@@ -1082,6 +1087,13 @@ void VectorSortSpeedTest() {
     sec = chrono::system_clock::now() - st;
     cout << "stl::sort lambda   : " << sec.count() << "sec" << endl;
     PrintIterator(vs3.begin(), vs3.end());
+
+    auto lambdaObj = [](int a, int b) -> bool { return a < b; };
+    st = chrono::system_clock::now();
+    sort(vs4.begin(), vs4.end(), lambdaObj);
+    sec = chrono::system_clock::now() - st;
+    cout << "stl::sort lambda object  : " << sec.count() << "sec" << endl;
+    PrintIterator(vs4.begin(), vs4.end());
 
     st = chrono::system_clock::now();
     qsort(arr1, num, sizeof(int), cmpfunc);
@@ -1318,7 +1330,7 @@ int main() {
     //FindIfTest();
     //PredefFunctorTest();
     //StringSortNoCaseTest();
-    //VectorSortSpeedTest();
+    VectorSortSpeedTest();
     //RoundTest();
     //NegativeModulusTest();
     //SizeOfPrimitiveTest();
@@ -1327,7 +1339,7 @@ int main() {
     //IotaTest();
     //TransformTest();
     //InheritConstructorTest();
-    TryCatchTest();
+    //TryCatchTest();
     //LambdaTest1();
     //LambdaTest2();
     //StringAppendTest();
