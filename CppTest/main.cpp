@@ -48,14 +48,14 @@ double DoubleSum(int num, ...) {
     return sum;
 }
 
-wstring StringFormat(const wchar_t* fmt, ...) {
+wstring StringFormat(wstring fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
     
-    int size = _vscwprintf(fmt, ap) + 1;
+    int size = _vscwprintf(fmt.c_str(), ap) + 1;
     wchar_t* buf = new wchar_t[size];
     
-    vswprintf_s(buf, size, fmt, ap);
+    vswprintf_s(buf, size, fmt.c_str(), ap);
     wstring str(buf);
     
     delete[] buf;
