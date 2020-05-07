@@ -13,6 +13,7 @@
 #include <numeric>
 #include <functional>
 #include <fstream>
+#include <cstdarg>
 
 using namespace std;
 
@@ -47,12 +48,31 @@ double DoubleSum(int num, ...) {
     return sum;
 }
 
+wstring StringFormat(const wchar_t* fmt, ...) {
+    va_list ap;
+    va_start(ap, fmt);
+    
+    int size = _vscwprintf(fmt, ap) + 1;
+    wchar_t* buf = new wchar_t[size];
+    
+    vswprintf_s(buf, size, fmt, ap);
+    wstring str(buf);
+    
+    delete[] buf;
+    
+    va_end(ap);
+    
+    return str;
+}
+
 void VariableArgumentTest() {
     cout << "==== VariableArgumentTest ====" << endl << endl;
     int iSum = IntSum(3, 1, 2, 3);
     cout << "int sum = " << iSum << endl;
     double dSum = DoubleSum(3, 1.1, 2.2, 3.3);
     cout << "double sum = " << dSum << endl;
+    wstring sSum = StringFormat(L"%d, %f, %s", 123, 123.456, L"hello wstring");
+    wcout << "StringFormat = " << sSum << endl;
 }
 
 void OpenMPTest() {
@@ -1291,7 +1311,7 @@ void StringAppendTest() {
 }
 
 int main() {
-    //VariableArgumentTest();
+    VariableArgumentTest();
     //OpenMPTest();
     //DuckTypingTest();
     //RangeForTest();
@@ -1336,7 +1356,7 @@ int main() {
     //FindIfTest();
     //PredefFunctorTest();
     //StringSortNoCaseTest();
-    VectorSortSpeedTest();
+    //VectorSortSpeedTest();
     //RoundTest();
     //NegativeModulusTest();
     //SizeOfPrimitiveTest();
