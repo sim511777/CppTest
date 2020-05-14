@@ -1310,8 +1310,44 @@ void StringAppendTest() {
     cout << "writing to c:\\test\\StringAppendTest2.txt finished" << endl;
 }
 
+class YourClass {
+public:
+    YourClass() {
+        cout << "생성자" << endl;
+    }
+    ~YourClass() {
+        cout << "소멸자" << endl;
+    }
+
+    YourClass(const YourClass& a) {
+        cout << "복사 생성자" << endl;
+    }
+
+    YourClass& operator = (const YourClass& a) {
+        cout << "복사 연산자" << endl;
+        return *this;
+    }
+
+    YourClass(YourClass&& a) {
+        cout << "이동 생성자" << endl;
+    }
+
+    YourClass& operator = (YourClass&& a) {
+        cout << "이동 연산자" << endl;
+        return *this;
+    }
+};
+
+void MoveConstructorOperator() {
+    auto obj1 = YourClass();    // 생성자
+    //auto obj2 = obj1;           // 복사 생성자
+    //obj2 = obj1;                // 복사 연산자
+    auto obj3 = std::move(obj1);    // 이동 생성자
+    obj3 = std::move(obj1); // 이동 연산자
+}
+
 int main() {
-    VariableArgumentTest();
+    //VariableArgumentTest();
     //OpenMPTest();
     //DuckTypingTest();
     //RangeForTest();
@@ -1369,6 +1405,7 @@ int main() {
     //LambdaTest1();
     //LambdaTest2();
     //StringAppendTest();
+    MoveConstructorOperator();
 
     return 0;
 }
