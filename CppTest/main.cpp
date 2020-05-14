@@ -1346,6 +1346,22 @@ void MoveConstructorOperator() {
     obj3 = std::move(obj1); // 이동 연산자
 }
 
+void RefTest() {
+    int a = 1;
+    int& refA = a;
+    a = 3;
+    int b = 2;
+    refA = b;
+    b = 4;
+    int i = 4, j = 5;
+    ((i < 3) ? i : j) = 8;
+    string s = string("h") + "e" + "ll" + "o";
+    cout << s << endl;
+    // 정리:
+    // lvalue는 대입연산에서 왼쪽에 올 수 있는 값, 주소가 있는 값, 변수, *연산 결과
+    // rvalue는 대입연산에서 왼쪽에 울 수 없는 값, 주소가 없는 값, 상수, 산술 연산 결과, &연산 결과
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1405,7 +1421,8 @@ int main() {
     //LambdaTest1();
     //LambdaTest2();
     //StringAppendTest();
-    MoveConstructorOperator();
+    //MoveConstructorOperator();
+    RefTest();
 
     return 0;
 }
