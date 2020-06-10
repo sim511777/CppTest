@@ -14,6 +14,7 @@
 #include <functional>
 #include <fstream>
 #include <cstdarg>
+#include <windows.h>
 
 using namespace std;
 
@@ -1362,6 +1363,15 @@ void RefTest() {
     // rvalue는 대입연산에서 왼쪽에 울 수 없는 값, 주소가 없는 값, 상수, 산술 연산 결과, &연산 결과
 }
 
+void DebugViewTest() {
+    auto vs = vector<int>(10);
+    iota(vs.begin(), vs.end(), 0);
+    for (auto v : vs) {
+        wstring str = std::to_wstring(v);
+        OutputDebugString(str.c_str()); // DebugView.exe를 실행시켜놓고 있으면 거기에 이게 출력 된다
+    }
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1422,7 +1432,8 @@ int main() {
     //LambdaTest2();
     //StringAppendTest();
     //MoveConstructorOperator();
-    RefTest();
+    //RefTest();
+    DebugViewTest();
 
     return 0;
 }
