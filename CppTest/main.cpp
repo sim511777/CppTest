@@ -1372,6 +1372,43 @@ void DebugViewTest() {
     }
 }
 
+/* swap: interchange v[i] and v[j] */
+void swap(int v[], int i, int j) {
+    int temp;
+    temp = v[i];
+    v[i] = v[j];
+    v[j] = temp;
+}
+
+/* qsort: sort v[left]...v[right] into increasing order */
+void QuickSort_tcpl(int v[], int left, int right) {
+    int i, last;
+    void swap(int v[], int i, int j);
+    if (left >= right) /* do nothing if array contains */
+        return; /* fewer than two elements */
+    swap(v, left, (left + right) / 2); /* move partition elem */
+    last = left; /* to v[0] */
+    for (i = left + 1; i <= right; i++) /* partition */
+        if (v[i] < v[left])
+            swap(v, ++last, i);
+    swap(v, left, last); /* restore partition elem */
+    QuickSort_tcpl(v, left, last - 1);
+    QuickSort_tcpl(v, last + 1, right);
+}
+
+void QuickSortTest() {
+    int arr[] = { 14, 4, 19, 13, 17, 3, 12, 6, 10, 1, 5, 2, 9, 16, 18, 15, 8, 0, 11, 7 };
+    for (int i = 0; i < 20; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    printf("\n");
+    QuickSort_tcpl(arr, 0, 19);
+    for (int i = 0; i < 20; i++) {
+        printf("%d ", arr[i]);
+    }
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1433,7 +1470,8 @@ int main() {
     //StringAppendTest();
     //MoveConstructorOperator();
     //RefTest();
-    DebugViewTest();
+    //DebugViewTest();
+    QuickSortTest();
 
     return 0;
 }
