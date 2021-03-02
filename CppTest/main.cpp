@@ -1,3 +1,5 @@
+#define _HAS_AUTO_PTR_ETC 1
+
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -1409,6 +1411,17 @@ void QuickSortTest() {
     }
 }
 
+void ForEachTest() {
+    vector<int> data(10);
+    iota(begin(data), end(data), 1);
+
+    for_each(begin(data), end(data), [](auto value) { cout << value << ' '; });
+
+    cout << endl;
+
+    for_each_n(begin(data), 5, [](auto value) { cout << value << ' '; });
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1471,7 +1484,8 @@ int main() {
     //MoveConstructorOperator();
     //RefTest();
     //DebugViewTest();
-    QuickSortTest();
+    //QuickSortTest();
+    ForEachTest();
 
     return 0;
 }
