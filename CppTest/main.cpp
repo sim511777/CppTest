@@ -1422,6 +1422,21 @@ void ForEachTest() {
     for_each_n(begin(data), 5, [](auto value) { cout << value << ' '; });
 }
 
+template <typename T>
+void tell_type() {
+    if (std::is_void<T>::value) {
+        std::cout << "T 는 void ! \n";
+    } else {
+        std::cout << "T 는 void 가 아니다. \n";
+    }
+}
+
+void TypeTraitTest() {
+    tell_type<int>();  // void 아님!
+
+    tell_type<void>();  // void!
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1485,7 +1500,8 @@ int main() {
     //RefTest();
     //DebugViewTest();
     //QuickSortTest();
-    ForEachTest();
+    //ForEachTest();
+    TypeTraitTest();
 
     return 0;
 }
