@@ -1437,6 +1437,17 @@ void TypeTraitTest() {
     tell_type<void>();  // void!
 }
 
+void Int32Int64() {
+    // dword, eax
+    int a32 = 1;
+    int b32 = 1;
+    int c32 = a32 + b32;
+    // qword,rax
+    __int64 a64 = 1;
+    __int64 b64 = 1;
+    __int64 c64 = a64 + b64;
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1501,7 +1512,8 @@ int main() {
     //DebugViewTest();
     //QuickSortTest();
     //ForEachTest();
-    TypeTraitTest();
+    //TypeTraitTest();
+    Int32Int64();
 
     return 0;
 }
