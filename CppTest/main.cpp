@@ -862,7 +862,7 @@ public:
 
 void SomeMesmerizeTest1() {
     cout << "==== SomeMesmerizeTest1 ====" << endl << endl;
-    MyMesmerize obj();  // 햇갈리지 말자. MyMesmerize객체 생성이 아니고 MyMesmerize를 리턴하는 파라미터 없는 obj함수 선언. 아무것도 안함.
+    //MyMesmerize obj();  // 햇갈리지 말자. MyMesmerize객체 생성이 아니고 MyMesmerize를 리턴하는 파라미터 없는 obj함수 선언. 아무것도 안함.
     // obj(); // 이것은 에러. 위에서 함수선언은 했지만 정의를 안했으므로 링크 에러 발생
     MyMesmerize obj1(1, 2);
     MyMesmerize obj2 = { 1,2 };
@@ -1448,6 +1448,24 @@ void Int32Int64() {
     __int64 c64 = a64 + b64;
 }
 
+void print(int a) {
+    printf("%d\n", a);
+}
+
+struct Print {
+    void operator()(int a) const {
+        printf("%d\n", a);
+    }
+};
+
+void FunctorTest() {
+    int ari[] = { 2,8,5,1,9 };
+    for_each(ari, ari + 5, print);  // 함수
+    for_each(ari, ari + 5, Print());// 함수객체
+    for_each(ari, ari + 5, [](int a) { printf("%d\n", a); });// 람다
+}
+
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1513,7 +1531,8 @@ int main() {
     //QuickSortTest();
     //ForEachTest();
     //TypeTraitTest();
-    Int32Int64();
+    //Int32Int64();
+    FunctorTest();
 
     return 0;
 }
