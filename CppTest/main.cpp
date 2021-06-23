@@ -1267,7 +1267,7 @@ void TryCatchTest() {
         //cout << vec[-1] << endl;
 
         // stoi는 잡는다
-        int n = std::stoi("abc");
+        int n = stoi("abc");
         cout << n << endl;
 
         cout << "try end" << endl;
@@ -1314,12 +1314,17 @@ void StringAppendTest() {
 }
 
 class YourClass {
+private:
+    string name;
 public:
-    YourClass() {
+    YourClass(string _name) : name(_name) {
         cout << "생성자" << endl;
     }
     ~YourClass() {
         cout << "소멸자" << endl;
+    }
+    void PrintName() {
+        cout << name << endl;
     }
 
     YourClass(const YourClass& a) {
@@ -1327,7 +1332,7 @@ public:
     }
 
     YourClass& operator = (const YourClass& a) {
-        cout << "복사 연산자" << endl;
+        cout << "대입 연산자" << endl;
         return *this;
     }
 
@@ -1342,11 +1347,13 @@ public:
 };
 
 void MoveConstructorOperator() {
-    auto obj1 = YourClass();    // 생성자
-    //auto obj2 = obj1;           // 복사 생성자
-    //obj2 = obj1;                // 복사 연산자
-    auto obj3 = std::move(obj1);    // 이동 생성자
-    obj3 = std::move(obj1); // 이동 연산자
+    auto obj1 = YourClass("꼬북좌");    // 생성자
+    auto obj2 = obj1;           // 복사 생성자
+    obj2 = obj1;                // 대입 연산자
+    obj1.PrintName();
+    auto obj3 = move(obj1);    // 이동 생성자
+    obj1.PrintName();
+    obj3 = move(obj1); // 이동 연산자
 }
 
 void RefTest() {
@@ -1369,7 +1376,7 @@ void DebugViewTest() {
     auto vs = vector<int>(10);
     iota(vs.begin(), vs.end(), 0);
     for (auto v : vs) {
-        wstring str = std::to_wstring(v);
+        wstring str = to_wstring(v);
         OutputDebugString(str.c_str()); // DebugView.exe를 실행시켜놓고 있으면 거기에 이게 출력 된다
     }
 }
@@ -1424,10 +1431,10 @@ void ForEachTest() {
 
 template <typename T>
 void tell_type() {
-    if (std::is_void<T>::value) {
-        std::cout << "T 는 void ! \n";
+    if (is_void<T>::value) {
+        cout << "T 는 void ! \n";
     } else {
-        std::cout << "T 는 void 가 아니다. \n";
+        cout << "T 는 void 가 아니다. \n";
     }
 }
 
@@ -1464,7 +1471,6 @@ void FunctorTest() {
     for_each(ari, ari + 5, Print());// 함수객체
     for_each(ari, ari + 5, [](int a) { printf("%d\n", a); });// 람다
 }
-
 
 int main() {
     //VariableArgumentTest();
@@ -1525,14 +1531,14 @@ int main() {
     //LambdaTest1();
     //LambdaTest2();
     //StringAppendTest();
-    //MoveConstructorOperator();
+    MoveConstructorOperator();
     //RefTest();
     //DebugViewTest();
     //QuickSortTest();
     //ForEachTest();
     //TypeTraitTest();
     //Int32Int64();
-    FunctorTest();
+    //FunctorTest();
 
     return 0;
 }
