@@ -1472,6 +1472,17 @@ void FunctorTest() {
     for_each(ari, ari + 5, [](int a) { printf("%d\n", a); });// ¶÷´Ù
 }
 
+void RValueRefTest() {
+    int a = 1;
+    int& la = a;
+    //int&& ra = a;
+
+    //int& lb = 2;
+    int&& rb = 2;
+    rb = 4;
+    auto p = &rb;
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1531,7 +1542,7 @@ int main() {
     //LambdaTest1();
     //LambdaTest2();
     //StringAppendTest();
-    MoveConstructorOperator();
+    //MoveConstructorOperator();
     //RefTest();
     //DebugViewTest();
     //QuickSortTest();
@@ -1539,6 +1550,7 @@ int main() {
     //TypeTraitTest();
     //Int32Int64();
     //FunctorTest();
+    RValueRefTest();
 
     return 0;
 }
