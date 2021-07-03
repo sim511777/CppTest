@@ -1504,6 +1504,17 @@ void SharedPtrTest2() {
     wcout << L"a5 : " << a5 << ":" << a5.use_count() << endl;
 }
 
+void VariableInitialzeTest() {
+    int i1 = 1;
+    int i2(1);
+    auto i3 = 1;
+    auto i4(1);
+    const char* c1 = "aaa";
+    const char* c2("aaa");
+    auto c3 = "aaa";
+    auto c4("aaa");
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
