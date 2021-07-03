@@ -1483,6 +1483,12 @@ void RValueRefTest() {
     auto p = &rb;
 }
 
+void DefaultDeleterTest() {
+    shared_ptr<int> p(new int);
+    shared_ptr<int> p1(new int, default_delete<int>());
+    shared_ptr<int> parr(new int[100], default_delete<int[]>());
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1550,7 +1556,8 @@ int main() {
     //TypeTraitTest();
     //Int32Int64();
     //FunctorTest();
-    RValueRefTest();
+    //RValueRefTest();
+    DefaultDeleterTest();
 
     return 0;
 }
