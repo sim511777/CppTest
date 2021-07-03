@@ -1489,6 +1489,21 @@ void DefaultDeleterTest() {
     shared_ptr<int> parr(new int[100], default_delete<int[]>());
 }
 
+void SharedPtrTest2() {
+    shared_ptr<int> a1(new int(1));
+    auto b = shared_ptr<int>(new int(1));
+    auto c = make_shared<int>(1);
+    auto a2 = a1;
+    auto a3 = a1;
+    auto a4 = a1;
+    auto a5 = a1;
+    wcout << L"a1 : " << a1 << ":" << a1.use_count() << endl;
+    wcout << L"a2 : " << a2 << ":" << a2.use_count() << endl;
+    wcout << L"a3 : " << a3 << ":" << a3.use_count() << endl;
+    wcout << L"a4 : " << a4 << ":" << a4.use_count() << endl;
+    wcout << L"a5 : " << a5 << ":" << a5.use_count() << endl;
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1557,7 +1572,8 @@ int main() {
     //Int32Int64();
     //FunctorTest();
     //RValueRefTest();
-    DefaultDeleterTest();
+    //DefaultDeleterTest();
+    SharedPtrTest2();
 
     return 0;
 }
