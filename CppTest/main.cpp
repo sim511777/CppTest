@@ -1515,6 +1515,50 @@ void VariableInitialzeTest() {
     auto c4("aaa");
 }
 
+class AA {
+public:
+    AA() {
+        wcout << this << " : AA()" << endl;
+    }
+    AA(const AA& rhs) {
+        wcout << this << " : AA(const AA& rhs)" << endl;
+    }
+    AA& operator=(const AA& rhs) {
+        wcout << this << " : operator=(const AA& rhs)" << endl;
+        return *this;
+    }
+    ~AA() {
+        wcout << this << " : ~AA()" << endl;
+    }
+};
+
+class BB {
+public:
+    int a;
+    AA aa;
+
+    BB() {
+        wcout << this << " : BB()" << endl;
+    }
+    BB(const BB& rhs) {
+        wcout << this << " : BB(const BB& rhs)" << endl;
+    }
+    BB& operator=(const BB& rhs) {
+        aa = rhs.aa;
+        wcout << this << " : operator=(const BB& rhs)" << endl;
+        return *this;
+    }
+    ~BB() {
+        wcout << this << " : ~BB()" << endl;
+    }
+};
+
+void ClassTest() {
+    BB b;
+    BB b2 = b;
+    b2 = b;
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1584,7 +1628,7 @@ int main() {
     //FunctorTest();
     //RValueRefTest();
     //DefaultDeleterTest();
-    SharedPtrTest2();
-
+    //SharedPtrTest2();
+    ClassTest();
     return 0;
 }
