@@ -1559,6 +1559,25 @@ void ClassTest() {
     b2 = b;
 }
 
+void LambdaTest3() {
+    auto addFunc = [](int a, int b) { return a + b; };
+    wcout << addFunc(3, 4) << endl;
+    // 1. function<int(int, int)> addFunc : 람다 변수 선언
+    // -> 선언과 동시에 초기화 시 function addFunc 로 간단화 가능
+    // -> 선언과 동시에 초기화 시 auto addFunc 로 간단화 가능
+    // 2. [num] : 캡쳐
+    // -> [num] : num변수 const 복사 캡쳐
+    // -> [&num] : num변수 참조 캡쳐
+    // -> [=] : 모든변수 const 복사 캡쳐
+    // -> [&] : 모든변수 참조 캡쳐
+    // 3. mutable : 복사 캡쳐 변수를 비 const화
+    // 4. (int a, int b) : 파라미터 변수
+    // -> 파라미터 없을때 [생략 가능]
+    // 5. -> int : 리턴 타입
+    // -> 본문에 의해 추론 가능 할때 [생략 가능]
+    // 6. {} 본문
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1629,6 +1648,7 @@ int main() {
     //RValueRefTest();
     //DefaultDeleterTest();
     //SharedPtrTest2();
-    ClassTest();
+    //ClassTest();
+    LambdaTest3();
     return 0;
 }
