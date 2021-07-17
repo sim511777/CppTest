@@ -1578,6 +1578,30 @@ void LambdaTest3() {
     // 6. {} 본문
 }
 
+void ShredPtrTest3() {
+    // 1. 선언 방법
+    auto pbyte1 = shared_ptr<BYTE>(new BYTE);
+    shared_ptr<BYTE> pbyte2(new BYTE);
+    // 2. deleter
+    shared_ptr<BYTE> pbyte3(new BYTE, [](BYTE *ptr){ delete ptr; });
+    shared_ptr<BYTE> arrbyte1(new BYTE[10], [](BYTE *ptr){ delete [] ptr; });
+    // 3. default_deleter
+    shared_ptr<BYTE> pbyte4(new BYTE, default_delete<BYTE>());
+    shared_ptr<BYTE> arrbyte2(new BYTE[10], default_delete<BYTE[]>());
+    
+    unique_ptr<BYTE> pbyte5(new BYTE);
+    unique_ptr<BYTE> arrbyte3(new BYTE[10]);
+
+    // not legal, operator[] not defined
+    //pbyte4[1] = 4;
+    //arrbyte2[1] = 4;
+    //pbyte5[1] = 4;
+    //arrbyte3[1] = 4;
+
+    //auto shared = std::make_shared<char[]>(64);   // not legal, (legal form c++20)
+    auto unique = std::make_unique<char[]>(64);
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1649,6 +1673,7 @@ int main() {
     //DefaultDeleterTest();
     //SharedPtrTest2();
     //ClassTest();
-    LambdaTest3();
+    //LambdaTest3();
+    ShredPtrTest3();
     return 0;
 }
