@@ -1318,33 +1318,53 @@ private:
     string name;
 public:
     YourClass(string _name) : name(_name) {
-        cout << "생성자" << endl;
-    }
-    ~YourClass() {
-        cout << "소멸자" << endl;
-    }
-    void PrintName() {
-        cout << name << endl;
+        cout << "일반 생성자" << endl;
+        PrintName();
     }
 
-    YourClass(const YourClass& a) {
+    YourClass(const YourClass& a) : name(a.name) {
         cout << "복사 생성자" << endl;
+        PrintName();
+    }
+
+    YourClass(YourClass&& a) : name(a.name) {
+        cout << "이동 생성자" << endl;
+        PrintName();
+    }
+
+    ~YourClass() {
+        cout << "소멸자" << endl;
+        PrintName();
     }
 
     YourClass& operator = (const YourClass& a) {
+        name = a.name;
         cout << "대입 연산자" << endl;
+        PrintName();
         return *this;
-    }
-
-    YourClass(YourClass&& a) {
-        cout << "이동 생성자" << endl;
     }
 
     YourClass& operator = (YourClass&& a) {
+        name = a.name;
         cout << "이동 연산자" << endl;
+        PrintName();
         return *this;
     }
+
+    void PrintName() {
+        cout << "이름 출력 : " << name << endl;
+    }
 };
+
+YourClass MoveMethod(YourClass aobj) {
+    YourClass robj("이순신");
+    return robj;
+}
+
+void MoveTest() {
+    YourClass obj1("홍길동");
+    YourClass obj2 = MoveMethod(obj1);
+}
 
 void MoveConstructorOperator() {
     auto obj1 = YourClass("꼬북좌");    // 생성자
@@ -1674,6 +1694,7 @@ int main() {
     //SharedPtrTest2();
     //ClassTest();
     //LambdaTest3();
-    ShredPtrTest3();
+    //ShredPtrTest3();
+    MoveTest();
     return 0;
 }
