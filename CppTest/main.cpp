@@ -1622,6 +1622,14 @@ void ShredPtrTest3() {
     auto unique = std::make_unique<char[]>(64);
 }
 
+void VectorTest5() {
+    vector<int> vec = { 1, 2, 3 };
+    vec[1] = 10;
+    for (auto n : vec) {
+        wcout << n << endl;
+    }
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1695,6 +1703,7 @@ int main() {
     //ClassTest();
     //LambdaTest3();
     //ShredPtrTest3();
-    MoveTest();
+    //MoveTest();
+    VectorTest5();
     return 0;
 }
