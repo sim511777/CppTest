@@ -1,3 +1,7 @@
+0. noexcept
+0. const expr
+
+==== old contents ====
 ok 1. SetTest 추가
 1. IDisposibleTest 후에 ParallelLinq 하면 데드락 상태 문제
 다음 키워드 예제 추가 할것

@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 15 for Windows Desktop
+# Visual Studio 15
 VisualStudioVersion = 15.0.28307.960
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppTest", "CppTest\CppTest.vcxproj", "{8720A8AF-0D2D-4853-B07C-0067D04F2223}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E320FFEB-4FB5-43F2-B9D7-0362761FFBE8}"
+	ProjectSection(SolutionItems) = preProject
+		Todo.txt = Todo.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
