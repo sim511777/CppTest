@@ -17,6 +17,7 @@
 #include <fstream>
 #include <cstdarg>
 #include <windows.h>
+#include <execution>
 
 using namespace std;
 
@@ -1630,6 +1631,30 @@ void VectorTest5() {
     }
 }
 
+std::vector<size_t> Range(size_t start, size_t num) {
+    std::vector<size_t> vec(num);
+    std::iota(vec.begin(), vec.end(), start);
+    return vec;
+}
+
+void Test() {
+    auto range = Range(0, 100);
+
+    //std::for_each(seq.begin(), seq.end(), [](auto num) { cout << num << " "; });
+
+    //auto policy = std::execution::seq;
+    //auto policy = std::execution::par;
+    auto policy = std::execution::par_unseq;
+
+    std::mutex m;
+    std::for_each(policy, range.begin(), range.end(), [&](auto num) {
+        //std::lock_guard<std::mutex> guard(m);
+        m.lock();
+        cout << num << std::endl;
+        m.unlock();
+    });
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1704,6 +1729,7 @@ int main() {
     //LambdaTest3();
     //ShredPtrTest3();
     //MoveTest();
-    VectorTest5();
+    //VectorTest5();
+    Test();
     return 0;
 }
