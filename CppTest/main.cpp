@@ -55,17 +55,17 @@ double DoubleSum(int num, ...) {
 wstring StringFormat(wstring fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
-    
+
     int size = _vscwprintf(fmt.c_str(), ap) + 1;
     wchar_t* buf = new wchar_t[size];
-    
+
     vswprintf_s(buf, size, fmt.c_str(), ap);
     wstring str(buf);
-    
+
     delete[] buf;
-    
+
     va_end(ap);
-    
+
     return str;
 }
 
@@ -525,8 +525,7 @@ void CarSetTest() {
     carSet.bus.Run();
 }
 
-wstring StrToWstr(string const& str)
-{
+wstring StrToWstr(string const& str) {
     size_t len = str.size();
     size_t bufSize = len + 1;
     wchar_t* wc = new wchar_t[bufSize];
@@ -537,8 +536,7 @@ wstring StrToWstr(string const& str)
     return wstr;
 }
 
-string WstrToStr(wstring const& wstr)
-{
+string WstrToStr(wstring const& wstr) {
     size_t len = wstr.size();
     size_t bufSize = len * 2 + 1;
     char* c = new char[bufSize];
@@ -758,7 +756,7 @@ void StructInitialize() {
     car1.direction = 3;
 
     MyCar car2 = { 1,2,3, };
-    MyCar car3 { 1,2,3 };
+    MyCar car3{ 1,2,3 };
 }
 
 template<typename IT>
@@ -947,7 +945,7 @@ struct SSum {
 
 struct SPrintString {
     string mes;
-    SPrintString(string m) : mes(m) { }
+    SPrintString(string m) : mes(m) {}
     void operator()(int a) const {
         cout << mes << a << endl;
     }
@@ -981,7 +979,7 @@ void ForeachFunctorTest() {
     for_each(intList.begin(), intList.end(), SPrintString(string("다른 메시지 ")));
     // SomeClass<SPrint> s1(SPrint());           // 이거 애매 모호 함, SPrint()를 SPrint(*)() 함수 포인터 타입으로 인식하여 객체 생성구문이 아닌 함수 선언 구문으로 이식함
     SomeClass<SPrint> s1 = SomeClass<SPrint>(SPrint());           // 템플릿 변수 선언
-    SomeClass<void (*)(int)> s2(fPrint);    // 템플릿 변수 선언
+    SomeClass<void(*)(int)> s2(fPrint);    // 템플릿 변수 선언
     s1.Call(3);
     s2.Call(4);
 }
@@ -998,14 +996,16 @@ void FindIfTest() {
     vector<string>::iterator it = find_if(nameList.begin(), nameList.end(), IsKim());
     if (it == nameList.end()) {
         cout << "김가 없다." << endl;
-    } else {
+    }
+    else {
         cout << *it << "이(가) 있다." << endl;
     }
 
     vector<string>::iterator it2 = find_if(nameList.begin(), nameList.end(), [](string name) ->bool { return (strncmp(name.c_str(), "신", 2) == 0); });
     if (it2 == nameList.end()) {
         cout << "신가 없다." << endl;
-    } else {
+    }
+    else {
         cout << *it2 << "이(가) 있다." << endl;
     }
 
@@ -1253,7 +1253,7 @@ void TryCatchTest() {
     cout << "==== TryCatchTest ====" << endl << endl;
     try {
         cout << "try start" << endl;
-        
+
         // 나누기 0 못잡는다
         //int a = 3;
         //int b = 0;
@@ -1262,7 +1262,7 @@ void TryCatchTest() {
         // 배열 인덱스 못잡는다
         //int arr[] = { 0,1,2,3 };
         //cout << arr[-1] << endl;
-        
+
         // 벡터 인덱스 못잡는다
         //vector<int> vec = { 0,1,2,3 };
         //cout << vec[-1] << endl;
@@ -1272,7 +1272,8 @@ void TryCatchTest() {
         cout << n << endl;
 
         cout << "try end" << endl;
-    } catch (const exception & e) {
+    }
+    catch (const exception & e) {
         cout << "catch exception : " << e.what() << endl;
     }
 }
@@ -1454,7 +1455,8 @@ template <typename T>
 void tell_type() {
     if (is_void<T>::value) {
         cout << "T 는 void ! \n";
-    } else {
+    }
+    else {
         cout << "T 는 void 가 아니다. \n";
     }
 }
@@ -1604,12 +1606,12 @@ void ShredPtrTest3() {
     auto pbyte1 = shared_ptr<BYTE>(new BYTE);
     shared_ptr<BYTE> pbyte2(new BYTE);
     // 2. deleter
-    shared_ptr<BYTE> pbyte3(new BYTE, [](BYTE *ptr){ delete ptr; });
-    shared_ptr<BYTE> arrbyte1(new BYTE[10], [](BYTE *ptr){ delete [] ptr; });
+    shared_ptr<BYTE> pbyte3(new BYTE, [](BYTE *ptr) { delete ptr; });
+    shared_ptr<BYTE> arrbyte1(new BYTE[10], [](BYTE *ptr) { delete[] ptr; });
     // 3. default_deleter
     shared_ptr<BYTE> pbyte4(new BYTE, default_delete<BYTE>());
     shared_ptr<BYTE> arrbyte2(new BYTE[10], default_delete<BYTE[]>());
-    
+
     unique_ptr<BYTE> pbyte5(new BYTE);
     unique_ptr<BYTE> arrbyte3(new BYTE[10]);
 
@@ -1631,14 +1633,14 @@ void VectorTest5() {
     }
 }
 
-std::vector<size_t> Range(size_t start, size_t num) {
+std::vector<size_t> GenRange(size_t start, size_t num) {
     std::vector<size_t> vec(num);
     std::iota(vec.begin(), vec.end(), start);
     return vec;
 }
 
-void Test() {
-    auto range = Range(0, 100);
+void ParallelForeachTest() {
+    auto range = GenRange(0, 100);
 
     //std::for_each(seq.begin(), seq.end(), [](auto num) { cout << num << " "; });
 
@@ -1652,7 +1654,7 @@ void Test() {
         m.lock();
         cout << num << std::endl;
         m.unlock();
-    });
+                  });
 }
 
 int main() {
@@ -1730,6 +1732,6 @@ int main() {
     //ShredPtrTest3();
     //MoveTest();
     //VectorTest5();
-    Test();
+    ParallelForeachTest();
     return 0;
 }
