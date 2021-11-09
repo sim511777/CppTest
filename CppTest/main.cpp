@@ -1657,6 +1657,38 @@ void ParallelForeachTest() {
                   });
 }
 
+void ThreadFunc(int repeatNum, bool hasError) {
+    int *ptr = nullptr;
+    for (int i = 0; i < repeatNum; i++) {
+        this_thread::sleep_for(chrono::milliseconds(10));
+        this_thread::sleep_for(chrono::milliseconds(10));
+        this_thread::sleep_for(chrono::milliseconds(10));
+        this_thread::sleep_for(chrono::milliseconds(10));
+        if (hasError && i == repeatNum / 2) {
+            *ptr = 10;
+        }
+        this_thread::sleep_for(chrono::milliseconds(10));
+        this_thread::sleep_for(chrono::milliseconds(10));
+        this_thread::sleep_for(chrono::milliseconds(10));
+        this_thread::sleep_for(chrono::milliseconds(10));
+    }
+}
+
+void ThreadTest() {
+    const int threadNum = 4;
+    int taskNum = 1000;
+    int repeatNum = taskNum / threadNum;
+    thread ts[threadNum];
+    for (int i = 0; i < threadNum; i++) {
+        ts[i] = thread(ThreadFunc, repeatNum, (i == 2));
+        cout << "thread start : " << i << endl;
+    }
+    for (int i = 0; i < threadNum; i++) {
+        ts[i].join();
+    }
+    cout << "all thread finished" << endl;
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1732,6 +1764,7 @@ int main() {
     //ShredPtrTest3();
     //MoveTest();
     //VectorTest5();
-    ParallelForeachTest();
+    //ParallelForeachTest();
+    ThreadTest();
     return 0;
 }
