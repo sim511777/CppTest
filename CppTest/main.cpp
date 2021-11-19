@@ -1689,6 +1689,34 @@ void ThreadTest() {
     cout << "all thread finished" << endl;
 }
 
+class AAA {
+public:
+    static void Func1() {
+        cout << "Func1" << endl;
+        // 클래스 함수에서는 뒤에 정의된 클래스 함수도 호출 가능하다.
+        Func2();
+    }
+
+    static void Func2() {
+        cout << "Func2" << endl;
+    }
+};
+
+void Func3() {
+    cout << "Func3" << endl;
+    // 일반 함수는 뒤에 정의된 함수 호출 불가
+    //Func4();
+}
+
+void Func4() {
+    cout << "Func4" << endl;
+}
+
+void ClassMemberOrder() {
+    AAA::Func1();
+    Func3();
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1765,6 +1793,7 @@ int main() {
     //MoveTest();
     //VectorTest5();
     //ParallelForeachTest();
-    ThreadTest();
+    //ThreadTest();
+    ClassMemberOrder();
     return 0;
 }
