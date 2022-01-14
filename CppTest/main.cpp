@@ -1717,6 +1717,23 @@ void ClassMemberOrder() {
     Func3();
 }
 
+void AssignTest() {
+    int a = 1;
+    int b(2);
+    int c{ 3 };
+
+    cout << a << endl;
+    cout << b << endl;
+    cout << c << endl;
+}
+
+class Cls1 {
+private:
+    int a;
+public:
+    Cls1(int a) : a{ a } {};
+};
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1794,6 +1811,7 @@ int main() {
     //VectorTest5();
     //ParallelForeachTest();
     //ThreadTest();
-    ClassMemberOrder();
+    //ClassMemberOrder();
+    AssignTest();
     return 0;
 }
