@@ -1734,6 +1734,59 @@ public:
     Cls1(int a) : a{ a } {};
 };
 
+// const int a = 1; int const a = 1; 동일
+// const int * a = &v; int const * a = &v; 동일
+// const int * a = &v; int * const a; 상수 int, 상수 a
+// 상수 객체는 상수 멤버 함수만 호출 가능
+// 상수 멤버 함수는 상수 멤버 함수만 호출 가능
+
+void ConstTest() {
+    const int i1 = 10;
+    int const i2 = 10;  // 위의 t1, t2는 동일함, i1, i2 상수, 변수값 변경 불가
+
+    int a = 10;
+    const int * p1 = &a;
+    int const * p2 = &a; // 위의 p1, p2는 동일함, *p1, *p2 상수, 포인터값 변경 가능, 포인터가 가리키는 값 변경 불가
+    // p2 = NULL;   // O
+    // *p2 = 10;    // X
+    
+    int * const p3 = &a; // p3 상수, 포인터값 변경 불가, 포인터가 가리키는 값 변경 가능
+    // p3 = NULL;   // X
+    // *p3 = 10;    // O
+}
+
+class Cls2 {
+private:
+    BYTE buffer[1024];
+    int len = sizeof(buffer);
+    BYTE * ptr;
+public:
+    void AAA() {
+        BYTE* a = GetPtr();         // GetPtr() 호출됨
+        *a = 10;
+    }
+    void BBB() const {
+        const BYTE* a = GetPtr();   // GetPtr() const 호출됨
+        //*a = 10; 
+    }
+
+    BYTE* GetPtr() {
+        return buffer;
+    }
+    BYTE* GetPtr1() {
+        return buffer;
+    }
+    void CCC() const {
+        auto t = GetPtr();
+    }
+    const BYTE* GetPtr() const {    // 상수객체에서는 상수멤버함수만 호출됨, 상수멤버함수에서는 상수멤버함수만 호출됨
+        return buffer;
+    }
+    const BYTE* GetPtr2() const {    // 상수객체에서는 상수멤버함수만 호출됨, 상수멤버함수에서는 상수멤버함수만 호출됨
+        return buffer;
+    }
+};
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
