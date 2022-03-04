@@ -1625,6 +1625,22 @@ void ShredPtrTest3() {
     auto unique = std::make_unique<char[]>(64);
 }
 
+void SharedPtrTest4_sub(unique_ptr<int> a) {
+    wcout << a << endl;
+}
+
+void SharedPtrTest4() {
+    unique_ptr<int> a(new int);
+    *a = 10;
+    // SharedPtrTest4_sub(a);   // 복사생성 불가
+    // auto b = a;  // 복사생성 불가 delete 되었음
+    //// unique_ptr(const unique_ptr&) = delete;
+    //// unique_ptr& operator=(const unique_ptr&) = delete;
+    
+    auto b = move(a);
+    *a = 20;    // 런타임 에러
+}
+
 void VectorTest5() {
     vector<int> vec = { 1, 2, 3 };
     vec[1] = 10;
@@ -1865,6 +1881,7 @@ int main() {
     //ParallelForeachTest();
     //ThreadTest();
     //ClassMemberOrder();
-    AssignTest();
+    //AssignTest();
+    SharedPtrTest4();
     return 0;
 }
