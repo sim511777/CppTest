@@ -18,6 +18,7 @@
 #include <cstdarg>
 #include <windows.h>
 #include <execution>
+#include <ranges>
 
 using namespace std;
 
@@ -1803,6 +1804,21 @@ public:
     }
 };
 
+void RangeTest() {    
+    auto r =
+        std::views::iota(0, 20)
+        | std::views::filter([](int n) { return n % 2 == 0; })
+        | std::views::transform([](int n) { return -n; });
+    std::ranges::for_each(r, [](int n) { cout << n << " "; });
+
+    //// C# euqivalent
+    //var r =
+    //    Enumerable.Range(0, 20)
+    //    .Where(n => n % 2 == 0)
+    //    .Select(n => -n);
+    //r.ToList<int>().ForEach(n => Console.Write("{0} ", n));
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -1882,6 +1898,7 @@ int main() {
     //ThreadTest();
     //ClassMemberOrder();
     //AssignTest();
-    SharedPtrTest4();
+    //SharedPtrTest4();
+    RangeTest();
     return 0;
 }
