@@ -1,4 +1,4 @@
-#define _HAS_AUTO_PTR_ETC 1
+ï»¿#define _HAS_AUTO_PTR_ETC 1
 
 #include <string>
 #include <sstream>
@@ -28,9 +28,9 @@ int AlignedSize(int size) {
     return alignedSize;
 }
 
-// 1. °¡º¯ÀÎÀÚ¿¡ ´ëÇÑ Á¤º¸´Â ´Ù¸¥ ÀÎÀÚ·Î ÁÖ¾îÁ®¾ß ÇÑ´Ù. : °¹¼ö, °¢°¢ÀÇ Å¸ÀÔ
-// 2. ¸Ş¸ğ¸® »ó¿¡ ºñ°¡º¯ ÀÎÀÚ ´ÙÀ½¿¡ °¡º¯ ÀÎÀÚµéÀÌ ¼ø¼­´ë·Î µé¾î°£´Ù.
-// 3. ÀÎÀÚµéÀº ºÙ¾î¼­ µé¾î°¡Áö ¾Ê°í Æ÷ÀÎÅÍÀÇ Å©±â·Î ¾ó¶óÀÎ µÇ¾î µé¾î°£´Ù. : 32bit -> 4byte align, 64bit -> 8byte align
+// 1. ê°€ë³€ì¸ìì— ëŒ€í•œ ì •ë³´ëŠ” ë‹¤ë¥¸ ì¸ìë¡œ ì£¼ì–´ì ¸ì•¼ í•œë‹¤. : ê°¯ìˆ˜, ê°ê°ì˜ íƒ€ì…
+// 2. ë©”ëª¨ë¦¬ ìƒì— ë¹„ê°€ë³€ ì¸ì ë‹¤ìŒì— ê°€ë³€ ì¸ìë“¤ì´ ìˆœì„œëŒ€ë¡œ ë“¤ì–´ê°„ë‹¤.
+// 3. ì¸ìë“¤ì€ ë¶™ì–´ì„œ ë“¤ì–´ê°€ì§€ ì•Šê³  í¬ì¸í„°ì˜ í¬ê¸°ë¡œ ì–¼ë¼ì¸ ë˜ì–´ ë“¤ì–´ê°„ë‹¤. : 32bit -> 4byte align, 64bit -> 8byte align
 int IntSum(int num, ...) {
     char* ap = (char*)&num + AlignedSize(sizeof(num));
     int sum = 0;
@@ -136,7 +136,7 @@ void DuckTypingTest() {
 
 void RangeForTest() {
     cout << "==== RangeForTest ====" << endl << endl;
-    // ¹è¿­ÀÇ °æ¿ì ·ÎÄÃ¿¡¼­¸¸ °¡´É
+    // ë°°ì—´ì˜ ê²½ìš° ë¡œì»¬ì—ì„œë§Œ ê°€ëŠ¥
     int arr[5] = { 0, 1, 2, 3, 4, };
     for (int i : arr)
         cout << i << endl;
@@ -160,14 +160,14 @@ void PrintfTest() {
 
 void MemoryLeakTest() {
     cout << "==== MemoryLeakTest ====" << endl << endl;
-    // ÀÌ°ÍÀ» ÇÏ¸é ÇÁ·Î±×·¥ Á¾·á½Ã µğ¹ö±× Ãâ·ÂÃ¢¿¡ ¸Ş¸ğ¸® ¸¯ Á¤º¸¸¦ ¾Æ·¡¿Í °°ÀÌ Ç¥½ÃÇØ ÁØ´Ù.
+    // ì´ê²ƒì„ í•˜ë©´ í”„ë¡œê·¸ë¨ ì¢…ë£Œì‹œ ë””ë²„ê·¸ ì¶œë ¥ì°½ì— ë©”ëª¨ë¦¬ ë¦­ ì •ë³´ë¥¼ ì•„ë˜ì™€ ê°™ì´ í‘œì‹œí•´ ì¤€ë‹¤.
     // Detected memory leaks!
     // Dumping objects ->
     // {165} normal block at 0x0000018484721D80, 40 bytes long.
     //  Data: <                > CD CD CD CD CD CD CD CD CD CD CD CD CD CD CD CD
     //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    // ÇÒ´ç ¹øÈ£ {165} ¸¦ ¾Æ·¡¿¡ ÇÔ¼ö¿¡ ³Ö¾îÁÖ¸é ÇØ´ç ÇÒ´ç½Ã ·±Å¸ÀÓ ¿¡·¯¸¦ ¹ß»ı½ÃÄÑ ÁØ´Ù. 
+    // í• ë‹¹ ë²ˆí˜¸ {165} ë¥¼ ì•„ë˜ì— í•¨ìˆ˜ì— ë„£ì–´ì£¼ë©´ í•´ë‹¹ í• ë‹¹ì‹œ ëŸ°íƒ€ì„ ì—ëŸ¬ë¥¼ ë°œìƒì‹œì¼œ ì¤€ë‹¤. 
     //_CrtSetBreakAlloc(161);
 
     auto a = new int[10];
@@ -177,22 +177,22 @@ void MemoryLeakTest() {
     delete[] a;
     delete[] c;
 
-    _CrtDumpMemoryLeaks();    // _CrtSetDbgFlag ´ë½Ã ÇÁ·Î±×·¥ ³¡³ª±â Àü¿¡ ÀÌ°É È£Ãâ ÇØµµ µÊ
+    _CrtDumpMemoryLeaks();    // _CrtSetDbgFlag ëŒ€ì‹œ í”„ë¡œê·¸ë¨ ëë‚˜ê¸° ì „ì— ì´ê±¸ í˜¸ì¶œ í•´ë„ ë¨
 }
 
 void UnrefFunctionList() {
-    // Project ¼Ó¼º¿¡¼­
-    // C/C++ -> ÄÚµå»ı¼º -> ÇÔ¼ö¼öÁØ¸µÅ©»ç¿ë : ¿¹(/Gy)
-    // ¸µÄ¿ -> ÃÖÀûÈ­ -> ÂüÁ¶ : Yes(/OPT:REF)
-    // ¸µÄ¿ -> ¸í·ÉÁÙ -> Ãß°¡¿É¼Ç : /VERBOSE:REF Ãß°¡
+    // Project ì†ì„±ì—ì„œ
+    // C/C++ -> ì½”ë“œìƒì„± -> í•¨ìˆ˜ìˆ˜ì¤€ë§í¬ì‚¬ìš© : ì˜ˆ(/Gy)
+    // ë§ì»¤ -> ìµœì í™” -> ì°¸ì¡° : Yes(/OPT:REF)
+    // ë§ì»¤ -> ëª…ë ¹ì¤„ -> ì¶”ê°€ì˜µì…˜ : /VERBOSE:REF ì¶”ê°€
 }
 
-void Func(int a) { cout << "Á¤¼ö¸¦ ÀÎÀÚ·Î ¹Ş´Â ÇÔ¼ö" << endl; }
-void Func(int* a) { cout << "Æ÷ÀÎÅÍ¸¦ ÀÎÀÚ·Î ¹Ş´Â ÇÔ¼ö" << endl; }
+void Func(int a) { cout << "ì •ìˆ˜ë¥¼ ì¸ìë¡œ ë°›ëŠ” í•¨ìˆ˜" << endl; }
+void Func(int* a) { cout << "í¬ì¸í„°ë¥¼ ì¸ìë¡œ ë°›ëŠ” í•¨ìˆ˜" << endl; }
 void NullPtrTest() {
     cout << "==== NullPtrTest ====" << endl << endl;
     Func(1);
-    Func(NULL); // ÀÌ°ÍÀ» Á¤¼ö ÀÎÀÚ ÇÔ¼ö°¡ È£ÃâµÈ´Ù. Æ÷ÀÎÅÍ ÀÎÀÚ ÇÔ¼ö¸¦ ³ÎÆ÷ÀÎÅÍ ÀÎÀÚ·Î È£Ãâ ÇÏ°í ½ÍÀ»¶§ ³­°¨
+    Func(NULL); // ì´ê²ƒì„ ì •ìˆ˜ ì¸ì í•¨ìˆ˜ê°€ í˜¸ì¶œëœë‹¤. í¬ì¸í„° ì¸ì í•¨ìˆ˜ë¥¼ ë„í¬ì¸í„° ì¸ìë¡œ í˜¸ì¶œ í•˜ê³  ì‹¶ì„ë•Œ ë‚œê°
     Func(nullptr);
 }
 
@@ -214,10 +214,10 @@ public:
 void SharedPtrTest() {
     cout << "==== SharedPtrTest ====" << endl << endl;
     wcout.imbue(locale("korean"));
-    auto car = Car(L"¾Æ¹İ¶¼");
+    auto car = Car(L"ì•„ë°˜ë–¼");
     auto car2 = Car();
-    auto sp = shared_ptr<Car>(new Car(L"¼Ò³ªÅ¸"));
-    auto sp2 = shared_ptr<Car>(new Car(L"¸¶Æ¼Áî"));
+    auto sp = shared_ptr<Car>(new Car(L"ì†Œë‚˜íƒ€"));
+    auto sp2 = shared_ptr<Car>(new Car(L"ë§ˆí‹°ì¦ˆ"));
     auto sp3(sp);
     auto sp4 = sp2;
 }
@@ -225,9 +225,9 @@ void SharedPtrTest() {
 void SharedPtrInitTest() {
     cout << "==== SharedPtrInitTest ====" << endl << endl;
     wcout.imbue(locale("korean"));
-    shared_ptr<Car> sp1(new Car(L"±×·£Àú"));
-    auto sp2 = shared_ptr<Car>(new Car(L"¼Ò³ªÅ¸"));
-    auto sp3 = make_shared<Car>(L"¾Æ¹İ¶¼");
+    shared_ptr<Car> sp1(new Car(L"ê·¸ëœì €"));
+    auto sp2 = shared_ptr<Car>(new Car(L"ì†Œë‚˜íƒ€"));
+    auto sp3 = make_shared<Car>(L"ì•„ë°˜ë–¼");
 }
 
 shared_ptr<Car> fullRentCar;
@@ -235,40 +235,40 @@ void SharedPtrVectorTest() {
     cout << "==== SharedPtrVectorTest ====" << endl << endl;
     wcout.imbue(locale("korean"));
     vector<shared_ptr<Car>> carList;
-    carList.push_back(shared_ptr<Car>(new Car(L"±×·£Àú")));
-    carList.push_back(shared_ptr<Car>(new Car(L"¼Ò³ªÅ¸")));
-    carList.push_back(shared_ptr<Car>(new Car(L"¾Æ¹İ¶¼")));
-    carList.push_back(shared_ptr<Car>(new Car(L"¸¶Æ¼Áî")));
+    carList.push_back(shared_ptr<Car>(new Car(L"ê·¸ëœì €")));
+    carList.push_back(shared_ptr<Car>(new Car(L"ì†Œë‚˜íƒ€")));
+    carList.push_back(shared_ptr<Car>(new Car(L"ì•„ë°˜ë–¼")));
+    carList.push_back(shared_ptr<Car>(new Car(L"ë§ˆí‹°ì¦ˆ")));
     auto rentCar1 = carList[1];
     fullRentCar = carList[2];
 }
 
 class Graphic {
 public:
-    Graphic() { cout << "±×·¡ÇÈ »ı¼º" << endl; }
-    virtual ~Graphic() { cout << "±×·¡ÇÈ ÆÄ±«" << endl; }
-    virtual void Draw() { cout << "±×·¡ÇÈ ¿ÀºêÁ§Æ®ÀÔ´Ï´Ù." << endl; }
+    Graphic() { cout << "ê·¸ë˜í”½ ìƒì„±" << endl; }
+    virtual ~Graphic() { cout << "ê·¸ë˜í”½ íŒŒê´´" << endl; }
+    virtual void Draw() { cout << "ê·¸ë˜í”½ ì˜¤ë¸Œì íŠ¸ì…ë‹ˆë‹¤." << endl; }
 };
 
 class Line : public Graphic {
 public:
-    Line() { cout << "¼± »ı¼º" << endl; }
-    ~Line() { cout << "¼± ÆÄ±«" << endl; }
-    void Draw() { cout << "¼±À» ±ß½À´Ï´Ù." << endl; }
+    Line() { cout << "ì„  ìƒì„±" << endl; }
+    ~Line() { cout << "ì„  íŒŒê´´" << endl; }
+    void Draw() { cout << "ì„ ì„ ê¸‹ìŠµë‹ˆë‹¤." << endl; }
 };
 
 class Circle : public Graphic {
 public:
-    Circle() { cout << "¿ø »ı¼º" << endl; }
-    ~Circle() { cout << "¿ø ÆÄ±«" << endl; }
-    void Draw() { cout << "µ¿±×¶ó¹Ì ±×·È´Ù Ä¡°í." << endl; }
+    Circle() { cout << "ì› ìƒì„±" << endl; }
+    ~Circle() { cout << "ì› íŒŒê´´" << endl; }
+    void Draw() { cout << "ë™ê·¸ë¼ë¯¸ ê·¸ë ¸ë‹¤ ì¹˜ê³ ." << endl; }
 };
 
 class Rect : public Graphic {
 public:
-    Rect() { cout << "»ç°¢Çü »ı¼º" << endl; }
-    ~Rect() { cout << "»ç°¢Çü ÆÄ±«" << endl; }
-    void Draw() { cout << "¿ä°Ç »ç°¢ÇüÀÔ´Ï´Ù." << endl; }
+    Rect() { cout << "ì‚¬ê°í˜• ìƒì„±" << endl; }
+    ~Rect() { cout << "ì‚¬ê°í˜• íŒŒê´´" << endl; }
+    void Draw() { cout << "ìš”ê±´ ì‚¬ê°í˜•ì…ë‹ˆë‹¤." << endl; }
 };
 
 void del(Graphic* g) {
@@ -417,7 +417,7 @@ int fun() {
 void PromiseFutureTest() {
     cout << "==== PromiseFutureTest ====" << endl << endl;
     //future<int> fut = async(fun);
-    future<int> fut = async(launch::async, fun);  // ºñµ¿±â·Î ½ÇÇà
+    future<int> fut = async(launch::async, fun);  // ë¹„ë™ê¸°ë¡œ ì‹¤í–‰
     //future<int> fut = async(launch::deferred, fun);
 
     for (int i = 1; i <= 10; i++) {
@@ -425,7 +425,7 @@ void PromiseFutureTest() {
     }
     cout << endl;
 
-    int result = fut.get();   // ºñµ¿±â ÀÛ¾÷ÀÌ ¿Ï·áµÉ¶§±îÁö ´ë±âÇÏ°í ¸®ÅÏ°ª ¹ŞÀ½
+    int result = fut.get();   // ë¹„ë™ê¸° ì‘ì—…ì´ ì™„ë£Œë ë•Œê¹Œì§€ ëŒ€ê¸°í•˜ê³  ë¦¬í„´ê°’ ë°›ìŒ
 
     cout << "result : " << result << endl;
 }
@@ -434,13 +434,13 @@ void ConstPointerTest() {
     cout << "==== ConstPointerTest ====" << endl << endl;
     int a = 5;
     int b = 10;
-    const int* ptr1 = &a;    // int º¯°æ ºÒ°¡
-    //*ptr1 = 10;             // Æ÷ÀÎÅÍ°¡ °¡¸®Å°´Â °ª º¯°æ ºÒ°¡
-    ptr1 = &b;              // Æ÷ÀÎÅÍ º¯¼ö º¯°æ °¡´É
+    const int* ptr1 = &a;    // int ë³€ê²½ ë¶ˆê°€
+    //*ptr1 = 10;             // í¬ì¸í„°ê°€ ê°€ë¦¬í‚¤ëŠ” ê°’ ë³€ê²½ ë¶ˆê°€
+    ptr1 = &b;              // í¬ì¸í„° ë³€ìˆ˜ ë³€ê²½ ê°€ëŠ¥
 
-    int* const ptr2 = &a;   // Æ÷ÀÎÅÍ º¯°æ ºÒ°¡
-    *ptr2 = 10;             // Æ÷ÀÎÄ¿°¡ °¡¸®Å°´Â °ªÀº º¯°æ °¡´É
-    //ptr2 = &b;              // Æ÷ÀÎÅÍ º¯¼ö º¯°æ °¡´É
+    int* const ptr2 = &a;   // í¬ì¸í„° ë³€ê²½ ë¶ˆê°€
+    *ptr2 = 10;             // í¬ì¸ì»¤ê°€ ê°€ë¦¬í‚¤ëŠ” ê°’ì€ ë³€ê²½ ê°€ëŠ¥
+    //ptr2 = &b;              // í¬ì¸í„° ë³€ìˆ˜ ë³€ê²½ ê°€ëŠ¥
 }
 
 class GraphicSet {
@@ -548,36 +548,6 @@ string WstrToStr(wstring const& wstr) {
     return str;
 }
 
-void StringConvertTest() {
-    cout << "==== StringConvertTest ====" << endl << endl;
-    //locale::global(locale("ko-KR"));
-    //setlocale(LC_ALL, "ko-KR");
-
-    const char* _0_ch = "¾È³çAB";
-    const wchar_t* _1_wch = L"¾È³çAB";
-
-    string  _2_str = "¾È³çAB";
-    wstring _3_wstr = L"¾È³çAB";
-
-    string _4_str2 = WstrToStr(_3_wstr);
-    wstring _5_wstr2 = StrToWstr(_2_str);
-
-    string _6_str3 = string(_3_wstr.begin(), _3_wstr.end());
-    wstring _7_wstr3 = wstring(_2_str.begin(), _2_str.end());
-
-    cout << "char* : " << _0_ch << endl;
-    wcout << "wchar_t* : " << _1_wch << endl;
-
-    cout << "string : " << _2_str << endl;
-    wcout << L"wstring : " << _3_wstr << endl;
-
-    cout << "WstrToStr : " << _4_str2 << endl;
-    wcout << L"StrToWstr : " << _5_wstr2 << endl;
-
-    cout << "string(iter, iter) : " << _6_str3 << endl;
-    wcout << L"wstring(iter, iter) : " << _7_wstr3 << endl;
-}
-
 wstring mbs_to_wcs(string const& str, locale const& loc = locale("")) {
     typedef codecvt<wchar_t, char, mbstate_t> codecvt_t;
     codecvt_t const& codecvt = use_facet<codecvt_t>(loc);
@@ -600,22 +570,26 @@ string wcs_to_mbs(wstring const& str, locale const& loc = locale("")) {
     return string(&buf[0]);
 }
 
-void StringConvertTest2() {
-    cout << "==== StringConvertTest2 ====" << endl << endl;
+
+void StringConvertTest() {
+    cout << "==== StringConvertTest ====" << endl << endl;
     //locale::global(locale("ko-KR"));
     //setlocale(LC_ALL, "ko-KR");
 
-    const char* _0_ch = "¾È³çAB";
-    const wchar_t* _1_wch = L"¾È³çAB";
+    const char* _0_ch = "ì•ˆë…•AB";
+    const wchar_t* _1_wch = L"ì•ˆë…•AB";
 
-    string  _2_str = "¾È³çAB";
-    wstring _3_wstr = L"¾È³çAB";
+    string  _2_str = "ì•ˆë…•AB";
+    wstring _3_wstr = L"ì•ˆë…•AB";
 
-    string _4_str2 = wcs_to_mbs(_3_wstr);
-    wstring _5_wstr2 = mbs_to_wcs(_2_str);
+    string _4_str2 = WstrToStr(_3_wstr);
+    wstring _5_wstr2 = StrToWstr(_2_str);
 
-    string _6_str3 = string(_3_wstr.begin(), _3_wstr.end());
-    wstring _7_wstr3 = wstring(_2_str.begin(), _2_str.end());
+    string _6_str2 = wcs_to_mbs(_3_wstr);
+    wstring _7_wstr2 = mbs_to_wcs(_2_str);
+
+    //string _8_str3 = string(_3_wstr.begin(), _3_wstr.end());
+    //wstring _9_wstr3 = wstring(_2_str.begin(), _2_str.end());
 
     cout << "char* : " << _0_ch << endl;
     wcout << "wchar_t* : " << _1_wch << endl;
@@ -626,8 +600,11 @@ void StringConvertTest2() {
     cout << "WstrToStr : " << _4_str2 << endl;
     wcout << L"StrToWstr : " << _5_wstr2 << endl;
 
-    cout << "string(iter, iter) : " << _6_str3 << endl;
-    wcout << L"wstring(iter, iter) : " << _7_wstr3 << endl;
+    cout << "wcs_to_mbs : " << _6_str2 << endl;
+    wcout << L"mbs_to_wcs : " << _7_wstr2 << endl;
+
+    //cout << "string(iter, iter) : " << _8_str3 << endl;
+    //wcout << L"wstring(iter, iter) : " << _9_wstr3 << endl;
 }
 
 void RangeBasedForTest() {
@@ -795,7 +772,7 @@ void IteratorTest() {
     PrintIndex(ari, 0, 5);
     cout << "index vector" << endl;
     PrintIndex(vi, 0, vi.size());
-    // error : list´Â ÀÎµ¦½Ì ¿¬»êÀÚ([])°¡ Á¤ÀÇµÇ¾î ÀÖÁö ¾Ê´Ù.
+    // error : listëŠ” ì¸ë±ì‹± ì—°ì‚°ì([])ê°€ ì •ì˜ë˜ì–´ ìˆì§€ ì•Šë‹¤.
     //cout << "index list" << endl;
     //PrintIndex(li, 0, li.size());
 }
@@ -807,9 +784,9 @@ void StlFindTest() {
     vector<int> vi = { 1,2,3,4,5 };
     list<int> li = { 1,2,3,4,5 };
 
-    cout << (find(vi.begin(), vi.end(), 4) == vi.end() ? "¾ø´Ù." : "ÀÖ´Ù.") << endl;
-    cout << (find(li.begin(), li.end(), 8) == li.end() ? "¾ø´Ù." : "ÀÖ´Ù.") << endl;
-    cout << (find(&arr[0], &arr[5], 3) == &arr[5] ? "¾ø´Ù." : "ÀÖ´Ù.") << endl;
+    cout << (find(vi.begin(), vi.end(), 4) == vi.end() ? "ì—†ë‹¤." : "ìˆë‹¤.") << endl;
+    cout << (find(li.begin(), li.end(), 8) == li.end() ? "ì—†ë‹¤." : "ìˆë‹¤.") << endl;
+    cout << (find(&arr[0], &arr[5], 3) == &arr[5] ? "ì—†ë‹¤." : "ìˆë‹¤.") << endl;
 }
 
 void StlSortTest() {
@@ -862,8 +839,8 @@ public:
 
 void SomeMesmerizeTest1() {
     cout << "==== SomeMesmerizeTest1 ====" << endl << endl;
-    //MyMesmerize obj();  // ÇŞ°¥¸®Áö ¸»ÀÚ. MyMesmerize°´Ã¼ »ı¼ºÀÌ ¾Æ´Ï°í MyMesmerize¸¦ ¸®ÅÏÇÏ´Â ÆÄ¶ó¹ÌÅÍ ¾ø´Â objÇÔ¼ö ¼±¾ğ. ¾Æ¹«°Íµµ ¾ÈÇÔ.
-    // obj(); // ÀÌ°ÍÀº ¿¡·¯. À§¿¡¼­ ÇÔ¼ö¼±¾ğÀº ÇßÁö¸¸ Á¤ÀÇ¸¦ ¾ÈÇßÀ¸¹Ç·Î ¸µÅ© ¿¡·¯ ¹ß»ı
+    //MyMesmerize obj();  // í–‡ê°ˆë¦¬ì§€ ë§ì. MyMesmerizeê°ì²´ ìƒì„±ì´ ì•„ë‹ˆê³  MyMesmerizeë¥¼ ë¦¬í„´í•˜ëŠ” íŒŒë¼ë¯¸í„° ì—†ëŠ” objí•¨ìˆ˜ ì„ ì–¸. ì•„ë¬´ê²ƒë„ ì•ˆí•¨.
+    // obj(); // ì´ê²ƒì€ ì—ëŸ¬. ìœ„ì—ì„œ í•¨ìˆ˜ì„ ì–¸ì€ í–ˆì§€ë§Œ ì •ì˜ë¥¼ ì•ˆí–ˆìœ¼ë¯€ë¡œ ë§í¬ ì—ëŸ¬ ë°œìƒ
     MyMesmerize obj1(1, 2);
     MyMesmerize obj2 = { 1,2 };
     MyMesmerize obj3{ 2,3 };
@@ -876,7 +853,7 @@ void VectorElementAccessTest() {
         cout << i << " ";
     cout << endl;
 
-    // reference at (size_type n); ÇÔ¼ö·Î Á¢±Ù
+    // reference at (size_type n); í•¨ìˆ˜ë¡œ ì ‘ê·¼
     int a = intList.at(3);  // get
     cout << a << endl;
     intList.at(3) = 7;      // set
@@ -884,7 +861,7 @@ void VectorElementAccessTest() {
         cout << i << " ";
     cout << endl;
 
-    // reference operator[] (size_type n); ¿¬»êÀÚ·Î Á¢±Ù
+    // reference operator[] (size_type n); ì—°ì‚°ìë¡œ ì ‘ê·¼
     int b = intList[4];     // get
     cout << b << endl;
     intList[4] = 8;         // set
@@ -892,7 +869,7 @@ void VectorElementAccessTest() {
         cout << i << " ";
     cout << endl;
 
-    // iterator ÅëÇØ¼­ Á¢±Ù
+    // iterator í†µí•´ì„œ ì ‘ê·¼
     auto it = intList.begin();
     advance(it, 5);
     int c = *it;            // get
@@ -910,10 +887,10 @@ void ListElementAccessTest() {
         cout << i << " ";
     cout << endl;
 
-    // reference at (size_type n); ÇÔ¼ö·Î Á¢±Ù ºÒ°¡
-    // reference operator[] (size_type n); ¿¬»êÀÚ·Î Á¢±Ù ºÒ°¡
+    // reference at (size_type n); í•¨ìˆ˜ë¡œ ì ‘ê·¼ ë¶ˆê°€
+    // reference operator[] (size_type n); ì—°ì‚°ìë¡œ ì ‘ê·¼ ë¶ˆê°€
 
-    // iterator ÅëÇØ¼­ Á¢±Ù
+    // iterator í†µí•´ì„œ ì ‘ê·¼
     auto it = intList.begin();
     advance(it, 5);
     int c = *it;            // get
@@ -973,48 +950,48 @@ void ForeachFunctorTest() {
     for_each(intList.begin(), intList.end(), [](int a) -> void { cout << a << " "; });
     cout << endl;
 
-    SSum sumObj = for_each(intList.begin(), intList.end(), SSum());  // ÇÔ¼ö °´Ã¼ÀÇ º¹»çº»ÀÌ ³Ñ¾î°¡±â ¶§¹®¿¡ ±× º¹»çº»À» ¸®ÅÏ¹Ş¾Æ ¿Í¾ß ÇÑ´Ù.
+    SSum sumObj = for_each(intList.begin(), intList.end(), SSum());  // í•¨ìˆ˜ ê°ì²´ì˜ ë³µì‚¬ë³¸ì´ ë„˜ì–´ê°€ê¸° ë•Œë¬¸ì— ê·¸ ë³µì‚¬ë³¸ì„ ë¦¬í„´ë°›ì•„ ì™€ì•¼ í•œë‹¤.
     cout << "sum = " << sumObj.sum << endl;
 
-    for_each(intList.begin(), intList.end(), SPrintString(string("¿ä¼Ò°ªÀº ")));
-    for_each(intList.begin(), intList.end(), SPrintString(string("´Ù¸¥ ¸Ş½ÃÁö ")));
-    // SomeClass<SPrint> s1(SPrint());           // ÀÌ°Å ¾Ö¸Å ¸ğÈ£ ÇÔ, SPrint()¸¦ SPrint(*)() ÇÔ¼ö Æ÷ÀÎÅÍ Å¸ÀÔÀ¸·Î ÀÎ½ÄÇÏ¿© °´Ã¼ »ı¼º±¸¹®ÀÌ ¾Æ´Ñ ÇÔ¼ö ¼±¾ğ ±¸¹®À¸·Î ÀÌ½ÄÇÔ
-    SomeClass<SPrint> s1 = SomeClass<SPrint>(SPrint());           // ÅÛÇÃ¸´ º¯¼ö ¼±¾ğ
-    SomeClass<void(*)(int)> s2(fPrint);    // ÅÛÇÃ¸´ º¯¼ö ¼±¾ğ
+    for_each(intList.begin(), intList.end(), SPrintString(string("ìš”ì†Œê°’ì€ ")));
+    for_each(intList.begin(), intList.end(), SPrintString(string("ë‹¤ë¥¸ ë©”ì‹œì§€ ")));
+    // SomeClass<SPrint> s1(SPrint());           // ì´ê±° ì• ë§¤ ëª¨í˜¸ í•¨, SPrint()ë¥¼ SPrint(*)() í•¨ìˆ˜ í¬ì¸í„° íƒ€ì…ìœ¼ë¡œ ì¸ì‹í•˜ì—¬ ê°ì²´ ìƒì„±êµ¬ë¬¸ì´ ì•„ë‹Œ í•¨ìˆ˜ ì„ ì–¸ êµ¬ë¬¸ìœ¼ë¡œ ì´ì‹í•¨
+    SomeClass<SPrint> s1 = SomeClass<SPrint>(SPrint());           // í…œí”Œë¦¿ ë³€ìˆ˜ ì„ ì–¸
+    SomeClass<void(*)(int)> s2(fPrint);    // í…œí”Œë¦¿ ë³€ìˆ˜ ì„ ì–¸
     s1.Call(3);
     s2.Call(4);
 }
 
 struct IsKim {
     bool operator()(string name) const {
-        return (strncmp(name.c_str(), "±è", 2) == 0);
+        return (strncmp(name.c_str(), "ê¹€", 2) == 0);
     }
 };
 void FindIfTest() {
     cout << "==== ForeachFunctorTest ====" << endl << endl;
-    vector<string> nameList = { "±èÀ¯½Å", "ÀÌ¼ø½Å", "¼º»ï¹®", "Àåº¸°í", "Á¶±¤Á¶", "½Å¼÷ÁÖ", "±èÈ«µµ", "Á¤µµÀü", "ÀÌ¼º°è", "Á¤¸ùÁÖ" };
+    vector<string> nameList = { "ê¹€ìœ ì‹ ", "ì´ìˆœì‹ ", "ì„±ì‚¼ë¬¸", "ì¥ë³´ê³ ", "ì¡°ê´‘ì¡°", "ì‹ ìˆ™ì£¼", "ê¹€í™ë„", "ì •ë„ì „", "ì´ì„±ê³„", "ì •ëª½ì£¼" };
 
     vector<string>::iterator it = find_if(nameList.begin(), nameList.end(), IsKim());
     if (it == nameList.end()) {
-        cout << "±è°¡ ¾ø´Ù." << endl;
+        cout << "ê¹€ê°€ ì—†ë‹¤." << endl;
     }
     else {
-        cout << *it << "ÀÌ(°¡) ÀÖ´Ù." << endl;
+        cout << *it << "ì´(ê°€) ìˆë‹¤." << endl;
     }
 
-    vector<string>::iterator it2 = find_if(nameList.begin(), nameList.end(), [](string name) ->bool { return (strncmp(name.c_str(), "½Å", 2) == 0); });
+    vector<string>::iterator it2 = find_if(nameList.begin(), nameList.end(), [](string name) ->bool { return (strncmp(name.c_str(), "ì‹ ", 2) == 0); });
     if (it2 == nameList.end()) {
-        cout << "½Å°¡ ¾ø´Ù." << endl;
+        cout << "ì‹ ê°€ ì—†ë‹¤." << endl;
     }
     else {
-        cout << *it2 << "ÀÌ(°¡) ÀÖ´Ù." << endl;
+        cout << *it2 << "ì´(ê°€) ìˆë‹¤." << endl;
     }
 
     vector<string>::iterator it3;
     for (it3 = nameList.begin();; it3++) {
         it3 = find_if(it3, nameList.end(), IsKim());
         if (it3 == nameList.end()) break;
-        cout << *it3 << "ÀÌ(°¡) ÀÖ´Ù" << endl;
+        cout << *it3 << "ì´(ê°€) ìˆë‹¤" << endl;
     }
 }
 
@@ -1255,20 +1232,20 @@ void TryCatchTest() {
     try {
         cout << "try start" << endl;
 
-        // ³ª´©±â 0 ¸øÀâ´Â´Ù
+        // ë‚˜ëˆ„ê¸° 0 ëª»ì¡ëŠ”ë‹¤
         //int a = 3;
         //int b = 0;
         //cout << a / b << endl;
 
-        // ¹è¿­ ÀÎµ¦½º ¸øÀâ´Â´Ù
+        // ë°°ì—´ ì¸ë±ìŠ¤ ëª»ì¡ëŠ”ë‹¤
         //int arr[] = { 0,1,2,3 };
         //cout << arr[-1] << endl;
 
-        // º¤ÅÍ ÀÎµ¦½º ¸øÀâ´Â´Ù
+        // ë²¡í„° ì¸ë±ìŠ¤ ëª»ì¡ëŠ”ë‹¤
         //vector<int> vec = { 0,1,2,3 };
         //cout << vec[-1] << endl;
 
-        // stoi´Â Àâ´Â´Ù
+        // stoiëŠ” ì¡ëŠ”ë‹¤
         int n = stoi("abc");
         cout << n << endl;
 
@@ -1321,62 +1298,62 @@ private:
     string name;
 public:
     YourClass(string _name) : name(_name) {
-        cout << "ÀÏ¹İ »ı¼ºÀÚ" << endl;
+        cout << "ì¼ë°˜ ìƒì„±ì" << endl;
         PrintName();
     }
 
     YourClass(const YourClass& a) : name(a.name) {
-        cout << "º¹»ç »ı¼ºÀÚ" << endl;
+        cout << "ë³µì‚¬ ìƒì„±ì" << endl;
         PrintName();
     }
 
     YourClass(YourClass&& a) : name(a.name) {
-        cout << "ÀÌµ¿ »ı¼ºÀÚ" << endl;
+        cout << "ì´ë™ ìƒì„±ì" << endl;
         PrintName();
     }
 
     ~YourClass() {
-        cout << "¼Ò¸êÀÚ" << endl;
+        cout << "ì†Œë©¸ì" << endl;
         PrintName();
     }
 
     YourClass& operator = (const YourClass& a) {
         name = a.name;
-        cout << "´ëÀÔ ¿¬»êÀÚ" << endl;
+        cout << "ëŒ€ì… ì—°ì‚°ì" << endl;
         PrintName();
         return *this;
     }
 
     YourClass& operator = (YourClass&& a) {
         name = a.name;
-        cout << "ÀÌµ¿ ¿¬»êÀÚ" << endl;
+        cout << "ì´ë™ ì—°ì‚°ì" << endl;
         PrintName();
         return *this;
     }
 
     void PrintName() {
-        cout << "ÀÌ¸§ Ãâ·Â : " << name << endl;
+        cout << "ì´ë¦„ ì¶œë ¥ : " << name << endl;
     }
 };
 
 YourClass MoveMethod(YourClass aobj) {
-    YourClass robj("ÀÌ¼ø½Å");
+    YourClass robj("ì´ìˆœì‹ ");
     return robj;
 }
 
 void MoveTest() {
-    YourClass obj1("È«±æµ¿");
+    YourClass obj1("í™ê¸¸ë™");
     YourClass obj2 = MoveMethod(obj1);
 }
 
 void MoveConstructorOperator() {
-    auto obj1 = YourClass("²¿ºÏÁÂ");    // »ı¼ºÀÚ
-    auto obj2 = obj1;           // º¹»ç »ı¼ºÀÚ
-    obj2 = obj1;                // ´ëÀÔ ¿¬»êÀÚ
+    auto obj1 = YourClass("ê¼¬ë¶ì¢Œ");    // ìƒì„±ì
+    auto obj2 = obj1;           // ë³µì‚¬ ìƒì„±ì
+    obj2 = obj1;                // ëŒ€ì… ì—°ì‚°ì
     obj1.PrintName();
-    auto obj3 = move(obj1);    // ÀÌµ¿ »ı¼ºÀÚ
+    auto obj3 = move(obj1);    // ì´ë™ ìƒì„±ì
     obj1.PrintName();
-    obj3 = move(obj1); // ÀÌµ¿ ¿¬»êÀÚ
+    obj3 = move(obj1); // ì´ë™ ì—°ì‚°ì
 }
 
 void RefTest() {
@@ -1390,9 +1367,9 @@ void RefTest() {
     ((i < 3) ? i : j) = 8;
     string s = string("h") + "e" + "ll" + "o";
     cout << s << endl;
-    // Á¤¸®:
-    // lvalue´Â ´ëÀÔ¿¬»ê¿¡¼­ ¿ŞÂÊ¿¡ ¿Ã ¼ö ÀÖ´Â °ª, ÁÖ¼Ò°¡ ÀÖ´Â °ª, º¯¼ö, *¿¬»ê °á°ú
-    // rvalue´Â ´ëÀÔ¿¬»ê¿¡¼­ ¿ŞÂÊ¿¡ ¿ï ¼ö ¾ø´Â °ª, ÁÖ¼Ò°¡ ¾ø´Â °ª, »ó¼ö, »ê¼ú ¿¬»ê °á°ú, &¿¬»ê °á°ú
+    // ì •ë¦¬:
+    // lvalueëŠ” ëŒ€ì…ì—°ì‚°ì—ì„œ ì™¼ìª½ì— ì˜¬ ìˆ˜ ìˆëŠ” ê°’, ì£¼ì†Œê°€ ìˆëŠ” ê°’, ë³€ìˆ˜, *ì—°ì‚° ê²°ê³¼
+    // rvalueëŠ” ëŒ€ì…ì—°ì‚°ì—ì„œ ì™¼ìª½ì— ìš¸ ìˆ˜ ì—†ëŠ” ê°’, ì£¼ì†Œê°€ ì—†ëŠ” ê°’, ìƒìˆ˜, ì‚°ìˆ  ì—°ì‚° ê²°ê³¼, &ì—°ì‚° ê²°ê³¼
 }
 
 void DebugViewTest() {
@@ -1400,7 +1377,7 @@ void DebugViewTest() {
     iota(vs.begin(), vs.end(), 0);
     for (auto v : vs) {
         wstring str = to_wstring(v);
-        OutputDebugString(str.c_str()); // DebugView.exe¸¦ ½ÇÇà½ÃÄÑ³õ°í ÀÖÀ¸¸é °Å±â¿¡ ÀÌ°Ô Ãâ·Â µÈ´Ù
+        OutputDebugString(str.c_str()); // DebugView.exeë¥¼ ì‹¤í–‰ì‹œì¼œë†“ê³  ìˆìœ¼ë©´ ê±°ê¸°ì— ì´ê²Œ ì¶œë ¥ ëœë‹¤
     }
 }
 
@@ -1455,15 +1432,15 @@ void ForEachTest() {
 template <typename T>
 void tell_type() {
     if (is_void<T>::value) {
-        cout << "T ´Â void ! \n";
+        cout << "T ëŠ” void ! \n";
     }
     else {
-        cout << "T ´Â void °¡ ¾Æ´Ï´Ù. \n";
+        cout << "T ëŠ” void ê°€ ì•„ë‹ˆë‹¤. \n";
     }
 }
 
 void TypeTraitTest() {
-    tell_type<int>();  // void ¾Æ´Ô!
+    tell_type<int>();  // void ì•„ë‹˜!
 
     tell_type<void>();  // void!
 }
@@ -1491,9 +1468,9 @@ struct Print {
 
 void FunctorTest() {
     int ari[] = { 2,8,5,1,9 };
-    for_each(ari, ari + 5, print);  // ÇÔ¼ö
-    for_each(ari, ari + 5, Print());// ÇÔ¼ö°´Ã¼
-    for_each(ari, ari + 5, [](int a) { printf("%d\n", a); });// ¶÷´Ù
+    for_each(ari, ari + 5, print);  // í•¨ìˆ˜
+    for_each(ari, ari + 5, Print());// í•¨ìˆ˜ê°ì²´
+    for_each(ari, ari + 5, [](int a) { printf("%d\n", a); });// ëŒë‹¤
 }
 
 void RValueRefTest() {
@@ -1586,24 +1563,24 @@ void ClassTest() {
 void LambdaTest3() {
     auto addFunc = [](int a, int b) { return a + b; };
     wcout << addFunc(3, 4) << endl;
-    // 1. function<int(int, int)> addFunc : ¶÷´Ù º¯¼ö ¼±¾ğ
-    // -> ¼±¾ğ°ú µ¿½Ã¿¡ ÃÊ±âÈ­ ½Ã function addFunc ·Î °£´ÜÈ­ °¡´É
-    // -> ¼±¾ğ°ú µ¿½Ã¿¡ ÃÊ±âÈ­ ½Ã auto addFunc ·Î °£´ÜÈ­ °¡´É
-    // 2. [num] : Ä¸ÃÄ
-    // -> [num] : numº¯¼ö const º¹»ç Ä¸ÃÄ
-    // -> [&num] : numº¯¼ö ÂüÁ¶ Ä¸ÃÄ
-    // -> [=] : ¸ğµçº¯¼ö const º¹»ç Ä¸ÃÄ
-    // -> [&] : ¸ğµçº¯¼ö ÂüÁ¶ Ä¸ÃÄ
-    // 3. mutable : º¹»ç Ä¸ÃÄ º¯¼ö¸¦ ºñ constÈ­
-    // 4. (int a, int b) : ÆÄ¶ó¹ÌÅÍ º¯¼ö
-    // -> ÆÄ¶ó¹ÌÅÍ ¾øÀ»¶§ [»ı·« °¡´É]
-    // 5. -> int : ¸®ÅÏ Å¸ÀÔ
-    // -> º»¹®¿¡ ÀÇÇØ Ãß·Ğ °¡´É ÇÒ¶§ [»ı·« °¡´É]
-    // 6. {} º»¹®
+    // 1. function<int(int, int)> addFunc : ëŒë‹¤ ë³€ìˆ˜ ì„ ì–¸
+    // -> ì„ ì–¸ê³¼ ë™ì‹œì— ì´ˆê¸°í™” ì‹œ function addFunc ë¡œ ê°„ë‹¨í™” ê°€ëŠ¥
+    // -> ì„ ì–¸ê³¼ ë™ì‹œì— ì´ˆê¸°í™” ì‹œ auto addFunc ë¡œ ê°„ë‹¨í™” ê°€ëŠ¥
+    // 2. [num] : ìº¡ì³
+    // -> [num] : numë³€ìˆ˜ const ë³µì‚¬ ìº¡ì³
+    // -> [&num] : numë³€ìˆ˜ ì°¸ì¡° ìº¡ì³
+    // -> [=] : ëª¨ë“ ë³€ìˆ˜ const ë³µì‚¬ ìº¡ì³
+    // -> [&] : ëª¨ë“ ë³€ìˆ˜ ì°¸ì¡° ìº¡ì³
+    // 3. mutable : ë³µì‚¬ ìº¡ì³ ë³€ìˆ˜ë¥¼ ë¹„ constí™”
+    // 4. (int a, int b) : íŒŒë¼ë¯¸í„° ë³€ìˆ˜
+    // -> íŒŒë¼ë¯¸í„° ì—†ì„ë•Œ [ìƒëµ ê°€ëŠ¥]
+    // 5. -> int : ë¦¬í„´ íƒ€ì…
+    // -> ë³¸ë¬¸ì— ì˜í•´ ì¶”ë¡  ê°€ëŠ¥ í• ë•Œ [ìƒëµ ê°€ëŠ¥]
+    // 6. {} ë³¸ë¬¸
 }
 
 void ShredPtrTest3() {
-    // 1. ¼±¾ğ ¹æ¹ı
+    // 1. ì„ ì–¸ ë°©ë²•
     auto pbyte1 = shared_ptr<BYTE>(new BYTE);
     shared_ptr<BYTE> pbyte2(new BYTE);
     // 2. deleter
@@ -1633,13 +1610,13 @@ void SharedPtrTest4_sub(unique_ptr<int> a) {
 void SharedPtrTest4() {
     unique_ptr<int> a(new int);
     *a = 10;
-    // SharedPtrTest4_sub(a);   // º¹»ç»ı¼º ºÒ°¡
-    // auto b = a;  // º¹»ç»ı¼º ºÒ°¡ delete µÇ¾úÀ½
+    // SharedPtrTest4_sub(a);   // ë³µì‚¬ìƒì„± ë¶ˆê°€
+    // auto b = a;  // ë³µì‚¬ìƒì„± ë¶ˆê°€ delete ë˜ì—ˆìŒ
     //// unique_ptr(const unique_ptr&) = delete;
     //// unique_ptr& operator=(const unique_ptr&) = delete;
     
     auto b = move(a);
-    *a = 20;    // ·±Å¸ÀÓ ¿¡·¯
+    *a = 20;    // ëŸ°íƒ€ì„ ì—ëŸ¬
 }
 
 void VectorTest5() {
@@ -1710,7 +1687,7 @@ class AAA {
 public:
     static void Func1() {
         cout << "Func1" << endl;
-        // Å¬·¡½º ÇÔ¼ö¿¡¼­´Â µÚ¿¡ Á¤ÀÇµÈ Å¬·¡½º ÇÔ¼öµµ È£Ãâ °¡´ÉÇÏ´Ù.
+        // í´ë˜ìŠ¤ í•¨ìˆ˜ì—ì„œëŠ” ë’¤ì— ì •ì˜ëœ í´ë˜ìŠ¤ í•¨ìˆ˜ë„ í˜¸ì¶œ ê°€ëŠ¥í•˜ë‹¤.
         Func2();
     }
 
@@ -1721,7 +1698,7 @@ public:
 
 void Func3() {
     cout << "Func3" << endl;
-    // ÀÏ¹İ ÇÔ¼ö´Â µÚ¿¡ Á¤ÀÇµÈ ÇÔ¼ö È£Ãâ ºÒ°¡
+    // ì¼ë°˜ í•¨ìˆ˜ëŠ” ë’¤ì— ì •ì˜ëœ í•¨ìˆ˜ í˜¸ì¶œ ë¶ˆê°€
     //Func4();
 }
 
@@ -1751,23 +1728,23 @@ public:
     Cls1(int a) : a{ a } {};
 };
 
-// const int a = 1; int const a = 1; µ¿ÀÏ
-// const int * a = &v; int const * a = &v; µ¿ÀÏ
-// const int * a = &v; int * const a; »ó¼ö int, »ó¼ö a
-// »ó¼ö °´Ã¼´Â »ó¼ö ¸â¹ö ÇÔ¼ö¸¸ È£Ãâ °¡´É
-// »ó¼ö ¸â¹ö ÇÔ¼ö´Â »ó¼ö ¸â¹ö ÇÔ¼ö¸¸ È£Ãâ °¡´É
+// const int a = 1; int const a = 1; ë™ì¼
+// const int * a = &v; int const * a = &v; ë™ì¼
+// const int * a = &v; int * const a; ìƒìˆ˜ int, ìƒìˆ˜ a
+// ìƒìˆ˜ ê°ì²´ëŠ” ìƒìˆ˜ ë©¤ë²„ í•¨ìˆ˜ë§Œ í˜¸ì¶œ ê°€ëŠ¥
+// ìƒìˆ˜ ë©¤ë²„ í•¨ìˆ˜ëŠ” ìƒìˆ˜ ë©¤ë²„ í•¨ìˆ˜ë§Œ í˜¸ì¶œ ê°€ëŠ¥
 
 void ConstTest() {
     const int i1 = 10;
-    int const i2 = 10;  // À§ÀÇ t1, t2´Â µ¿ÀÏÇÔ, i1, i2 »ó¼ö, º¯¼ö°ª º¯°æ ºÒ°¡
+    int const i2 = 10;  // ìœ„ì˜ t1, t2ëŠ” ë™ì¼í•¨, i1, i2 ìƒìˆ˜, ë³€ìˆ˜ê°’ ë³€ê²½ ë¶ˆê°€
 
     int a = 10;
     const int * p1 = &a;
-    int const * p2 = &a; // À§ÀÇ p1, p2´Â µ¿ÀÏÇÔ, *p1, *p2 »ó¼ö, Æ÷ÀÎÅÍ°ª º¯°æ °¡´É, Æ÷ÀÎÅÍ°¡ °¡¸®Å°´Â °ª º¯°æ ºÒ°¡
+    int const * p2 = &a; // ìœ„ì˜ p1, p2ëŠ” ë™ì¼í•¨, *p1, *p2 ìƒìˆ˜, í¬ì¸í„°ê°’ ë³€ê²½ ê°€ëŠ¥, í¬ì¸í„°ê°€ ê°€ë¦¬í‚¤ëŠ” ê°’ ë³€ê²½ ë¶ˆê°€
     // p2 = NULL;   // O
     // *p2 = 10;    // X
     
-    int * const p3 = &a; // p3 »ó¼ö, Æ÷ÀÎÅÍ°ª º¯°æ ºÒ°¡, Æ÷ÀÎÅÍ°¡ °¡¸®Å°´Â °ª º¯°æ °¡´É
+    int * const p3 = &a; // p3 ìƒìˆ˜, í¬ì¸í„°ê°’ ë³€ê²½ ë¶ˆê°€, í¬ì¸í„°ê°€ ê°€ë¦¬í‚¤ëŠ” ê°’ ë³€ê²½ ê°€ëŠ¥
     // p3 = NULL;   // X
     // *p3 = 10;    // O
 }
@@ -1779,11 +1756,11 @@ private:
     BYTE * ptr;
 public:
     void AAA() {
-        BYTE* a = GetPtr();         // GetPtr() È£ÃâµÊ
+        BYTE* a = GetPtr();         // GetPtr() í˜¸ì¶œë¨
         *a = 10;
     }
     void BBB() const {
-        const BYTE* a = GetPtr();   // GetPtr() const È£ÃâµÊ
+        const BYTE* a = GetPtr();   // GetPtr() const í˜¸ì¶œë¨
         //*a = 10; 
     }
 
@@ -1796,15 +1773,17 @@ public:
     void CCC() const {
         auto t = GetPtr();
     }
-    const BYTE* GetPtr() const {    // »ó¼ö°´Ã¼¿¡¼­´Â »ó¼ö¸â¹öÇÔ¼ö¸¸ È£ÃâµÊ, »ó¼ö¸â¹öÇÔ¼ö¿¡¼­´Â »ó¼ö¸â¹öÇÔ¼ö¸¸ È£ÃâµÊ
+    const BYTE* GetPtr() const {    // ìƒìˆ˜ê°ì²´ì—ì„œëŠ” ìƒìˆ˜ë©¤ë²„í•¨ìˆ˜ë§Œ í˜¸ì¶œë¨, ìƒìˆ˜ë©¤ë²„í•¨ìˆ˜ì—ì„œëŠ” ìƒìˆ˜ë©¤ë²„í•¨ìˆ˜ë§Œ í˜¸ì¶œë¨
         return buffer;
     }
-    const BYTE* GetPtr2() const {    // »ó¼ö°´Ã¼¿¡¼­´Â »ó¼ö¸â¹öÇÔ¼ö¸¸ È£ÃâµÊ, »ó¼ö¸â¹öÇÔ¼ö¿¡¼­´Â »ó¼ö¸â¹öÇÔ¼ö¸¸ È£ÃâµÊ
+    const BYTE* GetPtr2() const {    // ìƒìˆ˜ê°ì²´ì—ì„œëŠ” ìƒìˆ˜ë©¤ë²„í•¨ìˆ˜ë§Œ í˜¸ì¶œë¨, ìƒìˆ˜ë©¤ë²„í•¨ìˆ˜ì—ì„œëŠ” ìƒìˆ˜ë©¤ë²„í•¨ìˆ˜ë§Œ í˜¸ì¶œë¨
         return buffer;
     }
 };
 
-void RangeTest() {    
+void RangeTest() {
+    using namespace std::views;
+    using namespace std::ranges;
     auto r =
         std::views::iota(0, 20)
         | std::views::filter([](int n) { return n % 2 == 0; })
@@ -1817,6 +1796,146 @@ void RangeTest() {
     //    .Where(n => n % 2 == 0)
     //    .Select(n => -n);
     //r.ToList<int>().ForEach(n => Console.Write("{0} ", n));
+}
+
+void StringEncodingTest() {
+    string str = "abcdê°€ë‚˜ë‹¤ë¼";
+    wstring wstr = L"abcdê°€ë‚˜ë‹¤ë¼";
+    u8string u8str = u8"abcdê°€ë‚˜ë‹¤ë¼";
+    u16string u16str = u"abcdê°€ë‚˜ë‹¤ë¼";
+    u32string u32str = U"abcdê°€ë‚˜ë‹¤ë¼";
+
+    cout << "sizeof(char) : " << sizeof(char) << endl;            // 1
+    cout << "sizeof(wchar_t) : " << sizeof(wchar_t) << endl;      // 2
+    cout << "sizeof(char8_t) : " << sizeof(char8_t) << endl;      // 1
+    cout << "sizeof(char16_t) : " << sizeof(char16_t) << endl;    // 2
+    cout << "sizeof(char32_t) : " << sizeof(char32_t) << endl;    // 4
+
+    cout << "str.length() : " << str.length() << endl;            // 12   -> ë°”ì´íŠ¸ìˆ˜
+    cout << "wstr.length() : " << wstr.length() << endl;          // 8    -> ë¬¸ììˆ˜
+    cout << "u8str.length() : " << u8str.length() << endl;        // 16   -> ë°”ì´íŠ¸ìˆ˜
+    cout << "u16str.length() : " << u16str.length() << endl;      // 8    -> ë¬¸ììˆ˜
+    cout << "u32str.length() : " << u32str.length() << endl;      // 8    -> ë¬¸ììˆ˜
+
+    cout << "str.capacity() : " << str.capacity() << endl;
+    cout << "wstr.capacity() : " << wstr.capacity() << endl;
+    cout << "u8str.capacity() : " << u8str.capacity() << endl;
+    cout << "u16str.capacity() : " << u16str.capacity() << endl;
+    cout << "u32str.capacity() : " << u32str.capacity() << endl;
+
+    cout << "str : " << str << endl;
+    //cout << "wstr : " << wstr << endl;
+    //cout << "u8str : " << u8str << endl;    // ì•ˆë¨
+    //cout << "u16str : " << u16str << endl;  // ì•ˆë¨
+    //cout << "u32str : " << u32str << endl;  // ì•ˆë¨
+
+    //wcout << "str : " << str << endl;
+    wcout << "wstr : " << wstr << endl;
+    //wcout << "u8str : " << u8str << endl;   // ì•ˆë¨
+    //wcout << "u16str : " << u16str << endl; // ì•ˆë¨
+    //wcout << "u32str : " << u32str << std::endl; // ì•ˆë¨
+
+    //wstring str;
+}
+
+void StringEncodingTest2() {
+    cout << "sizeof(char_t) : " << sizeof(char) << endl;
+    cout << "sizeof(wchar_t) : " << sizeof(wchar_t) << endl;
+    cout << "sizeof(char8_t) : " << sizeof(char8_t) << endl;
+    cout << "sizeof(char16_t) : " << sizeof(char16_t) << endl;
+    cout << "sizeof(char32_t) : " << sizeof(char32_t) << endl;
+    cout << endl;
+
+    string str_ENG = "A";
+    wstring wstr_ENG = L"A";
+    u8string u8str_ENG = u8"A";
+    u16string u16str_ENG = u"A";
+    u32string u32str_ENG = U"A";
+
+    string str_KOR = "ê°€";
+    wstring wstr_KOR = L"ê°€";
+    u8string u8str_KOR = u8"ê°€";
+    u16string u16str_KOR = u"ê°€";
+    u32string u32str_KOR = U"ê°€";
+
+    string str_SMP = "ğ›ƒ";
+    wstring wstr_SMP = L"ğ›ƒ";
+    u8string u8str_SMP = u8"ğ›ƒ";
+    u16string u16str_SMP = u"ğ›ƒ";
+    u32string u32str_SMP = U"ğ›ƒ";
+
+    cout << "str_ENG.length() : " << str_ENG.length() << endl;
+    cout << "wstr_ENG.length() : " << wstr_ENG.length() << endl;
+    cout << "u8str_ENG.length() : " << u8str_ENG.length() << endl;
+    cout << "u16str_ENG.length() : " << u16str_ENG.length() << endl;
+    cout << "u32str_ENG.length() : " << u32str_ENG.length() << endl;
+    cout << endl;
+
+    cout << "str_KOR.length() : " << str_KOR.length() << endl;
+    cout << "wstr_KOR.length() : " << wstr_KOR.length() << endl;
+    cout << "u8str_KOR.length() : " << u8str_KOR.length() << endl;
+    cout << "u16str_KOR.length() : " << u16str_KOR.length() << endl;
+    cout << "u32str_KOR.length() : " << u32str_KOR.length() << endl;
+    cout << endl;
+
+    cout << "str_SMP.length() : " << str_SMP.length() << endl;
+    cout << "wstr_SMP.length() : " << wstr_SMP.length() << endl;
+    cout << "u8str_SMP.length() : " << u8str_SMP.length() << endl;
+    cout << "u16str_SMP.length() : " << u16str_SMP.length() << endl;
+    cout << "u32str_SMP.length() : " << u32str_KOR.length() << endl;
+    cout << endl;
+
+    /* run result (VC)
+sizeof(char_t) : 1
+sizeof(wchar_t) : 2
+sizeof(char8_t) : 1
+sizeof(char16_t) : 2
+sizeof(char32_t) : 4
+
+str_ENG.length() : 1
+wstr_ENG.length() : 1
+u8str_ENG.length() : 1
+u16str_ENG.length() : 1
+u32str_ENG.length() : 1
+
+str_KOR.length() : 2
+wstr_KOR.length() : 1
+u8str_KOR.length() : 3
+u16str_KOR.length() : 1
+u32str_KOR.length() : 1
+
+str_SMP.length() : 2
+wstr_SMP.length() : 2
+u8str_SMP.length() : 4
+u16str_SMP.length() : 2
+u32str_SMP.length() : 1
+    */
+
+    /* run result (GNU C++20)
+sizeof(char_t) : 1
+sizeof(wchar_t) : 4
+sizeof(char8_t) : 1
+sizeof(char16_t) : 2
+sizeof(char32_t) : 4
+
+str_ENG.length() : 1
+wstr_ENG.length() : 1
+u8str_ENG.length() : 1
+u16str_ENG.length() : 1
+u32str_ENG.length() : 1
+
+str_KOR.length() : 3
+wstr_KOR.length() : 1
+u8str_KOR.length() : 3
+u16str_KOR.length() : 1
+u32str_KOR.length() : 1
+
+str_SMP.length() : 4
+wstr_SMP.length() : 1
+u8str_SMP.length() : 4
+u16str_SMP.length() : 2
+u32str_SMP.length() : 1
+    */
 }
 
 int main() {
@@ -1899,6 +2018,8 @@ int main() {
     //ClassMemberOrder();
     //AssignTest();
     //SharedPtrTest4();
-    RangeTest();
+    //RangeTest();
+    StringEncodingTest2();
+
     return 0;
 }
