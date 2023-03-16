@@ -1838,6 +1838,14 @@ void StringEncodingTest() {
     //wstring str;
 }
 
+void Pointer_of_SharedPtr_Test() {
+    auto car = make_shared<Car>("아반떼");
+    auto pcar = &car;
+    auto a = pcar->get();
+    auto b = (*pcar).get();
+    auto c = (*pcar)->fuel;
+}
+
 void StringEncodingTest2() {
     cout << "sizeof(char_t) : " << sizeof(char) << endl;
     cout << "sizeof(wchar_t) : " << sizeof(wchar_t) << endl;
