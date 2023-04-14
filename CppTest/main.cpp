@@ -1946,6 +1946,28 @@ u32str_SMP.length() : 1
     */
 }
 
+void PredefinedFunctionObject() {
+    std::plus<int> plus;
+    std::minus<int> minus;
+    std::multiplies<int> multiplies;
+    std::divides<int> divides;
+    std::modulus<int> modulus;
+    std::negate<int> negate;
+    std::equal_to<int> equal_to;
+    std::not_equal_to<int> not_equal_to;
+    std::greater<int> greater;
+    std::less<int> less;
+    std::greater_equal<int> greater_equal;
+    std::less_equal<int> less_equal;
+    std::logical_and<bool> logical_and;
+    std::logical_or<bool> logical_or;
+    std::logical_not<bool> logical_not;
+    std::bit_and<int> bit_and;
+    std::bit_or<int> bit_or;
+    std::bit_xor<int> bit_xor;
+    std::bit_not<int> bit_not;
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
