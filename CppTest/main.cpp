@@ -1838,13 +1838,13 @@ void StringEncodingTest() {
     //wstring str;
 }
 
-void Pointer_of_SharedPtr_Test() {
-    auto car = make_shared<Car>("아반떼");
-    auto pcar = &car;
-    auto a = pcar->get();
-    auto b = (*pcar).get();
-    auto c = (*pcar)->fuel;
-}
+//void Pointer_of_SharedPtr_Test() {
+//    auto car = make_shared<Car>("아반떼");
+//    auto pcar = &car;
+//    auto a = pcar->get();
+//    auto b = (*pcar).get();
+//    auto c = (*pcar)->fuel;
+//}
 
 void StringEncodingTest2() {
     cout << "sizeof(char_t) : " << sizeof(char) << endl;
@@ -1946,6 +1946,28 @@ u32str_SMP.length() : 1
     */
 }
 
+void PredefinedFunctionObject() {
+    cout << "plus<int>()(10, 3) : " << plus<int>()(10, 3) << endl;
+    cout << "minus<int>()(10, 3) : " << minus<int>()(10, 3) << endl;
+    cout << "multiplies<int>()(10, 3) : " << multiplies<int>()(10, 3) << endl;
+    cout << "divides<int>()(10, 3) : " << divides<int>()(10, 3) << endl;
+    cout << "modulus<int>()(10, 3) : " << modulus<int>()(10, 3) << endl;
+    cout << "negate<int>()(10) : " << negate<int>()(10) << endl;
+    cout << "equal_to<int>()(10, 3) : " << equal_to<int>()(10, 3) << endl;
+    cout << "not_equal_to<int>()(10, 3) : " << not_equal_to<int>()(10, 3) << endl;
+    cout << "greater<int>()(10, 3) : " << greater<int>()(10, 3) << endl;
+    cout << "less<int>()(10, 3) : " << less<int>()(10, 3) << endl;
+    cout << "greater_equal<int>()(10, 3) : " << greater_equal<int>()(10, 3) << endl;
+    cout << "less_equal<int>()(10, 3) : " << less_equal<int>()(10, 3) << endl;
+    cout << "logical_and<bool>()(true, false) : " << logical_and<bool>()(true, false) << endl;
+    cout << "logical_or<bool>()(true, false) : " << logical_or<bool>()(true, false) << endl;
+    cout << "logical_not<bool>()(true) : " << logical_not<bool>()(true) << endl;
+    cout << "bit_and<int>()(10, 3) : " << bit_and<int>()(10, 3) << endl;
+    cout << "bit_or<int>()(10, 3) : " << bit_or<int>()(10, 3) << endl;
+    cout << "bit_xor<int>()(10, 3) : " << bit_xor<int>()(10, 3) << endl;
+    cout << "bit_not<int>()(10) : " << bit_not<int>()(10) << endl;
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -2027,7 +2049,8 @@ int main() {
     //AssignTest();
     //SharedPtrTest4();
     //RangeTest();
-    StringEncodingTest2();
+    //tringEncodingTest2();
+    PredefinedFunctionObject();
 
     return 0;
 }
