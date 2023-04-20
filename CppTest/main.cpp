@@ -1968,6 +1968,19 @@ void PredefinedFunctionObject() {
     cout << "bit_not<int>()(10) : " << bit_not<int>()(10) << endl;
 }
 
+void ConsoleColor() {
+    cout << "\033[0;31m" << "red" << endl;
+    cout << "\033[1;31m" << "red" << endl;
+    cout << "\033[2;31m" << "red" << endl;
+    cout << "\033[3;31m" << "red" << endl;
+    cout << "\033[4;31m" << "red" << endl;
+    cout << "\033[1;32m" << "green" << endl;
+    cout << "\033[1;33m" << "yellow" << endl;
+    cout << "\033[1;36m" << "cyan" << endl;
+    cout << "\033[1;35m" << "magenta" << endl;
+    cout << "\033[0m" << "reset" << endl;
+}
+
 int main() {
     //VariableArgumentTest();
     //OpenMPTest();
@@ -2050,7 +2063,8 @@ int main() {
     //SharedPtrTest4();
     //RangeTest();
     //tringEncodingTest2();
-    PredefinedFunctionObject();
+    //PredefinedFunctionObject();
+    ConsoleColor();
 
     return 0;
 }
