@@ -1981,7 +1981,7 @@ void ConsoleColor() {
     cout << "\033[0m" << "reset" << endl;
 }
 
-void ConsoleColor2() {
+void ConsoleColor4Bit() {
     int i, j, n;
 
     for (i = 0; i < 11; i++) {
@@ -1994,91 +1994,115 @@ void ConsoleColor2() {
     }
 }
 
-int main() {
-    //VariableArgumentTest();
-    //OpenMPTest();
-    //DuckTypingTest();
-    //RangeForTest();
-    //StringFormatTest();
-    //PrintfTest();
-    //MemoryLeakTest();
-    //NullPtrTest();
-    //SharedPtrTest();
-    //SharedPtrInitTest();
-    //SharedPtrVectorTest();
-    //VectorTest();
-    //VectorTest2();
-    //VectorTest3();
-    //VectorTest4();
-    //VectorTestString();
-    //ChronoTestDuration();
-    //ChronoTestNow();
-    //ObjectReturnTest();
-    //PromiseFutureTest();
-    //ConstPointerTest();
-    //StaticMemberTest();
-    //CarSetTest();
-    //GraphicSetTest();
-    //StringConvertTest();
-    //StringConvertTest2();
-    //RangeBasedForTest();
-    //MapTest();
-    //ForTest();
-    //RemainderTest();
-    //VectorSortTest();
-    //ReferenceTest();
-    //StructInitialize();
-    //IteratorTest();
-    //StlFindTest();
-    //StlSortTest();
-    //StlReverseTest();
-    //StlRandomShuffleTest();
-    //SomeMesmerizeTest1();
-    //VectorElementAccessTest();
-    //ListElementAccessTest();
-    //ForeachFunctorTest();
-    //FindIfTest();
-    //PredefFunctorTest();
-    //StringSortNoCaseTest();
-    //VectorSortSpeedTest();
-    //RoundTest();
-    //NegativeModulusTest();
-    //SizeOfPrimitiveTest();
-    //FillTest();
-    //GenerateTest();
-    //IotaTest();
-    //TransformTest();
-    //InheritConstructorTest();
-    //TryCatchTest();
-    //LambdaTest1();
-    //LambdaTest2();
-    //StringAppendTest();
-    //MoveConstructorOperator();
-    //RefTest();
-    //DebugViewTest();
-    //QuickSortTest();
-    //ForEachTest();
-    //TypeTraitTest();
-    //Int32Int64();
-    //FunctorTest();
-    //RValueRefTest();
-    //DefaultDeleterTest();
-    //SharedPtrTest2();
-    //ClassTest();
-    //LambdaTest3();
-    //ShredPtrTest3();
-    //MoveTest();
-    //VectorTest5();
-    //ParallelForeachTest();
-    //ThreadTest();
-    //ClassMemberOrder();
-    //AssignTest();
-    //SharedPtrTest4();
-    //RangeTest();
-    //tringEncodingTest2();
-    //PredefinedFunctionObject();
-    ConsoleColor();
-    ConsoleColor2();
+void ConsoleColor8Bit() {
+    for (int i = 0; i < 256; i++) {
+        printf("\033[48;5;%dm %3d\033[m", i, i);
+        if (i % 36 == 15) printf("\n");
+    }    
+}
 
+void ConsoleColor24Bit() {
+    for (int i = 0; i < 256; i++) {
+        printf("\033[48;2;%d;%d;%dm %3d\033[m", i, i, i, i);
+        if (i % 8 == 7) printf("\n");
+    }    
+}
+
+
+int main() {
+    vector<function<void()>> funcList{
+        VariableArgumentTest,
+        OpenMPTest,
+        DuckTypingTest,
+        RangeForTest,
+        StringFormatTest,
+        PrintfTest,
+        MemoryLeakTest,
+        NullPtrTest,
+        SharedPtrTest,
+        SharedPtrInitTest,
+        SharedPtrVectorTest,
+        VectorTest,
+        VectorTest2,
+        VectorTest3,
+        VectorTest4,
+        VectorTestString,
+        ChronoTestDuration,
+        ChronoTestNow,
+        ObjectReturnTest,
+        PromiseFutureTest,
+        ConstPointerTest,
+        StaticMemberTest,
+        CarSetTest,
+        GraphicSetTest,
+        StringConvertTest,
+        RangeBasedForTest,
+        MapTest,
+        ForTest,
+        RemainderTest,
+        VectorSortTest,
+        ReferenceTest,
+        StructInitialize,
+        IteratorTest,
+        StlFindTest,
+        StlSortTest,
+        StlReverseTest,
+        StlRandomShuffleTest,
+        SomeMesmerizeTest1,
+        VectorElementAccessTest,
+        ListElementAccessTest,
+        ForeachFunctorTest,
+        FindIfTest,
+        PredefFunctorTest,
+        StringSortNoCaseTest,
+        VectorSortSpeedTest,
+        RoundTest,
+        NegativeModulusTest,
+        SizeOfPrimitiveTest,
+        FillTest,
+        GenerateTest,
+        IotaTest,
+        TransformTest,
+        InheritConstructorTest,
+        TryCatchTest,
+        LambdaTest1,
+        LambdaTest2,
+        StringAppendTest,
+        MoveConstructorOperator,
+        RefTest,
+        DebugViewTest,
+        QuickSortTest,
+        ForEachTest,
+        TypeTraitTest,
+        Int32Int64,
+        FunctorTest,
+        RValueRefTest,
+        DefaultDeleterTest,
+        SharedPtrTest2,
+        ClassTest,
+        LambdaTest3,
+        ShredPtrTest3,
+        MoveTest,
+        VectorTest5,
+        ParallelForeachTest,
+        ThreadTest,
+        ClassMemberOrder,
+        AssignTest,
+        SharedPtrTest4,
+        RangeTest,
+        StringEncodingTest2,
+        PredefinedFunctionObject,
+        ConsoleColor,
+        ConsoleColor4Bit,
+        ConsoleColor8Bit,
+        ConsoleColor24Bit,
+    };
+
+    int funcIdx = -1;
+    cout << "input function number (0 ~ " << funcList.size() << ")" << endl;
+    cin >> funcIdx;
+    funcList[funcIdx]();
+    cin.get();
+    cin.get();
     return 0;
 }
