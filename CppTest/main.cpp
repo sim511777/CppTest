@@ -1946,6 +1946,7 @@ u32str_SMP.length() : 1
     */
 }
 
+
 void PredefinedFunctionObject() {
     cout << "plus<int>()(10, 3) : " << plus<int>()(10, 3) << endl;
     cout << "minus<int>()(10, 3) : " << minus<int>()(10, 3) << endl;
@@ -2008,6 +2009,22 @@ void ConsoleColor24Bit() {
     }    
 }
 
+void Parallel_For(size_t start, size_t end, std::function<void(size_t)> action) {
+    // c++ 20
+    // auto seq = std::views::iota(start, end);
+    std::vector<size_t> seq(end - start);
+    std::iota(seq.begin(), seq.end(), start);
+    std::for_each(std::execution::par_unseq, seq.begin(), seq.end(), action);
+}
+
+void Parallel_For_Test() {
+    std::mutex m;
+    Parallel_For(0, 1000, [&](auto num) {
+        m.lock();        
+        cout << std::this_thread::get_id() << " : " << num << std::endl;
+        m.unlock();
+    });
+}
 
 int main() {
     vector<function<void()>> funcList{
@@ -2096,6 +2113,7 @@ int main() {
         ConsoleColor4Bit,
         ConsoleColor8Bit,
         ConsoleColor24Bit,
+        Parallel_For_Test,
     };
 
     int funcIdx = -1;
