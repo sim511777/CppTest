@@ -2026,6 +2026,19 @@ void Parallel_For_Test() {
     });
 }
 
+void CallFunc(double a) {
+    cout << "double param called" << endl;
+}
+
+void CallFunc(float a) {
+    cout << "float param called" << endl;
+}
+
+void CallFuncTest() {
+    CallFunc(1.0f);
+    CallFunc(1.0);
+}
+
 int main() {
     vector<function<void()>> funcList{
         VariableArgumentTest,
@@ -2114,7 +2127,12 @@ int main() {
         ConsoleColor8Bit,
         ConsoleColor24Bit,
         Parallel_For_Test,
+        CallFuncTest,
     };
+
+    for (int i = 0; i < funcList.size(); i++) {
+        cout << i << " : " << funcList[i].target_type().name() << endl;
+    }
 
     int funcIdx = -1;
     cout << "input function number (0 ~ " << funcList.size() << ")" << endl;
