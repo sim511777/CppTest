@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Todo.txt = Todo.txt
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppString", "CppString\CppString.vcxproj", "{622048FC-BA1F-418B-8A96-61CF778F9528}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -26,6 +28,14 @@ Global
 		{8720A8AF-0D2D-4853-B07C-0067D04F2223}.Release|x64.Build.0 = Release|x64
 		{8720A8AF-0D2D-4853-B07C-0067D04F2223}.Release|x86.ActiveCfg = Release|Win32
 		{8720A8AF-0D2D-4853-B07C-0067D04F2223}.Release|x86.Build.0 = Release|Win32
+		{622048FC-BA1F-418B-8A96-61CF778F9528}.Debug|x64.ActiveCfg = Debug|x64
+		{622048FC-BA1F-418B-8A96-61CF778F9528}.Debug|x64.Build.0 = Debug|x64
+		{622048FC-BA1F-418B-8A96-61CF778F9528}.Debug|x86.ActiveCfg = Debug|Win32
+		{622048FC-BA1F-418B-8A96-61CF778F9528}.Debug|x86.Build.0 = Debug|Win32
+		{622048FC-BA1F-418B-8A96-61CF778F9528}.Release|x64.ActiveCfg = Release|x64
+		{622048FC-BA1F-418B-8A96-61CF778F9528}.Release|x64.Build.0 = Release|x64
+		{622048FC-BA1F-418B-8A96-61CF778F9528}.Release|x86.ActiveCfg = Release|Win32
+		{622048FC-BA1F-418B-8A96-61CF778F9528}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
